@@ -1,72 +1,46 @@
 import { motion } from 'framer-motion'
-import { Sun, Moon } from 'lucide-react'
 
 interface NavigationProps {
   scrolled: boolean
   onExplore: () => void
-  isDark: boolean
-  toggleTheme: () => void
 }
 
-export default function Navigation({ scrolled, onExplore, isDark, toggleTheme }: NavigationProps) {
+export default function Navigation({ scrolled }: NavigationProps) {
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
         scrolled 
-          ? isDark 
-            ? 'bg-[#0a1628]/90 backdrop-blur-xl border-b border-white/5' 
-            : 'bg-white/90 backdrop-blur-xl border-b border-black/5'
-          : ''
+          ? 'bg-[#0a1628]/60 backdrop-blur-2xl' 
+          : 'bg-gradient-to-b from-black/40 to-transparent'
       }`}
     >
       <nav className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <a href="/" className="flex items-center gap-3 group">
-            <span className={`font-display text-xl italic transition-colors ${
-              isDark ? 'text-cream group-hover:text-accent' : 'text-[#0a1628] group-hover:text-[#1a3a6e]'
-            }`}>
-              fisify
-            </span>
-            <span className={`text-sm ${isDark ? 'text-accent/40' : 'text-[#1a3a6e]/40'}`}>×</span>
-            <span className={`text-sm font-light tracking-wide ${
-              isDark ? 'text-cream/50' : 'text-[#0a1628]/50'
-            }`}>
-              Medicus
-            </span>
-          </a>
-
-          {/* Nav Links */}
-          <div className="hidden md:flex items-center gap-10">
-            <a href="#about" className="nav-link">Proyecto</a>
-            <a href="#results" className="nav-link">Resultados</a>
-            <a href="#roadmap" className="nav-link">Roadmap</a>
-          </div>
-
-          {/* Actions */}
-          <div className="flex items-center gap-4">
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle"
-              aria-label="Toggle theme"
-            >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
-
-            {/* Explore */}
-            <button
-              onClick={onExplore}
-              className={`hidden md:block text-xs uppercase tracking-[0.2em] font-light transition-colors ${
-                isDark ? 'text-cream/40 hover:text-accent' : 'text-[#0a1628]/40 hover:text-[#1a3a6e]'
+        <div className={`flex items-center justify-center transition-all duration-500 ease-out ${
+          scrolled ? 'h-16' : 'h-20'
+        }`}>
+          {/* Logos - Centered with scale animation */}
+          <a href="/" className="flex items-center gap-4 group">
+            <img 
+              src="/images/fisify-logo-white.png" 
+              alt="Fisify" 
+              className={`brightness-0 invert transition-all duration-500 ease-out group-hover:opacity-70 ${
+                scrolled ? 'h-5 opacity-90' : 'h-6 opacity-100'
               }`}
-            >
-              Explorar
-            </button>
-          </div>
+            />
+            <span className={`font-light text-white/30 transition-all duration-500 ${
+              scrolled ? 'text-[8px]' : 'text-[10px]'
+            }`}>×</span>
+            <img 
+              src="/images/medicus-logo-white.png" 
+              alt="Medicus" 
+              className={`brightness-0 invert transition-all duration-500 ease-out group-hover:opacity-70 ${
+                scrolled ? 'h-[14px] opacity-90' : 'h-[18px] opacity-100'
+              }`}
+            />
+          </a>
         </div>
       </nav>
     </motion.header>

@@ -14,7 +14,6 @@ export type TabId = 'results' | 'product' | 'value' | 'implement'
 function App() {
   const [activeTab, setActiveTab] = useState<TabId>('results')
   const [scrolled, setScrolled] = useState(false)
-  const [isDark, setIsDark] = useState(true)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -22,22 +21,12 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    document.documentElement.classList.toggle('light', !isDark)
-  }, [isDark])
-
   const handleExplore = () => {
     document.getElementById('content')?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const toggleTheme = () => setIsDark(!isDark)
-
   return (
-    <div className={`min-h-screen relative transition-colors duration-300 ${
-      isDark 
-        ? 'bg-gradient-to-b from-[#0a1628] to-[#060f1d]' 
-        : 'bg-gradient-to-b from-[#faf9f7] to-[#f0eeeb]'
-    }`}>
+    <div className="min-h-screen relative bg-gradient-to-b from-[#0a1628] to-[#060f1d]">
       {/* Noise overlay */}
       <div className="noise" />
       
@@ -48,14 +37,14 @@ function App() {
         <div className="glow-gold w-[400px] h-[400px] top-1/3 right-1/4" />
       </div>
 
-      <Navigation scrolled={scrolled} onExplore={handleExplore} isDark={isDark} toggleTheme={toggleTheme} />
-      <HeroSection onExplore={handleExplore} isDark={isDark} />
+      <Navigation scrolled={scrolled} onExplore={handleExplore} />
+      <HeroSection onExplore={handleExplore} />
+      
+      {/* Sticky Tab Menu */}
+      <TabSection activeTab={activeTab} setActiveTab={setActiveTab} isDark={true} />
       
       {/* Content */}
-      <div id="content">
-        <TabSection activeTab={activeTab} setActiveTab={setActiveTab} isDark={isDark} />
-        
-        <main className="relative">
+      <main id="content" className="relative">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -64,16 +53,15 @@ function App() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              {activeTab === 'results' && <ResultsTab isDark={isDark} />}
-              {activeTab === 'product' && <ProductTab isDark={isDark} />}
-              {activeTab === 'value' && <ValueTab isDark={isDark} />}
-              {activeTab === 'implement' && <ImplementTab isDark={isDark} />}
+              {activeTab === 'results' && <ResultsTab isDark={true} />}
+              {activeTab === 'product' && <ProductTab isDark={true} />}
+              {activeTab === 'value' && <ValueTab isDark={true} />}
+              {activeTab === 'implement' && <ImplementTab isDark={true} />}
             </motion.div>
           </AnimatePresence>
-        </main>
-      </div>
+      </main>
       
-      <FooterSection isDark={isDark} />
+      <FooterSection isDark={true} />
     </div>
   )
 }
