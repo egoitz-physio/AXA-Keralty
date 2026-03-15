@@ -4,7 +4,7 @@ interface ResultsTabProps {
   isDark: boolean
 }
 
-export default function ResultsTab({ isDark }: ResultsTabProps) {
+export default function ResultsTab({ isDark: _isDark }: ResultsTabProps) {
   const adoptionData = [
     { week: 'S1', value: 45, percent: 28 },
     { week: 'S2', value: 78, percent: 49 },
