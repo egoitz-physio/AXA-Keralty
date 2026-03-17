@@ -7,9 +7,10 @@ import ResultsTab from './pages/ResultsTab'
 import ProductTab from './pages/ProductTab'
 import ValueTab from './pages/ValueTab'
 import ImplementTab from './pages/ImplementTab'
+import BienestarTab from './pages/BienestarTab'
 import FooterSection from './components/FooterSection'
 
-export type TabId = 'results' | 'product' | 'value' | 'implement'
+export type TabId = 'results' | 'product' | 'value' | 'bienestar' | 'implement'
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabId>('results')
@@ -52,6 +53,7 @@ function App() {
               {activeTab === 'results' && <ResultsTab isDark={true} />}
               {activeTab === 'product' && <ProductTab isDark={true} />}
               {activeTab === 'value' && <ValueTab isDark={true} />}
+              {activeTab === 'bienestar' && <BienestarTab isDark={true} />}
               {activeTab === 'implement' && <ImplementTab isDark={true} />}
             </motion.div>
           </AnimatePresence>

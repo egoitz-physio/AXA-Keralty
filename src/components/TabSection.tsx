@@ -12,7 +12,8 @@ const tabs = [
   { id: 'results' as TabId, label: 'Resultados', num: '01' },
   { id: 'product' as TabId, label: 'Producto', num: '02' },
   { id: 'value' as TabId, label: 'Valor', num: '03' },
-  { id: 'implement' as TabId, label: 'Implementación', num: '04' },
+  { id: 'bienestar' as TabId, label: 'Bienestar', num: '04' },
+  { id: 'implement' as TabId, label: 'Implementación', num: '05' },
 ]
 
 export default function TabSection({ activeTab, setActiveTab, isDark }: TabSectionProps) {
