@@ -9,10 +9,10 @@ interface TabSectionProps {
 }
 
 const tabs = [
-  { id: 'results' as TabId, label: 'Resultados', num: '01' },
-  { id: 'product' as TabId, label: 'Producto', num: '02' },
-  { id: 'value' as TabId, label: 'Valor', num: '03' },
-  { id: 'bienestar' as TabId, label: 'Bienestar', num: '04' },
+  { id: 'objetivo' as TabId, label: 'Objetivo', num: '01' },
+  { id: 'results' as TabId, label: 'Resultados', num: '02' },
+  { id: 'product' as TabId, label: 'Producto', num: '03' },
+  { id: 'value' as TabId, label: 'Valor', num: '04' },
   { id: 'implement' as TabId, label: 'Implementación', num: '05' },
 ]
 

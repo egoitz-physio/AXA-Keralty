@@ -1,154 +1,578 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 interface ImplementTabProps {
   isDark: boolean
 }
 
-export default function ImplementTab({ isDark }: ImplementTabProps) {
-  const cardBg = isDark ? 'bg-[#0d1a2e]' : 'bg-white'
-  const borderColor = isDark ? 'bg-white/5' : 'bg-black/5'
-  const textMain = isDark ? 'text-cream' : 'text-[#0a1628]'
-  const textMuted = isDark ? 'text-cream/40' : 'text-[#0a1628]/50'
+/* ─── Reusable fade-in variant ─── */
+const fadeUp = {
+  initial: { opacity: 0, y: 32 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-40px' },
+}
 
+/* ─── Thin horizontal rule ─── */
+function Divider({ isDark }: { isDark: boolean }) {
+  return (
+    <div className={`w-full h-px ${isDark ? 'bg-gradient-to-r from-transparent via-cream/[0.06] to-transparent' : 'bg-gradient-to-r from-transparent via-[#0a1628]/[0.06] to-transparent'}`} />
+  )
+}
+
+export default function ImplementTab({ isDark }: ImplementTabProps) {
+  const [expandedPhase, setExpandedPhase] = useState<number | null>(0)
+
+  const textMain = isDark ? 'text-cream' : 'text-[#0a1628]'
+  const textMuted = isDark ? 'text-cream/60' : 'text-[#0a1628]/60'
+  const textAccent = isDark ? 'text-accent' : 'text-[#1a3a6e]'
+  const borderColor = isDark ? 'border-white/[0.06]' : 'border-black/[0.06]'
+  const cardBg = isDark ? 'bg-[#0d1a2e]/60' : 'bg-white/80'
+
+  /* ══════════════════════════════════════════════════════ */
+  /*  DATA                                                  */
+  /* ══════════════════════════════════════════════════════ */
   const phases = [
-    { num: '01', title: 'Diseño', duration: '2 semanas', items: ['Definición de alcance con Medicus', 'Personalización de marca', 'Configuración de dashboard', 'Integración técnica (opcional)'] },
-    { num: '02', title: 'Formación', duration: '1 semana', items: ['Capacitación equipo comercial', 'Formación a kinesiólogos', 'Materiales de comunicación', 'Guías para asegurados'] },
-    { num: '03', title: 'Lanzamiento', duration: '1 semana', items: ['Comunicación a asegurados', 'Activación progresiva', 'Webinar de bienvenida', 'Soporte dedicado inicial'] },
-    { num: '04', title: 'Operación', duration: 'Continuo', items: ['Reportes mensuales', 'Revisiones trimestrales', 'Optimización continua', 'Evolución de roadmap'] },
+    {
+      num: '01',
+      title: 'Kick-off + escalado digital nacional',
+      months: 'M1–M3',
+      period: 'Abril — Junio',
+      deliverables: 'Gobernanza, protocolos, activación, reporting base',
+      actions: [
+        'Campaña multicanal: web Medicus + app + email + push (coordinado)',
+        'Email marketing segmentado por perfil, dolor y objetivo',
+        'Onboarding tutorial + "primer plan en 2 minutos"',
+        'Primer ciclo de retos e incentivos (activación)',
+      ],
+    },
+    {
+      num: '02',
+      title: 'Optimización conversión + campañas por segmento',
+      months: 'M4–M6',
+      period: 'Julio — Septiembre',
+      deliverables: 'Campañas, funnels, playbooks, primeros QBR',
+      actions: [
+        'Plan anual de comunicación (campañas trimestrales)',
+        'Segmentación avanzada: cohort por dolor, edad, plan, uso',
+        'Campañas de reactivación: nudges + contenidos + webinars + sorteos e incentivos',
+        'Optimización del circuito de derivación a red Medicus',
+      ],
+    },
+    {
+      num: '03',
+      title: 'Expansión comercialización',
+      months: 'M7–M12',
+      period: 'Octubre — Marzo',
+      deliverables: 'Paquetes por segmento, mejoras producto, QA',
+      actions: [
+        'Toolkit comercial: slides, one-pagers, casos del piloto',
+        'Paquetes corporativos por industria (call center / logística / sedentarismo)',
+        'Campañas in-company + webinars para colectivos',
+        'Mejoras producto basadas en uso real (iteraciones trimestrales)',
+        'Ampliación de biblioteca de contenido según requerimiento',
+      ],
+    },
+    {
+      num: '04',
+      title: 'Optimización outcomes + estandarización',
+      months: 'M13–M24',
+      period: 'Año 2',
+      deliverables: 'Escala + mejora continua',
+      actions: [
+        'Estandarización de journeys por plan y por vertical',
+        'Automatización de reactivación (mensajes + triggers por uso/dolor)',
+        'Reporting v3: insights ejecutivos y playbooks por segmento',
+        'Programa "return-to-activity" y continuidad post-consulta',
+        'Engranaje con campañas 360 del programa "Cuidarte"',
+        'Renovación bianual con business case consolidado',
+      ],
+    },
+  ]
+
+  const governance = [
+    {
+      area: 'Kick-off, implementación y seguimiento',
+      medicus: 'Rommy',
+      fisify: 'Customer Success Executive',
+    },
+    {
+      area: 'Operación: Soporte, SLAs y coordinación',
+      medicus: '—',
+      fisify: 'Inhar (CTO) + Iñaki (COO) + Equipo Kinesiólogos',
+    },
+    {
+      area: 'Activación: comunicación y engagement',
+      medicus: '—',
+      fisify: 'Laura Valbuena + Equipo Marketing',
+    },
+    {
+      area: 'Datos: reporting y seguimiento',
+      medicus: '—',
+      fisify: 'Customer Success Executive',
+    },
+    {
+      area: 'Comercial colectivos: enablement y playbooks',
+      medicus: '—',
+      fisify: 'Customer Success Executive',
+    },
+  ]
+
+  const kpis = [
+    { id: '01', name: '% Afiliados activos', desc: 'Ratio de afiliados que utilizan Fisify sobre el total habilitado' },
+    { id: '02', name: 'Frecuencia semanal', desc: 'Sesiones completadas por afiliado activo por semana' },
+    { id: '03', name: 'Nivel de adherencia', desc: 'Completitud de los programas asignados a cada afiliado' },
+    { id: '04', name: 'Evolución del dolor', desc: 'Reducción de la intensidad del dolor reportado por los usuarios activos' },
+    { id: '05', name: 'Episodios recurrentes', desc: 'Comparativa de recurrencia de consultas MSK antes y después de Fisify' },
+    { id: '06', name: 'NPS diferencial', desc: 'Diferencia de NPS entre afiliados usuarios de Fisify y el resto de la cartera' },
+  ]
+
+  const pricingTiers = [
+    { users: '100.000', cost: '1,48€', highlighted: false },
+    { users: '200.000', cost: '1,36€', highlighted: true },
+    { users: '300.000', cost: '1,27€', highlighted: false },
+    { users: '400.000', cost: '1,19€', highlighted: false },
+    { users: '500.000', cost: '1,14€', highlighted: false },
   ]
 
   return (
-    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20">
-      {/* Header */}
-      <section className="mb-20">
-        <span className="section-label mb-8 inline-block">Proceso de Implementación</span>
-        <h2 className={`heading-display text-display-lg mb-6 max-w-3xl ${textMain}`}>De 0 a lanzamiento en 4 semanas</h2>
-        <p className={`text-xl max-w-2xl font-light ${textMuted}`}>
-          Un proceso ágil y profesional, diseñado para minimizar la carga operativa del equipo de Medicus.
-        </p>
-      </section>
+    <div className="relative">
+      {/* ══════════════════════════════════════════════════════ */}
+      {/*  SECTION 1 — FASES DEL PLAN                           */}
+      {/* ══════════════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-6 lg:px-12 pt-24 pb-32">
+        {/* Header */}
+        <motion.div {...fadeUp} className="mb-20">
+          <span className="section-label mb-10 inline-block">Plan de implementación</span>
+          <h2 className={`heading-display text-display-lg max-w-4xl ${textMain}`}>
+            Fases del plan
+          </h2>
+          <p className={`text-xl lg:text-2xl font-light leading-relaxed max-w-2xl mt-6 ${textMuted}`}>
+            24 meses de ejecución coordinada, desde el kick-off hasta la escala completa y renovación.
+          </p>
+        </motion.div>
 
-      {/* Phases */}
-      <section className="mb-32">
-        <div className={`grid lg:grid-cols-4 gap-px ${borderColor}`}>
+        {/* Timeline progress bar */}
+        <motion.div
+          {...fadeUp}
+          transition={{ delay: 0.1 }}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-0">
+            {phases.map((phase, i) => (
+              <div key={phase.num} className="flex-1 flex items-center">
+                <button
+                  onClick={() => setExpandedPhase(expandedPhase === i ? null : i)}
+                  className={`relative flex items-center gap-3 transition-all duration-500 group`}
+                >
+                  <div className={`w-11 h-11 flex items-center justify-center border transition-all duration-500 ${
+                    expandedPhase === i
+                      ? isDark ? 'border-accent bg-accent/10' : 'border-[#1a3a6e] bg-[#1a3a6e]/10'
+                      : isDark ? 'border-cream/15 hover:border-cream/25' : 'border-[#0a1628]/15 hover:border-[#0a1628]/25'
+                  }`}>
+                    <span className={`text-xs font-medium tracking-wider transition-colors ${
+                      expandedPhase === i ? textAccent : textMuted
+                    }`}>
+                      {phase.num}
+                    </span>
+                  </div>
+                  <div className="hidden lg:block text-left">
+                    <span className={`text-xs uppercase tracking-[0.15em] block ${
+                      expandedPhase === i ? textAccent : textMuted
+                    }`}>
+                      {phase.months}
+                    </span>
+                  </div>
+                </button>
+                {i < phases.length - 1 && (
+                  <div className={`flex-1 h-px mx-4 ${isDark ? 'bg-cream/[0.08]' : 'bg-[#0a1628]/[0.08]'}`} />
+                )}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Phase cards */}
+        <div className="space-y-4">
           {phases.map((phase, i) => (
             <motion.div
               key={phase.num}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.15 }}
+              transition={{ delay: i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true }}
-              className={`${cardBg} p-8 lg:p-10`}
             >
-              <div className="flex items-center justify-between mb-6">
-                <span className={`text-xs tracking-[0.3em] ${isDark ? 'text-accent/50' : 'text-[#1a3a6e]/50'}`}>{phase.num}</span>
-                <span className={`text-[10px] uppercase tracking-[0.2em] px-3 py-1 border ${isDark ? 'border-white/10 text-cream/30' : 'border-black/10 text-[#0a1628]/30'}`}>{phase.duration}</span>
-              </div>
-              <h3 className={`font-display text-xl mb-6 ${textMain}`}>{phase.title}</h3>
-              <ul className="space-y-3">
-                {phase.items.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm">
-                    <span className={`w-1 h-1 mt-2 flex-shrink-0 ${isDark ? 'bg-accent/40' : 'bg-[#1a3a6e]/40'}`} />
-                    <span className={`font-light ${textMuted}`}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+              <button
+                onClick={() => setExpandedPhase(expandedPhase === i ? null : i)}
+                className={`w-full text-left transition-all duration-500 ${cardBg} backdrop-blur-sm border ${
+                  expandedPhase === i
+                    ? isDark ? 'border-accent/20' : 'border-[#1a3a6e]/20'
+                    : borderColor
+                }`}
+              >
+                {/* Top accent line */}
+                <div className={`h-px transition-all duration-500 ${
+                  expandedPhase === i
+                    ? isDark ? 'bg-accent' : 'bg-[#1a3a6e]'
+                    : 'bg-transparent'
+                }`} />
 
-      {/* Requirements */}
-      <section className="mb-32">
-        <div className="flex items-center gap-6 mb-12">
-          <div className={`w-16 h-px ${isDark ? 'bg-accent/50' : 'bg-[#1a3a6e]/50'}`} />
-          <h3 className={`text-xs uppercase tracking-[0.3em] font-light ${textMuted}`}>Requerimientos de Medicus</h3>
-        </div>
-        <div className={`grid md:grid-cols-3 gap-px ${borderColor}`}>
-          {[
-            { title: 'Brand assets', desc: 'Logo, colores y guía de estilo', effort: 'Bajo' },
-            { title: 'Interlocutor', desc: 'Punto de contacto para decisiones', effort: 'Bajo' },
-            { title: 'Comunicación', desc: 'Canales para llegar a asegurados', effort: 'Medio' },
-          ].map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className={`${cardBg} p-8`}
-            >
-              <div className="flex items-start justify-between mb-4">
-                <h4 className={`font-display ${textMain}`}>{item.title}</h4>
-                <span className={`text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 ${
-                  item.effort === 'Bajo' ? (isDark ? 'bg-accent/10 text-accent' : 'bg-[#1a3a6e]/10 text-[#1a3a6e]') : (isDark ? 'bg-cream/5 text-cream/30' : 'bg-[#0a1628]/5 text-[#0a1628]/30')
-                }`}>{item.effort}</span>
-              </div>
-              <p className={`text-sm font-light ${textMuted}`}>{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+                <div className="p-8 lg:p-10">
+                  {/* Phase header row */}
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8">
+                    {/* Phase number + title */}
+                    <div className="flex items-center gap-6 flex-1 min-w-0">
+                      <span className={`text-sm tracking-[0.3em] flex-shrink-0 ${
+                        expandedPhase === i ? textAccent : textMuted
+                      }`}>
+                        {phase.num}
+                      </span>
+                      <h3 className={`font-display text-xl lg:text-2xl ${textMain} truncate`}>
+                        {phase.title}
+                      </h3>
+                    </div>
 
-      {/* Fisify commitment */}
-      <section className="mb-32">
-        <div className="flex items-center gap-6 mb-12">
-          <div className={`w-16 h-px ${isDark ? 'bg-cream/20' : 'bg-[#0a1628]/20'}`} />
-          <h3 className={`text-xs uppercase tracking-[0.3em] font-light ${textMuted}`}>Compromiso de Fisify</h3>
-        </div>
-        <div className={`grid md:grid-cols-2 gap-px ${borderColor}`}>
-          {[
-            { title: 'Project Manager dedicado', desc: 'Un interlocutor único para toda la implementación' },
-            { title: 'Soporte técnico 24/7', desc: 'Equipo disponible para asegurados y Medicus' },
-            { title: 'Dashboard ejecutivo', desc: 'Panel de métricas en tiempo real' },
-            { title: 'Reportes mensuales', desc: 'Informes detallados de uso y resultados' },
-            { title: 'Optimización continua', desc: 'Mejoras basadas en feedback' },
-            { title: 'SLA garantizado', desc: 'Disponibilidad 99.9%' },
-          ].map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className={`${cardBg} p-8`}
-            >
-              <h4 className={`font-display mb-2 ${textMain}`}>{item.title}</h4>
-              <p className={`text-sm font-light ${textMuted}`}>{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+                    {/* Meta tags */}
+                    <div className="flex items-center gap-4 flex-shrink-0">
+                      <span className={`text-xs uppercase tracking-[0.15em] px-3 py-1.5 border ${
+                        isDark ? 'border-accent/25 text-accent' : 'border-[#1a3a6e]/25 text-[#1a3a6e]'
+                      }`}>
+                        {phase.months}
+                      </span>
+                      <span className={`text-sm font-light ${textMuted}`}>
+                        {phase.period}
+                      </span>
+                      <motion.span
+                        animate={{ rotate: expandedPhase === i ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className={`text-base ${textMuted}`}
+                      >
+                        ↓
+                      </motion.span>
+                    </div>
+                  </div>
 
-      {/* Timeline visual */}
-      <section className="mb-20">
-        <div className={`border p-12 lg:p-16 ${cardBg} ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-          <h3 className={`font-display text-2xl mb-12 text-center ${textMain}`}>Timeline de Lanzamiento</h3>
-          <div className="relative max-w-3xl mx-auto">
-            <div className={`absolute top-4 left-0 right-0 h-px ${isDark ? 'bg-gradient-to-r from-accent via-cream/20 to-cream/5' : 'bg-gradient-to-r from-[#1a3a6e] via-[#0a1628]/20 to-[#0a1628]/5'}`} />
-            <div className="grid grid-cols-4 gap-4">
-              {[
-                { week: 'Sem 1-2', label: 'Diseño' },
-                { week: 'Sem 3', label: 'Formación' },
-                { week: 'Sem 4', label: 'Lanzamiento' },
-                { week: 'Continuo', label: 'Operación' },
-              ].map((item, i) => (
-                <div key={item.week} className="text-center">
-                  <div className={`w-2 h-2 mx-auto mb-4 ${i === 0 ? (isDark ? 'bg-accent' : 'bg-[#1a3a6e]') : (isDark ? 'bg-cream/20' : 'bg-[#0a1628]/20')}`} />
-                  <span className={`text-sm font-light block mb-1 ${isDark ? 'text-cream/60' : 'text-[#0a1628]/60'}`}>{item.week}</span>
-                  <span className={`text-xs font-light ${textMuted}`}>{item.label}</span>
+                  {/* Expanded content */}
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: expandedPhase === i ? 'auto' : 0,
+                      opacity: expandedPhase === i ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className={`pt-8 mt-8 border-t ${borderColor}`}>
+                      <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+                        {/* Deliverables */}
+                        <div className="lg:col-span-4">
+                          <span className={`text-xs uppercase tracking-[0.2em] block mb-4 ${textAccent}`}>
+                            Entregables
+                          </span>
+                          <p className={`text-base font-light leading-relaxed ${isDark ? 'text-cream/70' : 'text-[#0a1628]/70'}`}>
+                            {phase.deliverables}
+                          </p>
+                        </div>
+
+                        {/* Actions */}
+                        <div className="lg:col-span-8">
+                          <span className={`text-xs uppercase tracking-[0.2em] block mb-4 ${textAccent}`}>
+                            Acciones clave
+                          </span>
+                          <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
+                            {phase.actions.map((action, actionIdx) => (
+                              <div key={actionIdx} className="flex items-start gap-3">
+                                <span className={`w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 ${isDark ? 'bg-accent/60' : 'bg-[#1a3a6e]/60'}`} />
+                                <span className={`text-[15px] font-light leading-relaxed ${isDark ? 'text-cream/70' : 'text-[#0a1628]/70'}`}>
+                                  {action}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
-              ))}
+              </button>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <Divider isDark={isDark} />
+
+      {/* ══════════════════════════════════════════════════════ */}
+      {/*  SECTION 2 — MODELO OPERATIVO + GOBERNANZA            */}
+      {/* ══════════════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32">
+        <motion.div {...fadeUp} className="mb-20">
+          <span className="section-label mb-10 inline-block">Gobernanza</span>
+          <h2 className={`heading-display text-display-lg max-w-3xl ${textMain}`}>
+            Modelo operativo
+          </h2>
+          <p className={`text-xl font-light leading-relaxed max-w-2xl mt-6 ${textMuted}`}>
+            Roles y responsabilidades claras entre Medicus y Fisify para una ejecución impecable.
+          </p>
+        </motion.div>
+
+        {/* Governance table */}
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className={`border ${borderColor} overflow-hidden`}
+        >
+          {/* Table header */}
+          <div className={`grid grid-cols-12 gap-0 ${isDark ? 'bg-[#0d1a2e]' : 'bg-[#f5f5f5]'}`}>
+            <div className="col-span-5 p-6 lg:p-8">
+              <span className={`text-xs uppercase tracking-[0.2em] font-medium ${textMuted}`}>Área</span>
+            </div>
+            <div className={`col-span-3 p-6 lg:p-8 border-l ${borderColor}`}>
+              <span className={`text-xs uppercase tracking-[0.2em] font-medium ${textAccent}`}>Medicus</span>
+            </div>
+            <div className={`col-span-4 p-6 lg:p-8 border-l ${borderColor}`}>
+              <span className={`text-xs uppercase tracking-[0.2em] font-medium ${textAccent}`}>Fisify</span>
             </div>
           </div>
+
+          {/* Table rows */}
+          {governance.map((row, i) => (
+            <motion.div
+              key={row.area}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.05 * i }}
+              viewport={{ once: true }}
+              className={`grid grid-cols-12 gap-0 border-t ${borderColor} ${
+                isDark ? 'hover:bg-white/[0.02]' : 'hover:bg-black/[0.02]'
+              } transition-colors`}
+            >
+              <div className="col-span-5 p-6 lg:p-8">
+                <span className={`text-[15px] font-light ${textMain}`}>{row.area}</span>
+              </div>
+              <div className={`col-span-3 p-6 lg:p-8 border-l ${borderColor}`}>
+                <span className={`text-[15px] font-light ${row.medicus === '—' ? (isDark ? 'text-cream/30' : 'text-[#0a1628]/30') : (isDark ? 'text-cream/80' : 'text-[#0a1628]/80')}`}>
+                  {row.medicus}
+                </span>
+              </div>
+              <div className={`col-span-4 p-6 lg:p-8 border-l ${borderColor}`}>
+                <span className={`text-[15px] font-light ${isDark ? 'text-cream/80' : 'text-[#0a1628]/80'}`}>
+                  {row.fisify}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Committee cadence */}
+        <motion.div
+          {...fadeUp}
+          transition={{ delay: 0.2 }}
+          className="mt-10 flex flex-wrap items-center gap-6"
+        >
+          <span className={`text-xs uppercase tracking-[0.2em] ${textMuted}`}>Comités</span>
+          {['Weekly ops', 'Monthly steering', 'QBR trimestral'].map((item, i) => (
+            <span
+              key={item}
+              className={`text-sm tracking-[0.03em] px-4 py-2 border ${
+                isDark ? 'border-cream/[0.08] text-cream/60' : 'border-[#0a1628]/[0.08] text-[#0a1628]/60'
+              }`}
+            >
+              {i === 0 && <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${isDark ? 'bg-accent/60' : 'bg-[#1a3a6e]/60'}`} />}
+              {i === 1 && <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${isDark ? 'bg-accent/40' : 'bg-[#1a3a6e]/40'}`} />}
+              {i === 2 && <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${isDark ? 'bg-accent/20' : 'bg-[#1a3a6e]/20'}`} />}
+              {item}
+            </span>
+          ))}
+        </motion.div>
+      </section>
+
+      <Divider isDark={isDark} />
+
+      {/* ══════════════════════════════════════════════════════ */}
+      {/*  SECTION 3 — KPIs DE IMPACTO                          */}
+      {/* ══════════════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32">
+        <motion.div {...fadeUp} className="mb-20">
+          <span className="section-label mb-10 inline-block">Medición</span>
+          <h2 className={`heading-display text-display-lg max-w-3xl ${textMain}`}>
+            KPIs de impacto
+          </h2>
+          <p className={`text-xl font-light leading-relaxed max-w-2xl mt-6 ${textMuted}`}>
+            Indicadores clave para medir el éxito del proyecto y demostrar resultados tangibles.
+          </p>
+        </motion.div>
+
+        {/* KPI grid */}
+        <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-px ${isDark ? 'bg-white/[0.03]' : 'bg-black/[0.03]'}`}>
+          {kpis.map((kpi, i) => (
+            <motion.div
+              key={kpi.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.06, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              className={`${cardBg} backdrop-blur-sm p-8 lg:p-10 group`}
+            >
+              {/* KPI number */}
+              <span className={`stat-value text-4xl lg:text-5xl tracking-tight block mb-5`}>
+                {kpi.id}
+              </span>
+
+              {/* KPI name */}
+              <h4 className={`font-display text-lg mb-3 ${textMain}`}>
+                {kpi.name}
+              </h4>
+
+              {/* KPI description */}
+              <p className={`text-[15px] font-light leading-relaxed ${textMuted}`}>
+                {kpi.desc}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section>
-        <div className="text-center">
-          <p className={`text-lg mb-8 font-light ${textMuted}`}>¿Listos para comenzar?</p>
-          <button className="btn-primary">Iniciar Proyecto</button>
+      <Divider isDark={isDark} />
+
+      {/* ══════════════════════════════════════════════════════ */}
+      {/*  SECTION 4 — PROPUESTA DE INVERSIÓN                   */}
+      {/* ══════════════════════════════════════════════════════ */}
+      <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32">
+        <motion.div {...fadeUp} className="mb-20">
+          <span className="section-label mb-10 inline-block">Inversión</span>
+          <h2 className={`heading-display text-display-lg max-w-3xl ${textMain}`}>
+            Propuesta de inversión
+          </h2>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          {/* Left — Pricing table */}
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+          >
+            <div className="mb-8">
+              <span className={`text-xs uppercase tracking-[0.2em] block mb-2 ${textMuted}`}>Para individuales</span>
+              <h3 className={`font-display text-2xl lg:text-3xl ${textMain}`}>Tabla de precios</h3>
+              <span className={`text-sm font-light mt-2 block ${textMuted}`}>(EUR* usuario/año)</span>
+            </div>
+
+            <div className={`border ${borderColor} overflow-hidden`}>
+              {/* Table header */}
+              <div className={`grid grid-cols-2 gap-0 ${isDark ? 'bg-[#0d1a2e]' : 'bg-[#f5f5f5]'}`}>
+                <div className="p-5 lg:p-6">
+                  <span className={`text-xs uppercase tracking-[0.15em] font-medium ${textAccent}`}>N.º de asegurados</span>
+                </div>
+                <div className={`p-5 lg:p-6 border-l ${borderColor}`}>
+                  <span className={`text-xs uppercase tracking-[0.15em] font-medium ${textAccent}`}>Coste</span>
+                </div>
+              </div>
+
+              {/* Table rows */}
+              {pricingTiers.map((tier, i) => (
+                <motion.div
+                  key={tier.users}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.05 * i }}
+                  viewport={{ once: true }}
+                  className={`grid grid-cols-2 gap-0 border-t ${borderColor} ${
+                    tier.highlighted
+                      ? isDark ? 'bg-accent/[0.06] border-l-2 border-l-accent' : 'bg-[#1a3a6e]/[0.06] border-l-2 border-l-[#1a3a6e]'
+                      : isDark ? 'hover:bg-white/[0.02]' : 'hover:bg-black/[0.02]'
+                  } transition-colors`}
+                >
+                  <div className="p-5 lg:p-6 flex items-center gap-3">
+                    <span className={`text-base font-light ${tier.highlighted ? textMain : (isDark ? 'text-cream/70' : 'text-[#0a1628]/70')}`}>
+                      {tier.users}
+                    </span>
+                    {tier.highlighted && (
+                      <span className={`text-[10px] uppercase tracking-[0.15em] px-2 py-1 font-medium ${
+                        isDark ? 'bg-accent/15 text-accent' : 'bg-[#1a3a6e]/15 text-[#1a3a6e]'
+                      }`}>
+                        Medicus
+                      </span>
+                    )}
+                  </div>
+                  <div className={`p-5 lg:p-6 border-l ${borderColor}`}>
+                    <span className={`text-base ${tier.highlighted ? `font-medium ${textAccent}` : `font-light ${isDark ? 'text-cream/70' : 'text-[#0a1628]/70'}`}`}>
+                      {tier.cost}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right — Pricing cards + CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            {/* Pricing cards */}
+            <div className="space-y-4 mb-12">
+              {/* Reference price */}
+              <div className={`${cardBg} backdrop-blur-sm border ${borderColor} p-10 lg:p-12`}>
+                <span className={`text-xs uppercase tracking-[0.2em] block mb-6 ${textMuted}`}>
+                  Coste licencia (200.000 asegurados)
+                </span>
+                <div className="flex items-baseline gap-1 mb-3">
+                  <span className={`stat-value text-5xl lg:text-6xl tracking-tight`}>1,36</span>
+                  <span className={`text-xl font-light ${textMuted}`}>€</span>
+                </div>
+                <span className={`text-base font-light ${textMuted}`}>por licencia / año</span>
+              </div>
+
+              {/* Medicus price */}
+              <div className={`relative border overflow-hidden ${
+                isDark ? 'border-accent/20 bg-accent/[0.04]' : 'border-[#1a3a6e]/20 bg-[#1a3a6e]/[0.04]'
+              } p-10 lg:p-12`}>
+                {/* Accent bar */}
+                <div className={`absolute top-0 left-0 right-0 h-px ${isDark ? 'bg-accent' : 'bg-[#1a3a6e]'}`} />
+
+                <span className={`text-xs uppercase tracking-[0.2em] block mb-6 ${textAccent}`}>
+                  Pricing Medicus
+                </span>
+                <div className="flex items-baseline gap-1 mb-3">
+                  <span className={`stat-value text-5xl lg:text-6xl tracking-tight`}>1,10</span>
+                  <span className={`text-xl font-light ${textMuted}`}>€</span>
+                </div>
+                <span className={`text-base font-light ${isDark ? 'text-cream/70' : 'text-[#0a1628]/70'}`}>por licencia / año</span>
+
+                {/* Savings badge */}
+                <div className={`mt-6 inline-flex items-center gap-2 px-4 py-2 ${
+                  isDark ? 'bg-accent/10' : 'bg-[#1a3a6e]/10'
+                }`}>
+                  <span className={`text-sm tracking-[0.03em] font-medium ${textAccent}`}>
+                    −19% sobre precio estándar
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Contract terms */}
+            <div className={`space-y-4 mt-2`}>
+              <div className={`flex items-center gap-4 py-4 border-t ${borderColor}`}>
+                <span className={`text-xs uppercase tracking-[0.2em] w-40 flex-shrink-0 ${textAccent}`}>Duración</span>
+                <span className={`text-base font-light ${isDark ? 'text-cream/80' : 'text-[#0a1628]/80'}`}>Dos años</span>
+              </div>
+              <div className={`flex items-center gap-4 py-4 border-t ${borderColor}`}>
+                <span className={`text-xs uppercase tracking-[0.2em] w-40 flex-shrink-0 ${textAccent}`}>Facturación</span>
+                <span className={`text-base font-light ${isDark ? 'text-cream/80' : 'text-[#0a1628]/80'}`}>Mensual</span>
+              </div>
+              <div className={`py-4 border-t ${borderColor}`}>
+                <p className={`text-base font-light ${textMuted}`}>
+                  Propuesta válida hasta el 31 de marzo
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

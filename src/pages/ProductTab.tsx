@@ -21,7 +21,7 @@ function Divider({ isDark }: { isDark: boolean }) {
 }
 
 export default function ProductTab({ isDark }: ProductTabProps) {
-  const [showVideo, setShowVideo] = useState(false)
+  const [showVideo, setShowVideo] = useState<string | null>(null)
 
   const textMain = isDark ? 'text-cream' : 'text-[#0a1628]'
   const textMuted = isDark ? 'text-cream/40' : 'text-[#0a1628]/50'
@@ -75,8 +75,8 @@ export default function ProductTab({ isDark }: ProductTabProps) {
       images: ['/images/onetoone1.webp', '/images/onetoone2.webp'],
       impacts: [
         { label: 'Mayor activación', value: 'x3', desc: 'el modelo puede triplicar la tasa de activación gracias al acompañamiento desde el inicio' },
-        { label: 'Alta adherencia', value: '90%', desc: 'de los usuarios que realizan una primera sesión alcanzan la décima' },
-        { label: 'Satisfacción elevada', value: '9,8', unit: '/10', desc: 'niveles de satisfacción cercanos a 9,8/10' },
+        { label: 'Mayor adherencia', value: 'x4,6', desc: 'frente al modelo tradicional gracias al acompañamiento personalizado continuo' },
+        { label: 'Mayor eficacia clínica', value: '+', desc: 'mejores resultados de salud con fisioterapia guiada frente a ejercicio sin supervisión' },
       ],
     },
     {
@@ -87,6 +87,7 @@ export default function ProductTab({ isDark }: ProductTabProps) {
       body: 'BodyOS permite realizar un screening integral del estado físico y funcional del afiliado, combinando tests de movilidad, fuerza, análisis postural e integración de datos (incluyendo wearables). A partir de esta evaluación, la plataforma identifica riesgos específicos y genera planes de prevención totalmente personalizados, adaptados a las necesidades reales de cada usuario.',
       showcase: ['/images/bodyos1.webp', '/images/bodyos2.webp'],
       video: '/images/testbodyos.mp4',
+      video2: '/images/bodyos.mp4',
       impacts: [
         { label: 'Predictive Algorithm', desc: 'Algoritmo de detección de riesgos que analiza patrones biomecánicos y datos del afiliado para anticipar lesiones antes de que ocurran' },
         { label: 'Segmentación inteligente para Medicus', desc: 'permite diseñar acciones específicas basadas en datos reales de salud' },
@@ -266,7 +267,7 @@ export default function ProductTab({ isDark }: ProductTabProps) {
                     </span>
                     {dev.video && (
                       <button
-                        onClick={() => setShowVideo(true)}
+                        onClick={() => setShowVideo(dev.video!)}
                         className={`inline-flex items-center gap-3 px-5 py-2.5 border transition-all duration-300 ${
                           isDark
                             ? 'border-accent/30 text-accent hover:bg-accent/10 hover:border-accent/50'
@@ -276,6 +277,21 @@ export default function ProductTab({ isDark }: ProductTabProps) {
                         <Play size={14} />
                         <span className="text-[11px] uppercase tracking-[0.2em] font-medium">
                           Ver ejemplo test
+                        </span>
+                      </button>
+                    )}
+                    {dev.video2 && (
+                      <button
+                        onClick={() => setShowVideo(dev.video2!)}
+                        className={`inline-flex items-center gap-3 px-5 py-2.5 border transition-all duration-300 ${
+                          isDark
+                            ? 'border-accent/30 text-accent hover:bg-accent/10 hover:border-accent/50'
+                            : 'border-[#1a3a6e]/30 text-[#1a3a6e] hover:bg-[#1a3a6e]/10 hover:border-[#1a3a6e]/50'
+                        }`}
+                      >
+                        <Play size={14} />
+                        <span className="text-[11px] uppercase tracking-[0.2em] font-medium">
+                          Ver Ergonomy Analysis
                         </span>
                       </button>
                     )}
@@ -570,7 +586,7 @@ export default function ProductTab({ isDark }: ProductTabProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-6"
-            onClick={() => setShowVideo(false)}
+            onClick={() => setShowVideo(null)}
           >
             {/* Backdrop */}
             <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
@@ -586,7 +602,7 @@ export default function ProductTab({ isDark }: ProductTabProps) {
             >
               {/* Close button */}
               <button
-                onClick={() => setShowVideo(false)}
+                onClick={() => setShowVideo(null)}
                 className="absolute -top-12 right-0 text-white/60 hover:text-white transition-colors flex items-center gap-2"
               >
                 <span className="text-[10px] uppercase tracking-[0.2em]">Cerrar</span>
@@ -595,7 +611,8 @@ export default function ProductTab({ isDark }: ProductTabProps) {
 
               <div className="rounded-lg overflow-hidden shadow-2xl shadow-black/50">
                 <video
-                  src="/images/testbodyos.mp4"
+                  key={showVideo}
+                  src={showVideo}
                   controls
                   autoPlay
                   className="w-full h-auto"
