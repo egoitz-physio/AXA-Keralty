@@ -234,93 +234,146 @@ export default function ResultsTab({ isDark: _isDark }: ResultsTabProps) {
         {/* ══════════════════════════════════════ */}
         {/* 03 — RESULTADOS OBTENIDOS              */}
         {/* ══════════════════════════════════════ */}
-        <SectionHeader number="03" title="Resultados obtenidos" />
+        <div
+          className="relative overflow-hidden py-24 my-12"
+          style={{
+            marginLeft: 'calc(-50vw + 50%)',
+            marginRight: 'calc(-50vw + 50%)',
+            width: '100vw',
+          }}
+        >
+          {/* Background image */}
+          <img
+            src="/images/bg-1.jpeg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover scale-110"
+          />
+          {/* Dark cinematic overlay */}
+          <div className="absolute inset-0 bg-[#050d1a]/70" />
+          {/* Gradient edges for blending */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050d1a]/40 via-transparent to-[#050d1a]/60" />
 
-        <div className="grid lg:grid-cols-2 gap-6 mb-24">
-          {/* Prevención y Bienestar */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="bg-white rounded-3xl p-8 lg:p-10 relative overflow-hidden border border-[#1a3a6e]/10 h-full">
-              <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #1a3a6e 0%, transparent 70%)' }} />
-              <div className="relative">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#1a3a6e]/8 text-[#1a3a6e] text-[10px] uppercase tracking-[0.15em] font-medium rounded-full mb-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1a3a6e]" />
-                  Programa 01
-                </span>
-                <h4 className="text-xl font-semibold text-[#0a1628] tracking-tight mb-1">Prevención y Bienestar</h4>
-                <p className="text-[#0a1628]/30 text-xs mb-8">Datos 2025 — Póliza de salud – Prevención</p>
+          {/* Content constrained */}
+          <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
 
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { value: '160', label: 'Usuarios activos', icon: <Users size={16} /> },
-                    { value: '768', label: 'Logins', icon: <LogIn size={16} /> },
-                    { value: '9.82/10', label: 'Satisfacción', icon: <Star size={16} /> },
-                    { value: '548', label: 'Sesiones completadas', icon: <CheckCircle2 size={16} /> },
-                    { value: '2,344', label: 'Ejercicios', icon: <Dumbbell size={16} /> },
-                  ].map((stat, i) => (
-                    <motion.div
-                      key={stat.label}
-                      initial={{ opacity: 0, y: 12 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.05 }}
-                      viewport={{ once: true }}
-                      className="bg-[#1a3a6e]/[0.04] rounded-2xl p-4 border border-[#1a3a6e]/[0.06]"
-                    >
-                      <div className="text-[#1a3a6e]/50 mb-2">{stat.icon}</div>
-                      <div className="text-[#0a1628] text-2xl font-bold tracking-tight">{stat.value}</div>
-                      <span className="text-[#0a1628]/30 text-[10px] uppercase tracking-[0.1em] mt-0.5 block">{stat.label}</span>
-                    </motion.div>
-                  ))}
-                </div>
+            {/* Section header — glass inline */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-14"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-[11px] uppercase tracking-[0.2em] text-white/40 font-medium">03</span>
+                <div className="flex-1 border-t border-white/[0.08]" />
               </div>
-            </div>
-          </motion.div>
+              <h3
+                className="text-3xl md:text-4xl font-light text-white tracking-tight"
+                style={{ fontFamily: 'Outfit, sans-serif' }}
+              >
+                Resultados obtenidos
+              </h3>
+            </motion.div>
 
-          {/* Rehabilitación Híbrida */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <div className="bg-white rounded-3xl p-8 lg:p-10 relative overflow-hidden border border-[#c9a96e]/10 h-full">
-              <div className="absolute -top-20 -right-20 w-56 h-56 rounded-full opacity-20" style={{ background: 'radial-gradient(circle, #c9a96e 0%, transparent 70%)' }} />
-              <div className="relative">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#c9a96e]/10 text-[#9a7b3a] text-[10px] uppercase tracking-[0.15em] font-medium rounded-full mb-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#c9a96e]" />
-                  Programa 02
-                </span>
-                <h4 className="text-xl font-semibold text-[#0a1628] tracking-tight mb-1">Rehabilitación Híbrida</h4>
-                <p className="text-[#0a1628]/30 text-xs mb-8">Datos — Programa de Rehabilitación Híbrida</p>
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* Prevención y Bienestar — Glass card */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <div
+                  className="rounded-3xl p-8 lg:p-10 relative overflow-hidden h-full border border-white/[0.12]"
+                  style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)' }}
+                >
+                  {/* Subtle warm glow */}
+                  <div className="absolute -top-20 -right-20 w-56 h-56 rounded-full opacity-20 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(26,58,110,0.6) 0%, transparent 70%)' }} />
 
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { value: '4', label: 'Kinesiólogos activos', icon: <Stethoscope size={16} /> },
-                    { value: '35', label: 'Pacientes activados', icon: <UserCheck size={16} /> },
-                    { value: '186', label: 'Sesiones', icon: <Activity size={16} /> },
-                    { value: '6.64', label: 'Sesiones por paciente', icon: <TrendingUp size={16} /> },
-                    { value: '9.18/10', label: 'Satisfacción', icon: <Star size={16} /> },
-                  ].map((stat, i) => (
-                    <motion.div
-                      key={stat.label}
-                      initial={{ opacity: 0, y: 12 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 + i * 0.05 }}
-                      viewport={{ once: true }}
-                      className="bg-[#c9a96e]/[0.04] rounded-2xl p-4 border border-[#c9a96e]/[0.06]"
-                    >
-                      <div className="text-[#c9a96e]/50 mb-2">{stat.icon}</div>
-                      <div className="text-[#0a1628] text-2xl font-bold tracking-tight">{stat.value}</div>
-                      <span className="text-[#0a1628]/30 text-[10px] uppercase tracking-[0.1em] mt-0.5 block">{stat.label}</span>
-                    </motion.div>
-                  ))}
+                  <div className="relative">
+                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/[0.08] border border-white/[0.1] text-white/80 text-[10px] uppercase tracking-[0.15em] font-medium rounded-full mb-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#6b9fff]" />
+                      Programa 01
+                    </span>
+                    <h4 className="text-xl font-semibold text-white tracking-tight mb-1">Prevención y Bienestar</h4>
+                    <p className="text-white/35 text-xs mb-8">Datos 2025 — Póliza de salud – Prevención</p>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { value: '160', label: 'Usuarios activos', icon: <Users size={16} /> },
+                        { value: '768', label: 'Logins', icon: <LogIn size={16} /> },
+                        { value: '9.82/10', label: 'Satisfacción', icon: <Star size={16} /> },
+                        { value: '548', label: 'Sesiones completadas', icon: <CheckCircle2 size={16} /> },
+                        { value: '2,344', label: 'Ejercicios', icon: <Dumbbell size={16} /> },
+                      ].map((stat, i) => (
+                        <motion.div
+                          key={stat.label}
+                          initial={{ opacity: 0, y: 12 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.06 }}
+                          viewport={{ once: true }}
+                          className="rounded-2xl p-4 border border-white/[0.08]"
+                          style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
+                        >
+                          <div className="text-[#6b9fff] mb-2">{stat.icon}</div>
+                          <div className="text-white text-2xl font-bold tracking-tight">{stat.value}</div>
+                          <span className="text-white/60 text-[10px] uppercase tracking-[0.1em] mt-0.5 block">{stat.label}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
+
+              {/* Rehabilitación Híbrida — Glass card */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div
+                  className="rounded-3xl p-8 lg:p-10 relative overflow-hidden h-full border border-white/[0.12]"
+                  style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)' }}
+                >
+                  {/* Subtle warm glow */}
+                  <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full opacity-25 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(201,169,110,0.5) 0%, transparent 70%)' }} />
+
+                  <div className="relative">
+                    <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/[0.08] border border-white/[0.1] text-white/80 text-[10px] uppercase tracking-[0.15em] font-medium rounded-full mb-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#e8c87a]" />
+                      Programa 02
+                    </span>
+                    <h4 className="text-xl font-semibold text-white tracking-tight mb-1">Rehabilitación Híbrida</h4>
+                    <p className="text-white/35 text-xs mb-8">Datos — Programa de Rehabilitación Híbrida</p>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { value: '4', label: 'Kinesiólogos activos', icon: <Stethoscope size={16} /> },
+                        { value: '35', label: 'Pacientes activados', icon: <UserCheck size={16} /> },
+                        { value: '186', label: 'Sesiones', icon: <Activity size={16} /> },
+                        { value: '6.64', label: 'Sesiones por paciente', icon: <TrendingUp size={16} /> },
+                        { value: '9.18/10', label: 'Satisfacción', icon: <Star size={16} /> },
+                      ].map((stat, i) => (
+                        <motion.div
+                          key={stat.label}
+                          initial={{ opacity: 0, y: 12 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.1 + i * 0.06 }}
+                          viewport={{ once: true }}
+                          className="rounded-2xl p-4 border border-white/[0.08]"
+                          style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
+                        >
+                          <div className="text-[#e8c87a] mb-2">{stat.icon}</div>
+                          <div className="text-white text-2xl font-bold tracking-tight">{stat.value}</div>
+                          <span className="text-white/60 text-[10px] uppercase tracking-[0.1em] mt-0.5 block">{stat.label}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
 
@@ -529,53 +582,87 @@ export default function ResultsTab({ isDark: _isDark }: ResultsTabProps) {
           subtitle="Los pilotos dejan tres certezas que orientan la hoja de ruta conjunta."
         />
 
-        <div className="space-y-6">
+        <div className="grid md:grid-cols-3 gap-5">
           {[
             {
               num: '01',
               title: 'Prevención y bienestar: adopción y valor demostrado',
               desc: 'El modelo encaja en el día a día del asegurado como herramienta preventiva y de bienestar, con un uso recurrente y una valoración muy positiva por parte de los colaboradores.',
               aprendizaje: 'Para sostener la adopción y mantener ratios de hábitos en el piloto, es necesario activar campañas constantes, junto con estrategias de gamificación que impulsen una alta adherencia y refuercen el uso periódico.',
-              icon: <Zap size={24} />,
-              gradient: 'from-[#1a3a6e] to-[#2a4a7e]',
+              icon: <Zap size={20} />,
+              bg: '/images/bg-gradient-3.jpeg',
             },
             {
               num: '02',
               title: 'Rehabilitación de pacientes: buena aceptación y adherencia',
               desc: 'Los pacientes se activan, muestran una elevada satisfacción. El modelo híbrido mejora la accesibilidad y la adherencia al tratamiento.',
               aprendizaje: 'Es clave reforzar el seguimiento y la personalización del tratamiento, combinando el soporte digital con puntos de contacto clínico, para maximizar la adherencia sostenida y asegurar mejores resultados en la recuperación.',
-              icon: <Heart size={24} />,
-              gradient: 'from-[#c9a96e] to-[#d4b87e]',
+              icon: <Heart size={20} />,
+              bg: '/images/bg-gradient-2.png',
             },
             {
               num: '03',
               title: 'Adopción de fisioterapeutas: principal palanca de escalado',
               desc: 'El modelo es clínicamente viable, pero la adopción profesional requiere acciones específicas.',
               aprendizaje: 'Es clave trabajar la integración y el acompañamiento al fisioterapeuta: diseñar un plan para la adopción con incentivos, acciones formativas, seguimiento exhaustivo y soporte continuo para un uso recurrente en la práctica clínica.',
-              icon: <Lightbulb size={24} />,
-              gradient: 'from-[#4caf50] to-[#66bb6a]',
+              icon: <Lightbulb size={20} />,
+              bg: '/images/bg-gradient-5.png',
             },
           ].map((item, i) => (
             <motion.div
               key={item.num}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.12 }}
               viewport={{ once: true }}
-              className="bg-white rounded-3xl p-8 relative overflow-hidden"
+              className="group relative rounded-3xl overflow-hidden flex flex-col"
             >
-              <span className="text-[6rem] font-bold text-[#0a1628]/[0.03] absolute -top-2 right-4 leading-none select-none">{item.num}</span>
-              <div className="flex items-start gap-6">
-                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center text-white shrink-0`}>
-                  {item.icon}
+              {/* Gradient background image — visible as top strip */}
+              <div className="relative h-40 overflow-hidden flex-shrink-0">
+                <img
+                  src={item.bg}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover scale-105 transition-transform duration-700 group-hover:scale-110"
+                />
+                {/* Number overlay on gradient */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span
+                    className="text-[7rem] font-bold text-white/[0.12] leading-none select-none"
+                    style={{ fontFamily: 'Outfit, sans-serif' }}
+                  >
+                    {item.num}
+                  </span>
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-lg font-semibold text-[#0a1628] mb-3">{item.title}</h4>
-                  <p className="text-[#0a1628]/60 text-sm font-light leading-relaxed mb-5">{item.desc}</p>
-                  <div className="bg-[#0a1628]/[0.03] rounded-2xl p-5 border border-[#0a1628]/[0.05]">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#c9a96e] font-medium mb-2 block">Aprendizaje</span>
-                    <p className="text-[#0a1628]/70 text-sm font-light leading-relaxed">{item.aprendizaje}</p>
-                  </div>
+                {/* Bottom fade into white */}
+                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
+              </div>
+
+              {/* White content area */}
+              <div className="relative flex flex-col flex-1 bg-white px-7 pb-7 lg:px-8 lg:pb-8 -mt-4">
+                {/* Icon badge */}
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 -mt-5 shadow-md bg-white">
+                  <span className="text-[#0a1628]/30">{item.icon}</span>
+                </div>
+
+                {/* Title */}
+                <h4
+                  className="text-lg font-semibold text-[#0a1628] tracking-tight leading-snug mb-3"
+                  style={{ fontFamily: 'Outfit, sans-serif' }}
+                >
+                  {item.title}
+                </h4>
+
+                {/* Description */}
+                <p className="text-[#0a1628]/55 text-sm font-light leading-relaxed mb-auto">
+                  {item.desc}
+                </p>
+
+                {/* Aprendizaje box */}
+                <div className="mt-6 rounded-2xl p-5 bg-[#0a1628]/[0.03] border border-[#0a1628]/[0.06]">
+                  <span className="text-[9px] uppercase tracking-[0.2em] font-semibold mb-2.5 block text-[#c9a96e]">
+                    Aprendizaje
+                  </span>
+                  <p className="text-[#0a1628]/70 text-[13px] font-light leading-relaxed">{item.aprendizaje}</p>
                 </div>
               </div>
             </motion.div>

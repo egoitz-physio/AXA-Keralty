@@ -59,9 +59,8 @@ export default function FooterSection({ isDark }: FooterSectionProps) {
           <div className="lg:col-span-3">
             <h4 className={`text-xs uppercase tracking-[0.2em] mb-6 font-light ${textMuted}`}>Contacto</h4>
             <div className={`space-y-4 text-sm font-light ${textMuted}`}>
-              <p>Buenos Aires, Argentina</p>
               <p>Madrid, España</p>
-              <p className={textAccent}>hola@fisify.com</p>
+              <p className={textAccent}>info@fisify.com</p>
             </div>
           </div>
         </div>

@@ -4,214 +4,254 @@ interface ValueTabProps {
   isDark: boolean
 }
 
-export default function ValueTab({ isDark }: ValueTabProps) {
-  const cardBg = isDark ? 'bg-[#0d1a2e]' : 'bg-white'
-  const borderColor = isDark ? 'border-white/5' : 'border-black/5'
-  const textMain = isDark ? 'text-cream' : 'text-[#0a1628]'
-  const textMuted = isDark ? 'text-cream/40' : 'text-[#0a1628]/50'
-  const textAccent = isDark ? 'text-accent' : 'text-[#1a3a6e]'
-
-  const impactMetrics = [
-    { value: 'x3', label: 'Activación', detail: 'Con modelo One-to-One + Fisio', context: 'Con los one-to-ones con fisioterapeuta, la adherencia se multiplica por tres' },
-    { value: '90%', label: 'Adherencia', detail: 'Usuarios activos semana 10', context: 'El 90% de usuarios siguen activos, consolidando un hábito de mínimo 5 min/semana' },
-    { value: '9.8', label: 'Satisfacción', detail: 'Fisify 3.0', context: 'Con el lanzamiento de Fisify 3.0 hemos triplicado la adherencia de los asegurados' },
-  ]
-
-  const addons = [
-    { num: '01', title: 'FisifyCare Premium', desc: '30 min con fisioterapeuta de la red Medicus + plan de recuperación + seguimiento semanal.', tag: 'Premium', objective: 'Objetivo: disminuir siniestralidad' },
-    { num: '02', title: 'Apoyo de Marketing', desc: 'El equipo de marketing de Fisify crea contenido branded para la comunicación interna de Medicus.', tag: 'Incluido', objective: 'Objetivo: maximizar activación' },
-    { num: '03', title: 'Formaciones Online', desc: 'Charlas y webinars de salud física (45 min, online). Adaptadas al perfil del asegurado.', tag: 'Add-on', objective: 'Objetivo: educación preventiva' },
-    { num: '04', title: 'Clases Grupales', desc: 'Espalda sana, fuerza, hipopresivos y suelo pélvico. Sesiones de 30 min online en directo.', tag: 'Add-on', objective: 'Objetivo: comunidad y engagement' },
-  ]
-
+export default function ValueTab({ isDark: _isDark }: ValueTabProps) {
   return (
-    <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20">
-      {/* Header with image */}
-      <section className="mb-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="section-label mb-8 inline-block">
-              Impacto Demostrado
-            </span>
-            <h2 className={`heading-display text-display-lg mb-6 max-w-xl ${textMain}`}>
-              Resultados reales que validan nuestro modelo
-            </h2>
-            <p className={`text-xl max-w-lg font-light ${textMuted}`}>
-              Más adherencia = menos siniestralidad = mayor rentabilidad para Medicus.
-            </p>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="relative aspect-[4/3] overflow-hidden"
-          >
-            <img
-              src="/images/value-patient.png"
-              alt="Paciente usando Fisify"
-              className="w-full h-full object-cover"
-            />
-            <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-t from-[#0a1628]/50 to-transparent' : 'bg-gradient-to-t from-white/30 to-transparent'}`} />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Key metrics */}
-      <section className="mb-32">
-        <div className={`grid lg:grid-cols-3 gap-px ${borderColor}`}>
-          {impactMetrics.map((metric, i) => (
-            <motion.div
-              key={metric.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.15 }}
-              viewport={{ once: true }}
-              className={`${cardBg} p-12 lg:p-16`}
-            >
-              <span className="stat-value text-6xl lg:text-7xl block">
-                {metric.value}
-              </span>
-              <h3 className={`font-display text-xl mt-4 mb-2 ${textMain}`}>
-                {metric.label}
-              </h3>
-              <p className={`text-sm mb-4 ${textAccent}`}>
-                {metric.detail}
-              </p>
-              <p className={`text-sm font-light leading-relaxed ${textMuted}`}>
-                {metric.context}
-              </p>
-            </motion.div>
+    <div className="bg-[#faf9f7] min-h-screen relative">
+      {/* Subtle grid lines background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="max-w-[1400px] mx-auto h-full px-6 lg:px-12 flex">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="flex-1 border-l border-[#0a1628]/[0.03] first:border-l-0" />
           ))}
+          <div className="flex-1 border-l border-r border-[#0a1628]/[0.03]" />
         </div>
+      </div>
 
-        {/* Formula */}
-        <div className={`mt-px border p-8 text-center ${isDark ? 'border-accent/20 bg-accent/5' : 'border-[#1a3a6e]/20 bg-[#1a3a6e]/5'}`}>
-          <p className={`text-lg font-light tracking-wide ${isDark ? 'text-cream/70' : 'text-[#0a1628]/70'}`}>
-            <span className={textAccent}>Más adherencia</span>
-            <span className={isDark ? 'text-cream/20 mx-4 md:mx-6' : 'text-[#0a1628]/20 mx-4 md:mx-6'}>→</span>
-            <span className={textMain}>Menos siniestralidad</span>
-            <span className={isDark ? 'text-cream/20 mx-4 md:mx-6' : 'text-[#0a1628]/20 mx-4 md:mx-6'}>→</span>
-            <span className={textAccent}>Mayor rentabilidad</span>
-          </p>
-        </div>
-      </section>
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-24 relative">
 
-      {/* Image break */}
-      <section className="mb-32">
+        {/* ══════════════════════════════════════ */}
+        {/*  HEADER                                */}
+        {/* ══════════════════════════════════════ */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative aspect-[21/9] overflow-hidden"
+          className="mb-32"
         >
-          <img
-            src="/images/value-campus.png"
-            alt="Campus de salud Medicus"
-            className="w-full h-full object-cover"
-          />
-          <div className={`absolute inset-0 ${isDark ? 'bg-[#0a1628]/30' : 'bg-white/20'}`} />
-        </motion.div>
-      </section>
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-[11px] uppercase tracking-[0.2em] text-[#0a1628]/30 font-medium">Valor estratégico</span>
+            <div className="flex-1 border-t border-[#0a1628]/[0.06]" />
+          </div>
 
-      {/* Add-ons with image */}
-      <section className="mb-32">
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div>
-            <div className="flex items-center gap-6 mb-12">
-              <div className={`w-16 h-px ${isDark ? 'bg-cream/20' : 'bg-[#0a1628]/20'}`} />
-              <h3 className={`text-xs uppercase tracking-[0.3em] font-light ${textMuted}`}>
-                Servicios Add-on
-              </h3>
+          <h2
+            className="text-4xl md:text-5xl lg:text-[3.5rem] font-light text-[#0a1628] tracking-tight leading-[1.1] max-w-4xl"
+            style={{ fontFamily: 'Outfit, sans-serif' }}
+          >
+            Tres palancas estratégicas
+            <br />
+            <span className="font-semibold">para Medicus</span>
+          </h2>
+
+          <p className="text-lg text-[#0a1628]/40 font-light mt-6 max-w-2xl leading-relaxed">
+            Un modelo que transforma la relación con el afiliado y genera impacto medible en tres dimensiones clave.
+          </p>
+        </motion.div>
+
+        {/* ══════════════════════════════════════ */}
+        {/*  PALANCA 01 — DIFERENCIACIÓN           */}
+        {/* ══════════════════════════════════════ */}
+        <section className="mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {/* Section number + rule */}
+            <div className="flex items-center gap-4 mb-12">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-[#0a1628]/30 font-medium">01</span>
+              <div className="flex-1 border-t border-[#0a1628]/[0.06]" />
             </div>
 
-            <div className={`grid gap-px ${borderColor}`}>
-              {addons.map((addon, i) => (
+            {/* Two-column layout */}
+            <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+              {/* Left — Title + body */}
+              <div className="lg:col-span-7">
+                <h3
+                  className="text-3xl md:text-4xl font-light text-[#0a1628] tracking-tight mb-8"
+                  style={{ fontFamily: 'Outfit, sans-serif' }}
+                >
+                  Diferenciación
+                  <br />
+                  <span className="font-semibold">competitiva</span>
+                </h3>
+
+                <p className="text-lg text-[#0a1628]/55 font-light leading-[1.8] max-w-xl">
+                  Producto innovador que destaca en el mercado. Valor agregado tangible e inmediato.
+                  Posicionamiento como aseguradora <span className="text-[#1a3a6e] font-medium">preventiva, no reactiva</span>.
+                </p>
+              </div>
+
+              {/* Right — What it enables */}
+              <div className="lg:col-span-5">
+                <div className="border-l-2 border-[#c9a96e]/40 pl-8">
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-[#c9a96e] font-medium block mb-6">
+                    Lo que permite a la aseguradora
+                  </span>
+
+                  <div className="space-y-5">
+                    {[
+                      'Diseñar campañas preventivas segmentadas',
+                      'Ajustar estrategias de producto',
+                      'Anticipar tendencias de siniestralidad',
+                      'Generar inteligencia poblacional',
+                    ].map((item, i) => (
+                      <motion.div
+                        key={item}
+                        initial={{ opacity: 0, x: -12 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.08 }}
+                        viewport={{ once: true }}
+                        className="flex items-start gap-4"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#1a3a6e]/40 mt-2.5 flex-shrink-0" />
+                        <span className="text-[15px] text-[#0a1628]/70 font-light leading-relaxed">
+                          {item}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* ══════════════════════════════════════ */}
+        {/*  PALANCA 02 — MEJORA ESTADO FÍSICO     */}
+        {/* ══════════════════════════════════════ */}
+        <section className="mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {/* Section number + rule */}
+            <div className="flex items-center gap-4 mb-12">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-[#0a1628]/30 font-medium">02</span>
+              <div className="flex-1 border-t border-[#0a1628]/[0.06]" />
+            </div>
+
+            <h3
+              className="text-3xl md:text-4xl font-light text-[#0a1628] tracking-tight mb-8"
+              style={{ fontFamily: 'Outfit, sans-serif' }}
+            >
+              Mejora del estado físico
+              <br />
+              <span className="font-semibold">poblacional</span>
+            </h3>
+
+            <p className="text-lg text-[#0a1628]/55 font-light leading-[1.8] max-w-3xl mb-16">
+              Reducción de episodios leves recurrentes, menor progresión a lesiones graves,
+              reducción de primeras consultas innecesarias y prevención de recaídas.
+            </p>
+
+            {/* Three impact metrics */}
+            <div className="grid md:grid-cols-3 gap-0">
+              {[
+                { indicator: '↓', label: 'Menor frecuencia siniestral' },
+                { indicator: '↓', label: 'Menor severidad por episodio' },
+                { indicator: '↓', label: 'Menor tasa de recurrencia' },
+              ].map((metric, i) => (
                 <motion.div
-                  key={addon.num}
+                  key={metric.label}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                   viewport={{ once: true }}
-                  className={`${cardBg} p-8`}
+                  className={`py-10 px-8 lg:px-10 ${
+                    i > 0 ? 'md:border-l border-[#0a1628]/[0.06]' : ''
+                  } ${i < 2 ? 'border-b md:border-b-0 border-[#0a1628]/[0.06]' : ''}`}
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <span className={`text-xs tracking-[0.3em] ${isDark ? 'text-accent/50' : 'text-[#1a3a6e]/50'}`}>{addon.num}</span>
-                    <span className={`text-[10px] uppercase tracking-[0.2em] px-3 py-1 border ${
-                      addon.tag === 'Premium' 
-                        ? isDark ? 'border-accent/30 text-accent' : 'border-[#1a3a6e]/30 text-[#1a3a6e]'
-                        : isDark ? 'border-cream/10 text-cream/40' : 'border-[#0a1628]/10 text-[#0a1628]/40'
-                    }`}>
-                      {addon.tag}
-                    </span>
-                  </div>
-                  <h4 className={`font-display text-lg mb-2 ${textMain}`}>{addon.title}</h4>
-                  <p className={`text-sm font-light ${textMuted}`}>{addon.desc}</p>
+                  <span
+                    className="text-5xl lg:text-6xl font-bold text-[#1a3a6e] block mb-4"
+                    style={{ fontFamily: 'Philosopher, Georgia, serif' }}
+                  >
+                    {metric.indicator}
+                  </span>
+                  <span className="text-[15px] text-[#0a1628]/70 font-light leading-relaxed">
+                    {metric.label}
+                  </span>
                 </motion.div>
               ))}
             </div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="relative aspect-square overflow-hidden lg:aspect-auto"
-          >
-            <img
-              src="/images/value-care.png"
-              alt="Fisioterapeuta cuidando paciente"
-              className="w-full h-full object-cover"
-            />
-            <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-r from-[#0a1628]/50 to-transparent' : 'bg-gradient-to-r from-white/30 to-transparent'}`} />
           </motion.div>
-        </div>
-      </section>
+        </section>
 
-      {/* Strategic positioning */}
-      <section className="mb-32">
-        <div className={`border p-12 lg:p-16 ${cardBg} ${borderColor}`}>
-          <div className="max-w-3xl">
-            <span className={`text-xs tracking-[0.3em] block mb-6 ${isDark ? 'text-accent/50' : 'text-[#1a3a6e]/50'}`}>
-              Posicionamiento Estratégico
-            </span>
-            <h3 className={`font-display text-3xl mb-6 ${textMain}`}>
-              Medicus como referente en innovación
+        {/* ══════════════════════════════════════ */}
+        {/*  PALANCA 03 — FIDELIDAD Y ENGAGEMENT   */}
+        {/* ══════════════════════════════════════ */}
+        <section className="mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {/* Section number + rule */}
+            <div className="flex items-center gap-4 mb-12">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-[#0a1628]/30 font-medium">03</span>
+              <div className="flex-1 border-t border-[#0a1628]/[0.06]" />
+            </div>
+
+            <h3
+              className="text-3xl md:text-4xl font-light text-[#0a1628] tracking-tight mb-8"
+              style={{ fontFamily: 'Outfit, sans-serif' }}
+            >
+              Fidelidad y
+              <br />
+              <span className="font-semibold">engagement</span>
             </h3>
-            <p className={`text-lg font-light leading-relaxed mb-8 ${textMuted}`}>
-              50 años de excelencia médica + tecnología de vanguardia. 
-              La combinación perfecta para liderar el futuro de la salud digital en Argentina.
+
+            <p className="text-lg text-[#0a1628]/55 font-light leading-[1.8] max-w-3xl mb-16">
+              Fisify ha demostrado ser una herramienta de captación y retención de cuentas tanto
+              en individuales como en colectivos. Esta solución le permite a Medicus diferenciarse
+              de las otras pólizas y conseguir una <span className="text-[#1a3a6e] font-medium">mayor fidelización de la cartera existente</span>.
             </p>
-            <div className={`grid sm:grid-cols-3 gap-6 border-t pt-8 ${borderColor}`}>
+
+            {/* Two key insights */}
+            <div className="grid md:grid-cols-2 gap-0">
               {[
-                { label: 'Años de trayectoria', value: '50+' },
-                { label: 'Especialistas en red', value: '10k+' },
-                { label: 'Asegurados potenciales', value: '600k+' },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <span className={`text-2xl font-display ${textAccent}`}>{stat.value}</span>
-                  <span className={`block text-xs mt-2 uppercase tracking-widest ${textMuted}`}>{stat.label}</span>
-                </div>
+                {
+                  num: 'a',
+                  title: 'Relación continua',
+                  body: 'Frecuencia de interacción digital constante. Integración en la vida diaria del usuario.',
+                },
+                {
+                  num: 'b',
+                  title: 'Percepción de valor',
+                  body: 'El asegurado percibe que su seguro le ayuda a estar mejor cada día. Acceso inmediato, experiencia constante y personalizada.',
+                },
+              ].map((insight, i) => (
+                <motion.div
+                  key={insight.num}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className={`py-10 px-8 lg:px-10 ${
+                    i > 0 ? 'md:border-l border-[#0a1628]/[0.06]' : ''
+                  }`}
+                >
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="w-8 h-8 flex items-center justify-center border border-[#c9a96e]/30 text-[#c9a96e] text-xs font-medium">
+                      {insight.num}
+                    </span>
+                    <h4
+                      className="text-lg font-medium text-[#0a1628] tracking-tight"
+                      style={{ fontFamily: 'Outfit, sans-serif' }}
+                    >
+                      {insight.title}
+                    </h4>
+                  </div>
+                  <p className="text-[15px] text-[#0a1628]/55 font-light leading-[1.8]">
+                    {insight.body}
+                  </p>
+                </motion.div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        </section>
 
-      {/* CTA */}
-      <section>
-        <div className={`border p-12 lg:p-20 text-center ${cardBg} ${borderColor}`}>
-          <h2 className={`heading-display text-display mb-6 ${textMain}`}>
-            ¿Comenzamos juntos?
-          </h2>
-          <p className={`text-xl mb-10 max-w-2xl mx-auto font-light ${textMuted}`}>
-            Agenda una reunión con nuestro equipo para definir los próximos pasos de esta alianza estratégica.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="btn-primary">Agendar Reunión</button>
-            <button className="btn-ghost">Descargar Propuesta</button>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   )
 }

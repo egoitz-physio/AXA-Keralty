@@ -14,6 +14,7 @@ const tabs = [
   { id: 'product' as TabId, label: 'Producto', num: '03' },
   { id: 'value' as TabId, label: 'Valor', num: '04' },
   { id: 'implement' as TabId, label: 'Implementación', num: '05' },
+  { id: 'kinesiologia' as TabId, label: 'Kinesiología', num: '06' },
 ]
 
 export default function TabSection({ activeTab, setActiveTab, isDark }: TabSectionProps) {

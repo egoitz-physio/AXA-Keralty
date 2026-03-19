@@ -477,7 +477,7 @@ export default function ProductTab({ isDark }: ProductTabProps) {
             {
               quarter: 'Q3 2026',
               features: [
-                { text: 'Ampliación de contenidos: Gym, Suelo pélvico y más', video: '/images/gym-compressed.mp4' },
+                { text: 'Ampliación de contenidos: Gym, Suelo pélvico, Respiración y más', video: '/images/gym-compressed.mp4' },
                 { text: 'Aurya conversacional' },
                 { text: 'Algoritmia de Aurya para FisifyStudio' },
                 { text: 'Comunidad' },

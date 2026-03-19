@@ -26,15 +26,15 @@ export default function ObjetivoTab({ isDark: _isDark }: ObjetivoTabProps) {
     },
     {
       num: 'b',
-      icon: <Scale size={18} strokeWidth={1.5} />,
-      title: 'Cambio regulatorio: más libertad de elección + mayor presión competitiva',
-      body: 'Con el DNU 70/2023 y su reglamentación, se impulsó la libre elección entre obras sociales y prepagas y se redujeron restricciones de permanencia, fomentando captar/retener afiliados.',
-    },
-    {
-      num: 'c',
       icon: <Smartphone size={18} strokeWidth={1.5} />,
       title: 'Digital y telemedicina: avance real, pero todavía reactivo',
       body: 'Muchas ya tienen "canal digital", pero eso no garantiza hábito, ni prevención sostenida, ni una percepción de valor entre prestaciones. El afiliado solo interactúa cuando necesita atención.',
+    },
+    {
+      num: 'c',
+      icon: <Scale size={18} strokeWidth={1.5} />,
+      title: 'Cambio regulatorio: más libertad de elección + mayor presión competitiva',
+      body: 'Con el DNU 70/2023 y su reglamentación, se impulsó la libre elección entre obras sociales y prepagas y se redujeron restricciones de permanencia, fomentando captar/retener afiliados.',
     },
   ]
 
@@ -91,14 +91,7 @@ export default function ObjetivoTab({ isDark: _isDark }: ObjetivoTabProps) {
             Consolidar <span className="text-gradient font-medium">Fisify</span> como pilar de la{' '}
             <span className="text-cream font-medium">prevención activa</span> de dolencias
             musculoesqueléticas (MSK) para los asegurados de{' '}
-            <span className="text-gradient font-medium">Medicus</span>, a través de una mejora en
-            experiencia y resultados y, a la vez,{' '}
-            <span className="text-cream/90">
-              impulsar la compra/renovación de pólizas
-            </span>{' '}
-            <span className="text-cream/70">(individuales y colectivas)</span> con una propuesta{' '}
-            <span className="text-cream font-medium">diferencial y medible</span>, escalable a nivel
-            nacional.
+            <span className="text-gradient font-medium">Medicus</span>.
           </h2>
         </motion.div>
 

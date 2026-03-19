@@ -7,10 +7,11 @@ import ResultsTab from './pages/ResultsTab'
 import ProductTab from './pages/ProductTab'
 import ValueTab from './pages/ValueTab'
 import ImplementTab from './pages/ImplementTab'
+import KinesiologiaTab from './pages/KinesiologiaTab'
 import ObjetivoTab from './pages/ObjetivoTab'
 import FooterSection from './components/FooterSection'
 
-export type TabId = 'objetivo' | 'results' | 'product' | 'value' | 'implement'
+export type TabId = 'objetivo' | 'results' | 'product' | 'value' | 'kinesiologia' | 'implement'
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabId>('objetivo')
@@ -66,6 +67,7 @@ function App() {
               {activeTab === 'product' && <ProductTab isDark={true} />}
               {activeTab === 'value' && <ValueTab isDark={true} />}
               {activeTab === 'implement' && <ImplementTab isDark={true} />}
+              {activeTab === 'kinesiologia' && <KinesiologiaTab isDark={true} />}
             </motion.div>
           </AnimatePresence>
       </main>

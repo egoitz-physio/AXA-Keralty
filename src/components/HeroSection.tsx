@@ -23,10 +23,10 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="text-3xl md:text-5xl lg:text-6xl text-white leading-tight max-w-3xl"
+            className="text-3xl md:text-5xl lg:text-6xl text-white leading-tight max-w-2xl"
             style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 300, letterSpacing: '-0.01em' }}
           >
-            Fisioterapia digital de <span className="font-semibold">excelencia</span> para los asegurados de <span className="font-semibold">Medicus</span>
+            Bienestar inteligente para los afiliados de <span className="font-semibold">Medicus</span>
           </motion.h1>
         </div>
       </div>
