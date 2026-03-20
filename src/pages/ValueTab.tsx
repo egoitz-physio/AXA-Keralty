@@ -37,14 +37,10 @@ export default function ValueTab({ isDark: _isDark }: ValueTabProps) {
             className="text-4xl md:text-5xl lg:text-[3.5rem] font-light text-[#0a1628] tracking-tight leading-[1.1] max-w-4xl"
             style={{ fontFamily: 'Outfit, sans-serif' }}
           >
-            Tres palancas estratégicas
+            Tres oportunidades estratégicas
             <br />
-            <span className="font-semibold">para Medicus</span>
+            <span className="font-semibold">para redefinir el valor de Medicus</span>
           </h2>
-
-          <p className="text-lg text-[#0a1628]/40 font-light mt-6 max-w-2xl leading-relaxed">
-            Un modelo que transforma la relación con el afiliado y genera impacto medible en tres dimensiones clave.
-          </p>
         </motion.div>
 
         {/* ══════════════════════════════════════ */}
@@ -70,14 +66,11 @@ export default function ValueTab({ isDark: _isDark }: ValueTabProps) {
                   className="text-3xl md:text-4xl font-light text-[#0a1628] tracking-tight mb-8"
                   style={{ fontFamily: 'Outfit, sans-serif' }}
                 >
-                  Diferenciación
-                  <br />
-                  <span className="font-semibold">competitiva</span>
+                  <span className="font-semibold">Diferenciación</span>
                 </h3>
 
                 <p className="text-lg text-[#0a1628]/55 font-light leading-[1.8] max-w-xl">
-                  Producto innovador que destaca en el mercado. Valor agregado tangible e inmediato.
-                  Posicionamiento como aseguradora <span className="text-[#1a3a6e] font-medium">preventiva, no reactiva</span>.
+                  Con Fisify reforzaremos una propuesta de salud más preventiva, más moderna y más coherente con una marca que quiere liderar desde la <span className="text-[#1a3a6e] font-medium">calidad y la innovación</span>.
                 </p>
               </div>
 
@@ -85,15 +78,14 @@ export default function ValueTab({ isDark: _isDark }: ValueTabProps) {
               <div className="lg:col-span-5">
                 <div className="border-l-2 border-[#c9a96e]/40 pl-8">
                   <span className="text-[11px] uppercase tracking-[0.2em] text-[#c9a96e] font-medium block mb-6">
-                    Lo que permite a la aseguradora
+                    Lo que permite
                   </span>
 
                   <div className="space-y-5">
                     {[
-                      'Diseñar campañas preventivas segmentadas',
-                      'Ajustar estrategias de producto',
-                      'Anticipar tendencias de siniestralidad',
-                      'Generar inteligencia poblacional',
+                      'Más valor percibido de la cobertura',
+                      'Un posicionamiento más claro frente a otras prepagas',
+                      'Una propuesta más tangible para individuales y colectivos',
                     ].map((item, i) => (
                       <motion.div
                         key={item}
@@ -117,7 +109,7 @@ export default function ValueTab({ isDark: _isDark }: ValueTabProps) {
         </section>
 
         {/* ══════════════════════════════════════ */}
-        {/*  PALANCA 02 — MEJORA ESTADO FÍSICO     */}
+        {/*  PALANCA 02 — INTERVENCIÓN PREVENTIVA  */}
         {/* ══════════════════════════════════════ */}
         <section className="mb-32">
           <motion.div
@@ -131,54 +123,58 @@ export default function ValueTab({ isDark: _isDark }: ValueTabProps) {
               <div className="flex-1 border-t border-[#0a1628]/[0.06]" />
             </div>
 
-            <h3
-              className="text-3xl md:text-4xl font-light text-[#0a1628] tracking-tight mb-8"
-              style={{ fontFamily: 'Outfit, sans-serif' }}
-            >
-              Mejora del estado físico
-              <br />
-              <span className="font-semibold">poblacional</span>
-            </h3>
-
-            <p className="text-lg text-[#0a1628]/55 font-light leading-[1.8] max-w-3xl mb-16">
-              Reducción de episodios leves recurrentes, menor progresión a lesiones graves,
-              reducción de primeras consultas innecesarias y prevención de recaídas.
-            </p>
-
-            {/* Three impact metrics */}
-            <div className="grid md:grid-cols-3 gap-0">
-              {[
-                { indicator: '↓', label: 'Menor frecuencia siniestral' },
-                { indicator: '↓', label: 'Menor severidad por episodio' },
-                { indicator: '↓', label: 'Menor tasa de recurrencia' },
-              ].map((metric, i) => (
-                <motion.div
-                  key={metric.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  viewport={{ once: true }}
-                  className={`py-10 px-8 lg:px-10 ${
-                    i > 0 ? 'md:border-l border-[#0a1628]/[0.06]' : ''
-                  } ${i < 2 ? 'border-b md:border-b-0 border-[#0a1628]/[0.06]' : ''}`}
+            <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+              <div className="lg:col-span-7">
+                <h3
+                  className="text-3xl md:text-4xl font-light text-[#0a1628] tracking-tight mb-8"
+                  style={{ fontFamily: 'Outfit, sans-serif' }}
                 >
-                  <span
-                    className="text-5xl lg:text-6xl font-bold text-[#1a3a6e] block mb-4"
-                    style={{ fontFamily: 'Philosopher, Georgia, serif' }}
-                  >
-                    {metric.indicator}
+                  Intervención
+                  <br />
+                  <span className="font-semibold">preventiva</span>
+                </h3>
+
+                <p className="text-lg text-[#0a1628]/55 font-light leading-[1.8] max-w-xl">
+                  Acompañar mejor, prevenir más y ayudar al afiliado a tomar decisiones de salud más inteligentes. Eso no solo mejora experiencia. También se traduce en una población más cuidada, menor progresión de episodios leves y más <span className="text-[#1a3a6e] font-medium">continuidad post-consulta</span>.
+                </p>
+              </div>
+
+              <div className="lg:col-span-5">
+                <div className="border-l-2 border-[#c9a96e]/40 pl-8">
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-[#c9a96e] font-medium block mb-6">
+                    Lo que permite
                   </span>
-                  <span className="text-[15px] text-[#0a1628]/70 font-light leading-relaxed">
-                    {metric.label}
-                  </span>
-                </motion.div>
-              ))}
+
+                  <div className="space-y-5">
+                    {[
+                      'Prevención más visible y continua',
+                      'Mejor orientación del afiliado',
+                      'Menor recurrencia y mejor adherencia',
+                      'Más capacidad para educar en salud y no solo responder a la demanda',
+                    ].map((item, i) => (
+                      <motion.div
+                        key={item}
+                        initial={{ opacity: 0, x: -12 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.08 }}
+                        viewport={{ once: true }}
+                        className="flex items-start gap-4"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#1a3a6e]/40 mt-2.5 flex-shrink-0" />
+                        <span className="text-[15px] text-[#0a1628]/70 font-light leading-relaxed">
+                          {item}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </section>
 
         {/* ══════════════════════════════════════ */}
-        {/*  PALANCA 03 — FIDELIDAD Y ENGAGEMENT   */}
+        {/*  PALANCA 03 — RELACIONAMIENTO          */}
         {/* ══════════════════════════════════════ */}
         <section className="mb-20">
           <motion.div
@@ -192,61 +188,50 @@ export default function ValueTab({ isDark: _isDark }: ValueTabProps) {
               <div className="flex-1 border-t border-[#0a1628]/[0.06]" />
             </div>
 
-            <h3
-              className="text-3xl md:text-4xl font-light text-[#0a1628] tracking-tight mb-8"
-              style={{ fontFamily: 'Outfit, sans-serif' }}
-            >
-              Fidelidad y
-              <br />
-              <span className="font-semibold">engagement</span>
-            </h3>
-
-            <p className="text-lg text-[#0a1628]/55 font-light leading-[1.8] max-w-3xl mb-16">
-              Fisify ha demostrado ser una herramienta de captación y retención de cuentas tanto
-              en individuales como en colectivos. Esta solución le permite a Medicus diferenciarse
-              de las otras pólizas y conseguir una <span className="text-[#1a3a6e] font-medium">mayor fidelización de la cartera existente</span>.
-            </p>
-
-            {/* Two key insights */}
-            <div className="grid md:grid-cols-2 gap-0">
-              {[
-                {
-                  num: 'a',
-                  title: 'Relación continua',
-                  body: 'Frecuencia de interacción digital constante. Integración en la vida diaria del usuario.',
-                },
-                {
-                  num: 'b',
-                  title: 'Percepción de valor',
-                  body: 'El asegurado percibe que su seguro le ayuda a estar mejor cada día. Acceso inmediato, experiencia constante y personalizada.',
-                },
-              ].map((insight, i) => (
-                <motion.div
-                  key={insight.num}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  viewport={{ once: true }}
-                  className={`py-10 px-8 lg:px-10 ${
-                    i > 0 ? 'md:border-l border-[#0a1628]/[0.06]' : ''
-                  }`}
+            <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+              <div className="lg:col-span-7">
+                <h3
+                  className="text-3xl md:text-4xl font-light text-[#0a1628] tracking-tight mb-8"
+                  style={{ fontFamily: 'Outfit, sans-serif' }}
                 >
-                  <div className="flex items-center gap-3 mb-5">
-                    <span className="w-8 h-8 flex items-center justify-center border border-[#c9a96e]/30 text-[#c9a96e] text-xs font-medium">
-                      {insight.num}
-                    </span>
-                    <h4
-                      className="text-lg font-medium text-[#0a1628] tracking-tight"
-                      style={{ fontFamily: 'Outfit, sans-serif' }}
-                    >
-                      {insight.title}
-                    </h4>
+                  <span className="font-semibold">Relacionamiento</span>
+                </h3>
+
+                <p className="text-lg text-[#0a1628]/55 font-light leading-[1.8] max-w-xl">
+                  Cuando el afiliado incorpora un servicio útil a su rutina, la prepaga deja de ser algo que aparece solo ante un problema. Pasa a ser un <span className="text-[#1a3a6e] font-medium">aliado más activo en su bienestar diario</span>.
+                </p>
+              </div>
+
+              <div className="lg:col-span-5">
+                <div className="border-l-2 border-[#c9a96e]/40 pl-8">
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-[#c9a96e] font-medium block mb-6">
+                    Lo que permite
+                  </span>
+
+                  <div className="space-y-5">
+                    {[
+                      'Más argumentos de retención y captación',
+                      'Más frecuencia de interacción',
+                      'Más percepción de utilidad de la cobertura',
+                      'Más vínculo con la marca',
+                    ].map((item, i) => (
+                      <motion.div
+                        key={item}
+                        initial={{ opacity: 0, x: -12 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.08 }}
+                        viewport={{ once: true }}
+                        className="flex items-start gap-4"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#1a3a6e]/40 mt-2.5 flex-shrink-0" />
+                        <span className="text-[15px] text-[#0a1628]/70 font-light leading-relaxed">
+                          {item}
+                        </span>
+                      </motion.div>
+                    ))}
                   </div>
-                  <p className="text-[15px] text-[#0a1628]/55 font-light leading-[1.8]">
-                    {insight.body}
-                  </p>
-                </motion.div>
-              ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         </section>

@@ -349,7 +349,7 @@ export default function ResultsTab({ isDark: _isDark }: ResultsTabProps) {
                     <div className="grid grid-cols-2 gap-3">
                       {[
                         { value: '4', label: 'Kinesiólogos activos', icon: <Stethoscope size={16} /> },
-                        { value: '35', label: 'Pacientes activados', icon: <UserCheck size={16} /> },
+                        { value: '35', label: 'Pacientes invitados', icon: <UserCheck size={16} /> },
                         { value: '186', label: 'Sesiones', icon: <Activity size={16} /> },
                         { value: '6.64', label: 'Sesiones por paciente', icon: <TrendingUp size={16} /> },
                         { value: '9.18/10', label: 'Satisfacción', icon: <Star size={16} /> },

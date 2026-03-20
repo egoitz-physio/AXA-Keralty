@@ -21,20 +21,20 @@ export default function ObjetivoTab({ isDark: _isDark }: ObjetivoTabProps) {
     {
       num: 'a',
       icon: <AlertTriangle size={18} strokeWidth={1.5} />,
-      title: 'El afiliado cambió: paga más, exige más y quiere valor cotidiano',
-      body: 'La expectativa de "mantener" plan convive con una demanda creciente de claridad, servicio y valor para justificar el gasto mensual. En este escenario, la prepaga se enfrenta a una tensión: subir precios sin perder afiliados, pero también no deteriorar experiencia ni saturar canales de atención.',
+      title: 'Más presión por demostrar valor',
+      body: 'El afiliado ya no evalúa solo cobertura; evalúa experiencia, utilidad y valor cotidiano.',
     },
     {
       num: 'b',
-      icon: <Smartphone size={18} strokeWidth={1.5} />,
-      title: 'Digital y telemedicina: avance real, pero todavía reactivo',
-      body: 'Muchas ya tienen "canal digital", pero eso no garantiza hábito, ni prevención sostenida, ni una percepción de valor entre prestaciones. El afiliado solo interactúa cuando necesita atención.',
+      icon: <Scale size={18} strokeWidth={1.5} />,
+      title: 'Más necesidad de eficiencia clínica',
+      body: 'La buena medicina no es hacer más, sino hacer lo adecuado, evitando tanto el defecto como el exceso.',
     },
     {
       num: 'c',
-      icon: <Scale size={18} strokeWidth={1.5} />,
-      title: 'Cambio regulatorio: más libertad de elección + mayor presión competitiva',
-      body: 'Con el DNU 70/2023 y su reglamentación, se impulsó la libre elección entre obras sociales y prepagas y se redujeron restricciones de permanencia, fomentando captar/retener afiliados.',
+      icon: <Smartphone size={18} strokeWidth={1.5} />,
+      title: 'Más urgencia por educar y trabajar desde la prevención',
+      body: 'Sin educación para la salud, el sistema sigue siendo reactivo, imprevisible y más costoso.',
     },
   ]
 
@@ -122,7 +122,7 @@ export default function ObjetivoTab({ isDark: _isDark }: ObjetivoTabProps) {
             Situación actual
           </h3>
           <p className="text-lg text-cream/60 font-light">
-            Medicina prepaga en Argentina
+            Medicina prepagada en Argentina
           </p>
         </motion.div>
 

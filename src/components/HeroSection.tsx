@@ -1,7 +1,11 @@
 import { motion } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  clientName?: string
+}
+
+export default function HeroSection({ clientName = 'Medicus' }: HeroSectionProps) {
   return (
     <section className="relative min-h-screen flex flex-col">
       {/* Background Image */}
@@ -26,7 +30,7 @@ export default function HeroSection() {
             className="text-3xl md:text-5xl lg:text-6xl text-white leading-tight max-w-2xl"
             style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 300, letterSpacing: '-0.01em' }}
           >
-            Bienestar inteligente para los afiliados de <span className="font-semibold">Medicus</span>
+            Innovación con propósito para los afiliados de <span className="font-semibold">{clientName}</span>
           </motion.h1>
         </div>
       </div>

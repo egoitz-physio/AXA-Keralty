@@ -479,7 +479,7 @@ export default function KinesiologiaTab({
 							{[
 								{
 									num: 'a',
-									title: 'Account Manager dedicado',
+									title: 'Account Manager',
 									body: 'Account Manager para Medicus con conocimiento profundo del negocio, los afiliados y la red prestacional.',
 								},
 								{
@@ -608,6 +608,216 @@ export default function KinesiologiaTab({
 									</p>
 								</motion.div>
 							))}
+						</div>
+					</motion.div>
+				</section>
+
+				{/* ══════════════════════════════════════ */}
+				{/*  PLAN MENSUAL M1–M24                    */}
+				{/* ══════════════════════════════════════ */}
+				<section className='mb-32'>
+					<motion.div
+						initial={{ opacity: 0, y: 32 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.7 }}
+						viewport={{ once: true }}
+					>
+						<div className='flex items-center gap-4 mb-12'>
+							<span className='text-[11px] uppercase tracking-[0.2em] text-[#0a1628]/30 font-medium'>Implementación</span>
+							<div className='flex-1 border-t border-[#0a1628]/[0.06]' />
+						</div>
+
+						<h3
+							className='text-3xl md:text-4xl font-light text-[#0a1628] tracking-tight mb-4'
+							style={{ fontFamily: 'Outfit, sans-serif' }}
+						>
+							Plan mensual <span className='font-semibold'>M1–M24</span>
+						</h3>
+
+						{/* Table */}
+						<div className='mt-12 overflow-x-auto'>
+							<table className='w-full min-w-[900px] border-collapse'>
+								<thead>
+									<tr className='bg-[#0a1628]/[0.04]'>
+										<th className='text-left text-[10px] uppercase tracking-[0.2em] text-[#0a1628]/50 font-medium p-4 border border-[#0a1628]/[0.08] w-[100px]'>Mes</th>
+										<th className='text-left text-[10px] uppercase tracking-[0.2em] text-[#0a1628]/50 font-medium p-4 border border-[#0a1628]/[0.08] w-[160px]'>Tema</th>
+										<th className='text-left text-[10px] uppercase tracking-[0.2em] text-[#1a3a6e] font-medium p-4 border border-[#0a1628]/[0.08]'>Individual (45%)</th>
+										<th className='text-left text-[10px] uppercase tracking-[0.2em] text-[#c9a96e] font-medium p-4 border border-[#0a1628]/[0.08]'>Colectivo (55%)</th>
+										<th className='text-left text-[10px] uppercase tracking-[0.2em] text-[#0a1628]/50 font-medium p-4 border border-[#0a1628]/[0.08] w-[140px]'>KPIs</th>
+									</tr>
+								</thead>
+								<tbody>
+									{([
+										{
+											mes: 'M1–M2',
+											tema: 'Kick-off & diseño final',
+											individual: 'Definir journeys por plan; mensajes base',
+											colectivo: 'Mapeo cartera empresas + playbook ventas',
+											kpi: 'Activación _%; SLA _',
+										},
+										{
+											mes: 'M3',
+											tema: 'Lanzamiento controlado',
+											individual: 'Onboarding + nudges; primer cohort',
+											colectivo: [
+												'Trainings comerciales sobre beneficios del producto',
+												'Material comercial + casos piloto',
+												'Trainings para área comercial y colocación del producto como diferenciador',
+												'1ª oferta colectivos (priorizando cuentas clave)',
+											],
+											kpi: 'WAU _; NPS _',
+										},
+										{
+											mes: 'M4–M6',
+											tema: 'Campañas por segmento',
+											individual: 'Campaña espalda/cuello; segmentación',
+											colectivo: 'Campaña bienestar corporativo por industria',
+											kpi: 'CTR/conv _; uso _',
+										},
+										{
+											mes: 'M7',
+											tema: 'Eficiencia + QBR para optimización de conversión',
+											individual: 'Contenido por perfil; retención. A/B mensajes y nudges',
+											colectivo: 'QBR con empresas; Secuencias comerciales + casos',
+											kpi: 'Conv _; tiempos _',
+										},
+										{
+											mes: 'M8–M12',
+											tema: 'Campañas por segmento + Enablement ventas + Ampliación de contenidos',
+											individual: 'Campaña espalda/cuello; segmentación según calendario de activación del programa Cuidarte. Training comercial especializada acorde a las necesidades de los asegurados según feedback recolectado',
+											colectivo: 'Campaña bienestar corporativo por industria + Training comercial + toolkit. Workshops/Trainings con empleados de los clientes más importantes',
+											kpi: 'CTR/conv _; uso _',
+										},
+										{
+											mes: 'M13',
+											tema: 'Cierre año 1',
+											individual: 'Escala año 2 + Campaña Return-to-activity. Reporte anual. Ajustes por cohorts',
+											colectivo: 'Reporte anual corporativo. Acuerdos marco con cuentas clave',
+											kpi: 'Win-rate. Adopción _',
+										},
+										{
+											mes: 'M16',
+											tema: 'QBR estratégico',
+											individual: 'Retención & upsell',
+											colectivo: 'Renovación & expansión',
+											kpi: 'NRR _',
+										},
+										{
+											mes: 'M17–M22',
+											tema: 'Campañas por segmento + Enablement ventas + Ampliación de contenidos',
+											individual: 'Campaña espalda/cuello; segmentación según calendario de activación del programa Cuidarte. Training comercial + toolkit. Biblioteca especializada acorde a las necesidades de los asegurados según feedback recolectado',
+											colectivo: 'Campaña bienestar corporativo por industria + Training comercial + toolkit. Workshops/Trainings con empleados de los clientes más importantes',
+											kpi: 'CTR/conv _; uso _',
+										},
+										{
+											mes: 'M23',
+											tema: 'Preparación renovación',
+											individual: 'Plan de renovación anual',
+											colectivo: '',
+											kpi: 'Renewal _',
+										},
+										{
+											mes: 'M24',
+											tema: 'Cierre 24 meses',
+											individual: 'Informe 24M (individual)',
+											colectivo: 'Informe 24M (colectivo)',
+											kpi: 'ROI _ / decisión _',
+										},
+									] as { mes: string; tema: string; individual: string | string[]; colectivo: string | string[]; kpi: string }[]).map((row, i) => (
+										<motion.tr
+											key={i}
+											initial={{ opacity: 0 }}
+											whileInView={{ opacity: 1 }}
+											transition={{ delay: i * 0.03 }}
+											viewport={{ once: true }}
+											className='bg-white hover:bg-[#0a1628]/[0.02] transition-colors'
+										>
+											<td className='p-4 border border-[#0a1628]/[0.08] align-top'>
+												<span className='text-[13px] font-semibold text-[#1a3a6e] tracking-tight'>{row.mes}</span>
+											</td>
+											<td className='p-4 border border-[#0a1628]/[0.08] align-top'>
+												<span className='text-[13px] font-medium text-[#0a1628] leading-snug'>{row.tema}</span>
+											</td>
+											<td className='p-4 border border-[#0a1628]/[0.08] align-top'>
+												{typeof row.individual === 'string' ? (
+													<span className='text-[13px] text-[#0a1628]/65 font-light leading-relaxed'>{row.individual}</span>
+												) : (
+													<ul className='space-y-1.5'>
+														{row.individual.map((item: string, j: number) => (
+															<li key={j} className='text-[13px] text-[#0a1628]/65 font-light leading-relaxed flex items-start gap-2'>
+																<span className='w-1 h-1 rounded-full bg-[#1a3a6e]/40 mt-1.5 flex-shrink-0' />
+																{item}
+															</li>
+														))}
+													</ul>
+												)}
+											</td>
+											<td className='p-4 border border-[#0a1628]/[0.08] align-top'>
+												{typeof row.colectivo === 'string' ? (
+													<span className='text-[13px] text-[#0a1628]/65 font-light leading-relaxed'>{row.colectivo}</span>
+												) : (
+													<ul className='space-y-1.5'>
+														{row.colectivo.map((item: string, j: number) => (
+															<li key={j} className='text-[13px] text-[#0a1628]/65 font-light leading-relaxed flex items-start gap-2'>
+																<span className='w-1 h-1 rounded-full bg-[#c9a96e]/40 mt-1.5 flex-shrink-0' />
+																{item}
+															</li>
+														))}
+													</ul>
+												)}
+											</td>
+											<td className='p-4 border border-[#0a1628]/[0.08] align-top'>
+												<span className='text-[12px] text-[#0a1628]/40 font-light tracking-wide'>{row.kpi}</span>
+											</td>
+										</motion.tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</motion.div>
+				</section>
+
+				{/* ══════════════════════════════════════ */}
+				{/*  PROPUESTA ECONÓMICA PILOTO             */}
+				{/* ══════════════════════════════════════ */}
+				<section className='mb-20'>
+					<motion.div
+						initial={{ opacity: 0, y: 32 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.7 }}
+						viewport={{ once: true }}
+					>
+						<div className='flex items-center gap-4 mb-12'>
+							<span className='text-[11px] uppercase tracking-[0.2em] text-[#0a1628]/30 font-medium'>Inversión</span>
+							<div className='flex-1 border-t border-[#0a1628]/[0.06]' />
+						</div>
+
+						<h3
+							className='text-3xl md:text-4xl font-light text-[#0a1628] tracking-tight mb-4'
+							style={{ fontFamily: 'Outfit, sans-serif' }}
+						>
+							Propuesta económica <span className='font-semibold'>para el piloto</span>
+						</h3>
+						<p className='text-lg text-[#0a1628]/40 font-light mt-2 mb-12 max-w-2xl'>
+							Piloto Kinesiología Híbrida — FisifyPro
+						</p>
+
+						<div className='grid md:grid-cols-3 gap-0 border border-[#0a1628]/[0.08] bg-white'>
+							<div className='py-8 px-8 lg:px-10'>
+								<span className='text-[11px] uppercase tracking-[0.2em] text-[#0a1628]/35 font-medium block mb-3'>Duración</span>
+								<span className='text-2xl font-light text-[#0a1628] tracking-tight'>12 meses</span>
+							</div>
+							<div className='py-8 px-8 lg:px-10 md:border-l border-[#0a1628]/[0.08]'>
+								<span className='text-[11px] uppercase tracking-[0.2em] text-[#0a1628]/35 font-medium block mb-3'>Volumen</span>
+								<span className='text-2xl font-light text-[#0a1628] tracking-tight'>Ilimitado</span>
+							</div>
+							<div className='py-8 px-8 lg:px-10 md:border-l border-[#0a1628]/[0.08]'>
+								<span className='text-[11px] uppercase tracking-[0.2em] text-[#0a1628]/35 font-medium block mb-3'>Coste</span>
+								<div className='flex items-baseline gap-1'>
+									<span className='text-4xl lg:text-5xl font-bold text-[#1a3a6e] tracking-tight'>2.500</span>
+									<span className='text-lg font-light text-[#0a1628]/40'>€/mes</span>
+								</div>
+							</div>
 						</div>
 					</motion.div>
 				</section>

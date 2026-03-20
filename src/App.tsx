@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navigation from './components/Navigation'
 import HeroSection from './components/HeroSection'
 import TabSection from './components/TabSection'
@@ -10,10 +11,11 @@ import ImplementTab from './pages/ImplementTab'
 import KinesiologiaTab from './pages/KinesiologiaTab'
 import ObjetivoTab from './pages/ObjetivoTab'
 import FooterSection from './components/FooterSection'
+import OmintApp from './pages/OmintApp'
 
 export type TabId = 'objetivo' | 'results' | 'product' | 'value' | 'kinesiologia' | 'implement'
 
-function App() {
+function MedicusApp() {
   const [activeTab, setActiveTab] = useState<TabId>('objetivo')
   const [scrolled, setScrolled] = useState(false)
 
@@ -38,7 +40,7 @@ function App() {
     <div className="min-h-screen relative bg-gradient-to-b from-[#0a1628] to-[#060f1d]">
       {/* Noise overlay */}
       <div className="noise" />
-      
+
       {/* Ambient glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="glow-spot w-[900px] h-[900px] -top-40 -right-40" />
@@ -48,10 +50,10 @@ function App() {
 
       <Navigation scrolled={scrolled} />
       <HeroSection />
-      
+
       {/* Sticky Tab Menu */}
       <TabSection activeTab={activeTab} setActiveTab={handleTabChange} isDark={true} />
-      
+
       {/* Content */}
       <main id="content" className="relative">
           <AnimatePresence mode="wait">
@@ -71,9 +73,20 @@ function App() {
             </motion.div>
           </AnimatePresence>
       </main>
-      
+
       <FooterSection isDark={true} />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MedicusApp />} />
+        <Route path="/omint" element={<OmintApp />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

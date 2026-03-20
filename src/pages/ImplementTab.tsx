@@ -144,10 +144,10 @@ export default function ImplementTab({ isDark }: ImplementTabProps) {
         <motion.div {...fadeUp} className="mb-20">
           <span className="section-label mb-10 inline-block">Plan de implementación</span>
           <h2 className={`heading-display text-display-lg max-w-4xl ${textMain}`}>
-            Fases del plan
+            Hoja de ruta para escalar valor, adopción y resultados
           </h2>
-          <p className={`text-xl lg:text-2xl font-light leading-relaxed max-w-2xl mt-6 ${textMuted}`}>
-            24 meses de ejecución coordinada, desde el kick-off hasta la escala completa y renovación.
+          <p className={`text-xl lg:text-2xl font-light leading-relaxed max-w-3xl mt-6 ${textMuted}`}>
+            Plan de 24 meses para activar el servicio, optimizar su uso, convertirlo en una palanca comercial y consolidarlo como una capacidad estratégica dentro de Medicus.
           </p>
         </motion.div>
 
@@ -442,9 +442,12 @@ export default function ImplementTab({ isDark }: ImplementTabProps) {
       <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32">
         <motion.div {...fadeUp} className="mb-20">
           <span className="section-label mb-10 inline-block">Inversión</span>
-          <h2 className={`heading-display text-display-lg max-w-3xl ${textMain}`}>
-            Propuesta de inversión
+          <h2 className={`heading-display text-display-lg max-w-4xl ${textMain}`}>
+            Una inversión diseñada para escalar junto a Medicus
           </h2>
+          <p className={`text-xl font-light leading-relaxed max-w-3xl mt-6 ${textMuted}`}>
+            Una propuesta económica pensada para acompañar el volumen, facilitar la adopción y consolidar una relación de largo plazo.
+          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
@@ -574,6 +577,7 @@ export default function ImplementTab({ isDark }: ImplementTabProps) {
             </div>
           </motion.div>
         </div>
+
       </section>
     </div>
   )

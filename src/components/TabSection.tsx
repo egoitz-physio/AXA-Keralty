@@ -6,9 +6,12 @@ interface TabSectionProps {
   activeTab: TabId
   setActiveTab: (tab: TabId) => void
   isDark: boolean
+  clientLogo?: string
+  clientName?: string
+  visibleTabs?: TabId[]
 }
 
-const tabs = [
+const allTabs = [
   { id: 'objetivo' as TabId, label: 'Objetivo', num: '01' },
   { id: 'results' as TabId, label: 'Resultados', num: '02' },
   { id: 'product' as TabId, label: 'Producto', num: '03' },
@@ -17,7 +20,7 @@ const tabs = [
   { id: 'kinesiologia' as TabId, label: 'Kinesiología', num: '06' },
 ]
 
-export default function TabSection({ activeTab, setActiveTab, isDark }: TabSectionProps) {
+export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo = '/images/medicus-logo-white.png', clientName = 'Medicus', visibleTabs }: TabSectionProps) {
   const [isSticky, setIsSticky] = useState(false)
 
   useEffect(() => {
@@ -34,21 +37,23 @@ export default function TabSection({ activeTab, setActiveTab, isDark }: TabSecti
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const tabs = visibleTabs ? allTabs.filter(t => visibleTabs.includes(t.id)) : allTabs
+
   return (
-    <section 
+    <section
       id="tab-section"
       className={`sticky top-0 z-50 backdrop-blur-xl border-b transition-all duration-300 ${
-        isDark 
-          ? 'bg-[#0a1628]/95 border-white/5' 
+        isDark
+          ? 'bg-[#0a1628]/95 border-white/5'
           : 'bg-white/95 border-black/5'
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between">
           {/* Logo - appears when sticky */}
-          <motion.div 
+          <motion.div
             initial={false}
-            animate={{ 
+            animate={{
               opacity: isSticky ? 1 : 0,
               x: isSticky ? 0 : -20,
               width: isSticky ? 'auto' : 0
@@ -63,8 +68,8 @@ export default function TabSection({ activeTab, setActiveTab, isDark }: TabSecti
             />
             <span className={`text-xs ${isDark ? 'text-cream/30' : 'text-[#0a1628]/30'}`}>×</span>
             <img
-              src="/images/medicus-logo-white.png"
-              alt="Medicus"
+              src={clientLogo}
+              alt={clientName}
               className={`h-4 opacity-80 ${isDark ? 'brightness-0 invert' : 'brightness-0'}`}
             />
           </motion.div>
@@ -126,8 +131,8 @@ export default function TabSection({ activeTab, setActiveTab, isDark }: TabSecti
             />
             <span className={`text-xs font-light ${isDark ? 'text-cream/20' : 'text-[#0a1628]/20'}`}>×</span>
             <img
-              src="/images/medicus-logo-white.png"
-              alt="Medicus"
+              src={clientLogo}
+              alt={clientName}
               className={`h-3 opacity-40 ${isDark ? 'brightness-0 invert' : 'brightness-0'}`}
             />
           </motion.div>

@@ -2,9 +2,11 @@ import { motion } from 'framer-motion'
 
 interface NavigationProps {
   scrolled: boolean
+  clientName?: string
+  clientLogo?: string
 }
 
-export default function Navigation({ scrolled }: NavigationProps) {
+export default function Navigation({ scrolled, clientName = 'Medicus', clientLogo = '/images/medicus-logo-white.png' }: NavigationProps) {
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
@@ -32,9 +34,9 @@ export default function Navigation({ scrolled }: NavigationProps) {
             <span className={`font-light text-white/30 transition-all duration-500 ${
               scrolled ? 'text-[8px]' : 'text-[10px]'
             }`}>×</span>
-            <img 
-              src="/images/medicus-logo-white.png" 
-              alt="Medicus" 
+            <img
+              src={clientLogo}
+              alt={clientName}
               className={`brightness-0 invert transition-all duration-500 ease-out group-hover:opacity-70 ${
                 scrolled ? 'h-[14px] opacity-90' : 'h-[18px] opacity-100'
               }`}

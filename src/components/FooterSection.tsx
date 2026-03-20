@@ -1,8 +1,10 @@
 interface FooterSectionProps {
   isDark: boolean
+  clientName?: string
+  clientLogo?: string
 }
 
-export default function FooterSection({ isDark }: FooterSectionProps) {
+export default function FooterSection({ isDark, clientName = 'Medicus', clientLogo = '/images/medicus-logo-white.png' }: FooterSectionProps) {
   const textMuted = isDark ? 'text-cream/70' : 'text-[#0a1628]/70'
   const textAccent = isDark ? 'text-accent' : 'text-[#1a3a6e]'
   const borderColor = isDark ? 'border-white/10' : 'border-black/10'
@@ -22,13 +24,13 @@ export default function FooterSection({ isDark }: FooterSectionProps) {
               />
               <span className={`text-xs font-light ${isDark ? 'text-cream/50' : 'text-[#0a1628]/50'}`}>×</span>
               <img
-                src="/images/medicus-logo-white.png"
-                alt="Medicus"
+                src={clientLogo}
+                alt={clientName}
                 className={`h-5 transition-all ${isDark ? 'brightness-0 invert' : 'brightness-0'}`}
               />
             </div>
             <p className={`text-sm leading-relaxed mb-8 max-w-sm font-light ${textMuted}`}>
-              Transformando la experiencia de salud de los asegurados de Medicus a través de fisioterapia digital de excelencia.
+              Transformando la experiencia de salud de los asegurados de {clientName} a través de fisioterapia digital de excelencia.
             </p>
           </div>
 
@@ -70,7 +72,7 @@ export default function FooterSection({ isDark }: FooterSectionProps) {
       <div className={`border-t ${borderColor}`}>
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className={`text-xs font-light tracking-wide ${isDark ? 'text-cream/40' : 'text-[#0a1628]/40'}`}>
-            © 2026 Fisify. Propuesta exclusiva para Medicus.
+            © 2026 Fisify. Propuesta exclusiva para {clientName}.
           </p>
           <div className="flex gap-8">
             <a href="#" className={`text-xs transition-colors font-light ${isDark ? 'text-cream/40 hover:text-cream/70' : 'text-[#0a1628]/40 hover:text-[#0a1628]/70'}`}>Privacidad</a>

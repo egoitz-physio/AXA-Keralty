@@ -35,27 +35,31 @@ export default function ProductTab({ isDark }: ProductTabProps) {
   const timeline = [
     {
       quarter: 'Q3 2025',
+      subtitle: 'Base clínica y personalización inicial',
       status: 'complete' as const,
       features: [
-        { name: 'Evaluación y personalización', detail: 'Triaje inicial y diseño de planes · Programas personalizados' },
-        { name: 'Asistente Virtual (VA)', detail: 'Seguimiento en tiempo real · Corrección inmediata de ejercicios' },
+        { name: 'Triage inicial y diseño de planes personalizados', detail: '' },
+        { name: 'Primer modelo de acompañamiento según perfil, dolor y objetivo', detail: '' },
       ],
     },
     {
       quarter: 'Q4 2025',
+      subtitle: 'Expansión hacia prevención contextual y hábitos de salud',
       status: 'complete' as const,
       features: [
-        { name: 'FisifyWork', detail: 'Programas de salud laboral para prevenir lesiones en el entorno de trabajo' },
-        { name: 'FisifySport', detail: 'Planes específicos para deportistas y práctica deportiva segura' },
-        { name: 'Píldoras diarias de salud', detail: 'Consejos prácticos, hábitos saludables y prevención diaria' },
+        { name: 'FisifyWork', detail: 'Para prevenir lesiones en el entorno laboral' },
+        { name: 'FisifySport', detail: 'Para práctica deportiva más segura' },
+        { name: 'Píldoras diarias de salud', detail: 'Para reforzar hábitos y prevención cotidiana' },
       ],
     },
     {
       quarter: 'Q1 2026',
+      subtitle: 'Acompañamiento humano, adherencia y continuidad',
       status: 'current' as const,
       features: [
-        { name: 'FisifyOne — 1 to 1', detail: 'Kinesiólogo asignado con chat directo, plan de prevención y seguimiento semanal proactivo' },
-        { name: 'Gamificación', detail: 'Puntos acumulables y canjeables en sorteos mensuales. Fisify gestiona el envío de los premios' },
+        { name: 'FisifyOne 1:1 con kinesiólogo asignado', detail: '' },
+        { name: 'Chat directo y seguimiento semanal proactivo', detail: '' },
+        { name: 'Gamificación e incentivos', detail: 'Para reforzar adherencia sostenida' },
       ],
     },
   ]
@@ -74,7 +78,7 @@ export default function ProductTab({ isDark }: ProductTabProps) {
       images: ['/images/onetoone1.webp', '/images/onetoone2.webp'],
       impacts: [
         { label: 'Mayor activación', value: 'x3', desc: 'el modelo puede triplicar la tasa de activación gracias al acompañamiento desde el inicio' },
-        { label: 'Mayor adherencia', value: 'x4,6', desc: 'frente al modelo tradicional gracias al acompañamiento personalizado continuo' },
+        { label: 'Mayor adherencia', value: '90%', desc: 'de los usuarios que al menos realizan una sesión llegan a la décima sesión' },
         { label: 'Mayor eficacia clínica', value: '+', desc: 'mejores resultados de salud con fisioterapia guiada frente a ejercicio sin supervisión' },
       ],
     },
@@ -121,8 +125,8 @@ export default function ProductTab({ isDark }: ProductTabProps) {
         {/* Header */}
         <motion.div {...fadeUp} className="mb-14">
           <span className="section-label mb-10 inline-block">Roadmap de producto</span>
-          <h2 className={`heading-display text-display-lg max-w-3xl ${textMain}`}>
-            Evolución del producto
+          <h2 className={`heading-display text-display-lg max-w-4xl ${textMain}`}>
+            Evolucionamos hacia una nueva forma de prevenir, acompañar y escalar salud de calidad
           </h2>
         </motion.div>
 
@@ -146,17 +150,24 @@ export default function ProductTab({ isDark }: ProductTabProps) {
 
               <div className="p-8 lg:p-10">
                 {/* Quarter header */}
-                <div className="flex items-center gap-3 mb-6">
-                  <span className={`font-display text-xl tracking-tight ${
-                    phase.status === 'current' ? textAccent : textMain
-                  }`}>
-                    {phase.quarter}
-                  </span>
-                  {phase.status === 'current' && (
-                    <span className={`relative flex h-2 w-2`}>
-                      <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isDark ? 'bg-accent' : 'bg-[#1a3a6e]'}`} />
-                      <span className={`relative inline-flex rounded-full h-2 w-2 ${isDark ? 'bg-accent' : 'bg-[#1a3a6e]'}`} />
+                <div className="mb-6">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className={`font-display text-xl tracking-tight ${
+                      phase.status === 'current' ? textAccent : textMain
+                    }`}>
+                      {phase.quarter}
                     </span>
+                    {phase.status === 'current' && (
+                      <span className={`relative flex h-2 w-2`}>
+                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isDark ? 'bg-accent' : 'bg-[#1a3a6e]'}`} />
+                        <span className={`relative inline-flex rounded-full h-2 w-2 ${isDark ? 'bg-accent' : 'bg-[#1a3a6e]'}`} />
+                      </span>
+                    )}
+                  </div>
+                  {phase.subtitle && (
+                    <p className={`text-[13px] font-light leading-relaxed ${textMuted}`}>
+                      {phase.subtitle}
+                    </p>
                   )}
                 </div>
 
@@ -195,7 +206,7 @@ export default function ProductTab({ isDark }: ProductTabProps) {
         <motion.div {...fadeUp} className="mb-12">
           <span className="section-label mb-10 inline-block">Modelo de bienestar</span>
           <h2 className={`heading-display text-display-lg max-w-4xl mb-10 ${textMain}`}>
-            Desarrollos clave
+            Tres capacidades que consolidan el modelo
           </h2>
         </motion.div>
 
@@ -204,9 +215,8 @@ export default function ProductTab({ isDark }: ProductTabProps) {
           transition={{ delay: 0.1 }}
           className={`text-lg lg:text-xl font-light leading-relaxed max-w-3xl mb-32 ${textMuted}`}
         >
-          Estos desarrollos consolidan un modelo de bienestar digital que combina
-          acompañamiento humano, personalización basada en datos y tecnología avanzada
-          con el objetivo de mejorar resultados en salud y la experiencia del afiliado.
+          Consolidamos un modelo de salud digital que combina clínica, acompañamiento humano
+          y herramientas de adherencia para mejorar resultados y elevar la experiencia del afiliado.
         </motion.p>
 
         {/* ── DEVELOPMENT BLOCKS ── */}
@@ -477,17 +487,15 @@ export default function ProductTab({ isDark }: ProductTabProps) {
             {
               quarter: 'Q3 2026',
               features: [
-                { text: 'Ampliación de contenidos: Gym, Suelo pélvico, Respiración y más', video: '/images/gym-compressed.mp4' },
+                { text: 'Ampliación de contenidos: Gym, Respiratorio, Suelo pélvico y más', video: '/images/gym-compressed.mp4' },
                 { text: 'Aurya conversacional' },
-                { text: 'Algoritmia de Aurya para FisifyStudio' },
-                { text: 'Comunidad' },
               ],
             },
             {
               quarter: 'Q4 2026',
               features: [
                 { text: 'BodyOS 2.0' },
-                { text: 'Integración de historial clínico' },
+                { text: 'Algoritmia de Aurya para FisifyStudio' },
                 { text: 'Visión artificial en tiempo real' },
               ],
             },
