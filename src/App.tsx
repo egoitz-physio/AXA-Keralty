@@ -8,7 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AIGApp homePath="/" />} />
+        <Route path="/" element={<ZurichApp homePath="/" />} />
         <Route path="/omint" element={<OmintApp />} />
         <Route path="/AIG" element={<AIGApp homePath="/AIG" />} />
         <Route path="/aig" element={<AIGApp homePath="/AIG" />} />
