@@ -1,19 +1,18 @@
 import { motion } from 'framer-motion'
-import { ChartBar, Cpu, Diamond, Rocket } from 'lucide-react'
+import { Cpu, Diamond, Rocket, type LucideIcon } from 'lucide-react'
 
-export type TabId = 'results' | 'product' | 'value' | 'implement'
+export type TabId = 'product' | 'value' | 'implement'
 
 interface Tab {
   id: TabId
   label: string
-  icon: typeof ChartBar
+  icon: LucideIcon
 }
 
 const tabs: Tab[] = [
-  { id: 'results', label: 'Resultados', icon: ChartBar },
   { id: 'product', label: 'Producto', icon: Cpu },
   { id: 'value', label: 'Valor', icon: Diamond },
-  { id: 'implement', label: 'Implementación', icon: Rocket },
+  { id: 'implement', label: 'Plan de trabajo', icon: Rocket },
 ]
 
 interface TabNavigationProps {

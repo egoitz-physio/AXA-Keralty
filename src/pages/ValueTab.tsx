@@ -85,7 +85,7 @@ export default function ValueTab({ isDark: _isDark, clientName = 'Medicus' }: Va
                   <div className="space-y-5">
                     {[
                       'Más valor percibido de la cobertura',
-                      'Un posicionamiento más claro frente a otras prepagas',
+                      'Un posicionamiento más claro frente a otras aseguradoras de salud',
                       'Una propuesta más tangible para individuales y colectivos',
                     ].map((item, i) => (
                       <motion.div
@@ -199,7 +199,7 @@ export default function ValueTab({ isDark: _isDark, clientName = 'Medicus' }: Va
                 </h3>
 
                 <p className="text-lg text-[#0a1628]/55 font-light leading-[1.8] max-w-xl">
-                  Cuando el afiliado incorpora un servicio útil a su rutina, la prepaga deja de ser algo que aparece solo ante un problema. Pasa a ser un <span className="text-[#1a3a6e] font-medium">aliado más activo en su bienestar diario</span>.
+                  Cuando el afiliado incorpora un servicio útil a su rutina, la aseguradora deja de ser algo que aparece solo ante un problema. Pasa a ser un <span className="text-[#1a3a6e] font-medium">aliado más activo en su bienestar diario</span>.
                 </p>
               </div>
 

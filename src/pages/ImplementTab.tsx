@@ -1,633 +1,360 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import type { ReactNode } from 'react'
+import {
+  CalendarRange,
+  Megaphone,
+  MonitorPlay,
+  Repeat2,
+  Sparkles,
+  Users,
+  Workflow,
+} from 'lucide-react'
 
 interface ImplementTabProps {
   isDark: boolean
   clientName?: string
 }
 
-/* ─── Reusable fade-in variant ─── */
 const fadeUp = {
-  initial: { opacity: 0, y: 32 },
+  initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: '-40px' },
 }
 
-/* ─── Thin horizontal rule ─── */
-function Divider({ isDark }: { isDark: boolean }) {
+type Phase = {
+  num: string
+  title: string
+  months: string
+  period: string
+  summary: string
+  actions: string[]
+  accent?: boolean
+}
+
+const phases: Phase[] = [
+  {
+    num: '01',
+    title: 'Impulso y reactivación',
+    months: 'Abr - May',
+    period: 'Base de lanzamiento',
+    summary: 'Reforzar la presencia actual con mensajes claros y una primera ola de difusión.',
+    actions: [
+      'Vídeo de lanzamiento + CTA directo.',
+      'Newsletter y píldoras de contenido mensual.',
+      'Calendario editorial y argumentos comerciales.',
+    ],
+  },
+  {
+    num: '02',
+    title: 'Capacitación y penetración',
+    months: 'Jun - Jul',
+    period: 'Escalado inicial',
+    summary: 'Acelerar la adopción con formación, webinars y recursos de apoyo.',
+    actions: [
+      'Webinar temático para comerciales y clientes.',
+      'Capacitación comercial: pitch y casos de uso.',
+      'Vídeos cortos y contenidos de marca.',
+    ],
+    accent: true,
+  },
+  {
+    num: '03',
+    title: 'Dinamización comercial',
+    months: 'Ago - Oct',
+    period: 'Tracción sostenida',
+    summary: 'Mantener la actividad con campañas, sorteos y acciones recurrentes.',
+    actions: [
+      'Reactivación con nudges y newsletters segmentadas.',
+      'Sorteo trimestral para impulsar participación.',
+      'Nuevos webinars por segmento.',
+    ],
+  },
+  {
+    num: '04',
+    title: 'Consolidación y continuidad',
+    months: 'Nov - Dic',
+    period: 'Cierre anual',
+    summary: 'Cerrar el año con aprendizajes y continuidad para 2027.',
+    actions: [
+      'Campaña de cierre con resultados y buenas prácticas.',
+      'Webinar final con aprendizajes y preguntas.',
+      'Business case y plan de continuidad 2027.',
+    ],
+  },
+]
+
+const resources = [
+  {
+    icon: <Users size={18} />,
+    title: 'Senior Account Manager dedicado',
+    body: 'Un AM senior de Fisify asignado en exclusiva a Zurich para coordinar la ejecución y dar velocidad a la cuenta.',
+  },
+  {
+    icon: <Megaphone size={18} />,
+    title: 'Marketing y comunicación',
+    body: 'Equipo de contenidos, campañas y diseño para adaptar mensajes y materiales a cada momento del plan.',
+  },
+  {
+    icon: <Workflow size={18} />,
+    title: 'Interlocución Zurich',
+    body: 'Equipo comercial, marketing y comunicación para activar difusión, convocatorias y soporte operativo.',
+  },
+]
+
+const followUp = [
+  {
+    label: 'Mensual',
+    value:
+      'Control de KPIs, acciones ejecutadas y oportunidades, apoyado por reportes dinámicos en tiempo real para decidir los siguientes pasos en base a datos.',
+  },
+]
+
+const strategicKeys = [
+  'La formación debe ser continua, no puntual.',
+  'Cada acción debe tener un CTA claro y medible.',
+  'Webinars, sorteos y newsletters sostienen la conversación comercial.',
+  'La cadencia de seguimiento debe cerrar el círculo entre activación, adopción y negocio.',
+]
+
+function SectionTitle({
+  eyebrow,
+  title,
+  subtitle,
+}: {
+  eyebrow: string
+  title: string
+  subtitle?: string
+}) {
   return (
-    <div className={`w-full h-px ${isDark ? 'bg-gradient-to-r from-transparent via-cream/[0.06] to-transparent' : 'bg-gradient-to-r from-transparent via-[#0a1628]/[0.06] to-transparent'}`} />
+    <div className="mb-8">
+      <div className="flex items-center gap-4 mb-5">
+        <span className="text-[11px] uppercase tracking-[0.26em] text-[#9cc2ff] font-medium">{eyebrow}</span>
+        <div className="flex-1 h-px bg-white/10" />
+      </div>
+      <h3 className="text-3xl md:text-4xl font-light text-cream tracking-tight" style={{ fontFamily: 'Outfit, sans-serif' }}>
+        {title}
+      </h3>
+      {subtitle && <p className="text-base lg:text-lg text-cream/60 font-light mt-3 max-w-3xl">{subtitle}</p>}
+    </div>
   )
 }
 
-export default function ImplementTab({ isDark, clientName = 'Medicus' }: ImplementTabProps) {
-  const [expandedPhase, setExpandedPhase] = useState<number | null>(0)
+function IconCard({
+  title,
+  body,
+  icon,
+}: {
+  title: string
+  body: string
+  icon: ReactNode
+}) {
+  return (
+    <div className="rounded-[1.35rem] border border-white/8 bg-white/[0.03] p-5">
+      <div className="flex items-start gap-4">
+        <div className="w-10 h-10 rounded-2xl bg-[#9cc2ff]/10 border border-[#9cc2ff]/15 flex items-center justify-center text-[#9cc2ff] flex-shrink-0">
+          {icon}
+        </div>
+        <div>
+          <div className="text-lg font-medium text-cream mb-1">{title}</div>
+          <p className="text-sm text-cream/60 font-light leading-relaxed">{body}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
 
-  const textMain = isDark ? 'text-cream' : 'text-[#0a1628]'
-  const textMuted = isDark ? 'text-cream/75' : 'text-[#0a1628]/65'
-  const textAccent = isDark ? 'text-accent' : 'text-[#1a3a6e]'
-  const borderColor = isDark ? 'border-white/[0.10]' : 'border-black/[0.08]'
-  const cardBg = isDark ? 'bg-[#0d1a2e]/60' : 'bg-white/80'
-
-  /* ══════════════════════════════════════════════════════ */
-  /*  DATA                                                  */
-  /* ══════════════════════════════════════════════════════ */
-  const phases = [
-    {
-      num: '01',
-      title: 'Kick-off + escalado digital nacional',
-      months: 'M1–M3',
-      period: 'Abril — Junio',
-      deliverables: 'Gobernanza, protocolos, activación, reporting base',
-      actions: [
-        `Campaña multicanal: web ${clientName} + app + email + push (coordinado)`,
-        'Email marketing segmentado por perfil, dolor y objetivo',
-        'Onboarding tutorial + "primer plan en 2 minutos"',
-        'Primer ciclo de retos e incentivos (activación)',
-      ],
-    },
-    {
-      num: '02',
-      title: 'Optimización conversión + campañas por segmento',
-      months: 'M4–M6',
-      period: 'Julio — Septiembre',
-      deliverables: 'Campañas, funnels, playbooks, primeros QBR',
-      actions: [
-        'Plan anual de comunicación (campañas trimestrales)',
-        'Segmentación avanzada: cohort por dolor, edad, plan, uso',
-        'Campañas de reactivación: nudges + contenidos + webinars + sorteos e incentivos',
-        `Optimización del circuito de derivación a red ${clientName}`,
-      ],
-    },
-    {
-      num: '03',
-      title: 'Expansión comercialización',
-      months: 'M7–M12',
-      period: 'Octubre — Marzo',
-      deliverables: 'Paquetes por segmento, mejoras producto, QA',
-      actions: [
-        'Toolkit comercial: slides, one-pagers, casos del piloto',
-        'Paquetes corporativos por industria (call center / logística / sedentarismo)',
-        'Campañas in-company + webinars para colectivos',
-        'Mejoras producto basadas en uso real (iteraciones trimestrales)',
-        'Ampliación de biblioteca de contenido según requerimiento',
-      ],
-    },
-    {
-      num: '04',
-      title: 'Optimización outcomes + estandarización',
-      months: 'M13–M24',
-      period: 'Año 2',
-      deliverables: 'Escala + mejora continua',
-      actions: [
-        'Estandarización de journeys por plan y por vertical',
-        'Automatización de reactivación (mensajes + triggers por uso/dolor)',
-        'Reporting v3: insights ejecutivos y playbooks por segmento',
-        'Programa "return-to-activity" y continuidad post-consulta',
-        'Engranaje con campañas 360 del programa "Cuidarte"',
-        'Renovación bianual con business case consolidado',
-      ],
-    },
-  ]
-
-  const governance = [
-    {
-      area: 'Kick-off, implementación y seguimiento',
-      medicus: clientName,
-      fisify: 'Customer Success Executive',
-    },
-    {
-      area: 'Operación: Soporte, SLAs y coordinación',
-      medicus: '—',
-      fisify: 'Inhar (CTO) + Iñaki (COO) + Equipo Kinesiólogos',
-    },
-    {
-      area: 'Activación: comunicación y engagement',
-      medicus: '—',
-      fisify: 'Laura Valbuena + Equipo Marketing',
-    },
-    {
-      area: 'Datos: reporting y seguimiento',
-      medicus: '—',
-      fisify: 'Customer Success Executive',
-    },
-    {
-      area: 'Comercial colectivos: enablement y playbooks',
-      medicus: '—',
-      fisify: 'Customer Success Executive',
-    },
-  ]
-
-  const kpis = [
-    { id: '01', name: '% Afiliados activos', desc: 'Ratio de afiliados que utilizan Fisify sobre el total habilitado' },
-    { id: '02', name: 'Frecuencia semanal', desc: 'Sesiones completadas por afiliado activo por semana' },
-    { id: '03', name: 'Nivel de adherencia', desc: 'Completitud de los programas asignados a cada afiliado' },
-    { id: '04', name: 'Evolución del dolor', desc: 'Reducción de la intensidad del dolor reportado por los usuarios activos' },
-    { id: '05', name: 'Episodios recurrentes', desc: 'Comparativa de recurrencia de consultas MSK antes y después de Fisify' },
-    { id: '06', name: 'NPS diferencial', desc: 'Diferencia de NPS entre afiliados usuarios de Fisify y el resto de la cartera' },
-  ]
-
-  const pricingTiers = [
-    { users: '100.000', cost: '1,48€', highlighted: false },
-    { users: '200.000', cost: '1,36€', highlighted: true },
-    { users: '300.000', cost: '1,27€', highlighted: false },
-    { users: '400.000', cost: '1,19€', highlighted: false },
-    { users: '500.000', cost: '1,14€', highlighted: false },
-  ]
-
+export default function ImplementTab({ isDark: _isDark, clientName = 'Zurich' }: ImplementTabProps) {
   return (
     <div className="relative">
-      {/* ══════════════════════════════════════════════════════ */}
-      {/*  SECTION 1 — FASES DEL PLAN                           */}
-      {/* ══════════════════════════════════════════════════════ */}
       <section className="max-w-[1400px] mx-auto px-6 lg:px-12 pt-24 pb-32">
-        {/* Header */}
-        <motion.div {...fadeUp} className="mb-20">
-          <span className="section-label mb-10 inline-block">Plan de implementación</span>
-          <h2 className={`heading-display text-display-lg max-w-4xl ${textMain}`}>
-            Hoja de ruta para escalar valor, adopción y resultados
+        <motion.div {...fadeUp} className="mb-10">
+          <span className="section-label mb-10 inline-block">Plan de trabajo</span>
+          <h2 className="heading-display text-display-lg max-w-5xl text-cream">
+            Una hoja de ruta visual para impulsar, formar y escalar de abril a diciembre
           </h2>
-          <p className={`text-xl lg:text-2xl font-light leading-relaxed max-w-3xl mt-6 ${textMuted}`}>
-            Plan de 24 meses para activar el servicio, optimizar su uso, convertirlo en una palanca comercial y consolidarlo como una capacidad estratégica dentro de {clientName}.
+          <p className="text-lg lg:text-xl font-light leading-relaxed max-w-4xl mt-5 text-cream/60">
+            El objetivo es transformar la tracción de datos en adopción comercial real dentro de {clientName}, con una secuencia clara de
+            campañas, webinars, sorteos, contenidos y seguimiento.
           </p>
         </motion.div>
 
-        {/* Timeline progress bar */}
-        <motion.div
-          {...fadeUp}
-          transition={{ delay: 0.1 }}
-          className="mb-16"
-        >
-          <div className="flex items-center gap-0">
-            {phases.map((phase, i) => (
-              <div key={phase.num} className="flex-1 flex items-center">
-                <button
-                  onClick={() => setExpandedPhase(expandedPhase === i ? null : i)}
-                  className={`relative flex items-center gap-3 transition-all duration-500 group`}
-                >
-                  <div className={`w-11 h-11 flex items-center justify-center border transition-all duration-500 ${
-                    expandedPhase === i
-                      ? isDark ? 'border-accent bg-accent/10' : 'border-[#1a3a6e] bg-[#1a3a6e]/10'
-                      : isDark ? 'border-cream/25 hover:border-cream/40' : 'border-[#0a1628]/20 hover:border-[#0a1628]/35'
-                  }`}>
-                    <span className={`text-xs font-medium tracking-wider transition-colors ${
-                      expandedPhase === i ? textAccent : textMuted
-                    }`}>
-                      {phase.num}
-                    </span>
-                  </div>
-                  <div className="hidden lg:block text-left">
-                    <span className={`text-xs uppercase tracking-[0.15em] block ${
-                      expandedPhase === i ? textAccent : textMuted
-                    }`}>
-                      {phase.months}
-                    </span>
-                  </div>
-                </button>
-                {i < phases.length - 1 && (
-                  <div className={`flex-1 h-px mx-4 ${isDark ? 'bg-cream/[0.12]' : 'bg-[#0a1628]/[0.10]'}`} />
-                )}
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Phase cards */}
-        <div className="space-y-4">
-          {phases.map((phase, i) => (
-            <motion.div
-              key={phase.num}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true }}
-            >
-              <button
-                onClick={() => setExpandedPhase(expandedPhase === i ? null : i)}
-                className={`w-full text-left transition-all duration-500 ${cardBg} backdrop-blur-sm border ${
-                  expandedPhase === i
-                    ? isDark ? 'border-accent/20' : 'border-[#1a3a6e]/20'
-                    : borderColor
-                }`}
-              >
-                {/* Top accent line */}
-                <div className={`h-px transition-all duration-500 ${
-                  expandedPhase === i
-                    ? isDark ? 'bg-accent' : 'bg-[#1a3a6e]'
-                    : 'bg-transparent'
-                }`} />
-
-                <div className="p-8 lg:p-10">
-                  {/* Phase header row */}
-                  <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8">
-                    {/* Phase number + title */}
-                    <div className="flex items-center gap-6 flex-1 min-w-0">
-                      <span className={`text-sm tracking-[0.3em] flex-shrink-0 ${
-                        expandedPhase === i ? textAccent : textMuted
-                      }`}>
-                        {phase.num}
-                      </span>
-                      <h3 className={`font-display text-xl lg:text-2xl ${textMain} truncate`}>
-                        {phase.title}
-                      </h3>
-                    </div>
-
-                    {/* Meta tags */}
-                    <div className="flex items-center gap-4 flex-shrink-0">
-                      <span className={`text-xs uppercase tracking-[0.15em] px-3 py-1.5 border ${
-                        isDark ? 'border-accent/25 text-accent' : 'border-[#1a3a6e]/25 text-[#1a3a6e]'
-                      }`}>
-                        {phase.months}
-                      </span>
-                      <span className={`text-sm font-light ${textMuted}`}>
-                        {phase.period}
-                      </span>
-                      <motion.span
-                        animate={{ rotate: expandedPhase === i ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
-                        className={`text-base ${textMuted}`}
-                      >
-                        ↓
-                      </motion.span>
-                    </div>
-                  </div>
-
-                  {/* Expanded content */}
-                  <motion.div
-                    initial={false}
-                    animate={{
-                      height: expandedPhase === i ? 'auto' : 0,
-                      opacity: expandedPhase === i ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <div className={`pt-8 mt-8 border-t ${borderColor}`}>
-                      <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
-                        {/* Deliverables */}
-                        <div className="lg:col-span-4">
-                          <span className={`text-xs uppercase tracking-[0.2em] block mb-4 ${textAccent}`}>
-                            Entregables
-                          </span>
-                          <p className={`text-base font-light leading-relaxed ${isDark ? 'text-cream/85' : 'text-[#0a1628]/75'}`}>
-                            {phase.deliverables}
-                          </p>
-                        </div>
-
-                        {/* Actions */}
-                        <div className="lg:col-span-8">
-                          <span className={`text-xs uppercase tracking-[0.2em] block mb-4 ${textAccent}`}>
-                            Acciones clave
-                          </span>
-                          <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
-                            {phase.actions.map((action, actionIdx) => (
-                              <div key={actionIdx} className="flex items-start gap-3">
-                                <span className={`w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 ${isDark ? 'bg-accent/60' : 'bg-[#1a3a6e]/60'}`} />
-                                <span className={`text-[15px] font-light leading-relaxed ${isDark ? 'text-cream/85' : 'text-[#0a1628]/75'}`}>
-                                  {action}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </button>
-            </motion.div>
+        <div className="grid md:grid-cols-3 gap-4 mb-16">
+          {[
+            { label: 'Abr - May', value: 'Impulso', desc: 'Primeras acciones para acelerar adopción y visibilidad.' },
+            { label: 'Jun - Jul', value: 'Capacitación', desc: 'Webinars y formación comercial para profundizar el uso.' },
+            { label: 'Ago - Dic', value: 'Escalado', desc: 'Sorteos, reactivación y consolidación del plan.' },
+          ].map((item) => (
+            <div key={item.label} className="rounded-[1.4rem] border border-white/8 bg-white/[0.03] p-5">
+              <div className="text-[11px] uppercase tracking-[0.24em] text-[#9cc2ff] font-medium mb-2">{item.label}</div>
+              <div className="text-xl font-medium text-cream mb-1">{item.value}</div>
+              <div className="text-sm text-cream/55 font-light leading-relaxed">{item.desc}</div>
+            </div>
           ))}
         </div>
-      </section>
 
-      <Divider isDark={isDark} />
-
-      {/* ══════════════════════════════════════════════════════ */}
-      {/*  SECTION 2 — MODELO OPERATIVO + GOBERNANZA            */}
-      {/* ══════════════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32">
-        <motion.div {...fadeUp} className="mb-20">
-          <span className="section-label mb-10 inline-block">Gobernanza</span>
-          <h2 className={`heading-display text-display-lg max-w-3xl ${textMain}`}>
-            Modelo operativo
-          </h2>
-          <p className={`text-xl font-light leading-relaxed max-w-2xl mt-6 ${textMuted}`}>
-            Roles y responsabilidades claras entre {clientName} y Fisify para una ejecución impecable.
-          </p>
-        </motion.div>
-
-        {/* Governance table */}
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className={`border ${borderColor} overflow-hidden`}
-        >
-          {/* Table header */}
-          <div className={`grid grid-cols-12 gap-0 ${isDark ? 'bg-[#0d1a2e]' : 'bg-[#f5f5f5]'}`}>
-            <div className="col-span-5 p-6 lg:p-8">
-              <span className={`text-xs uppercase tracking-[0.2em] font-medium ${textMuted}`}>Área</span>
-            </div>
-            <div className={`col-span-3 p-6 lg:p-8 border-l ${borderColor}`}>
-              <span className={`text-xs uppercase tracking-[0.2em] font-medium ${textAccent}`}>{clientName}</span>
-            </div>
-            <div className={`col-span-4 p-6 lg:p-8 border-l ${borderColor}`}>
-              <span className={`text-xs uppercase tracking-[0.2em] font-medium ${textAccent}`}>Fisify</span>
-            </div>
-          </div>
-
-          {/* Table rows */}
-          {governance.map((row, i) => (
-            <motion.div
-              key={row.area}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.05 * i }}
-              viewport={{ once: true }}
-              className={`grid grid-cols-12 gap-0 border-t ${borderColor} ${
-                isDark ? 'hover:bg-white/[0.02]' : 'hover:bg-black/[0.02]'
-              } transition-colors`}
-            >
-              <div className="col-span-5 p-6 lg:p-8">
-                <span className={`text-[15px] font-light ${textMain}`}>{row.area}</span>
-              </div>
-              <div className={`col-span-3 p-6 lg:p-8 border-l ${borderColor}`}>
-                <span className={`text-[15px] font-light ${row.medicus === '—' ? (isDark ? 'text-cream/45' : 'text-[#0a1628]/40') : (isDark ? 'text-cream/90' : 'text-[#0a1628]/85')}`}>
-                  {row.medicus}
-                </span>
-              </div>
-              <div className={`col-span-4 p-6 lg:p-8 border-l ${borderColor}`}>
-                <span className={`text-[15px] font-light ${isDark ? 'text-cream/90' : 'text-[#0a1628]/85'}`}>
-                  {row.fisify}
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Committee cadence */}
-        <motion.div
-          {...fadeUp}
-          transition={{ delay: 0.2 }}
-          className="mt-10 flex flex-wrap items-center gap-6"
-        >
-          <span className={`text-xs uppercase tracking-[0.2em] ${textMuted}`}>Comités</span>
-          {['Weekly ops', 'Monthly steering', 'QBR trimestral'].map((item, i) => (
-            <span
-              key={item}
-              className={`text-sm tracking-[0.03em] px-4 py-2 border ${
-                isDark ? 'border-cream/[0.12] text-cream/80' : 'border-[#0a1628]/[0.10] text-[#0a1628]/70'
-              }`}
-            >
-              {i === 0 && <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${isDark ? 'bg-accent/60' : 'bg-[#1a3a6e]/60'}`} />}
-              {i === 1 && <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${isDark ? 'bg-accent/40' : 'bg-[#1a3a6e]/40'}`} />}
-              {i === 2 && <span className={`inline-block w-1.5 h-1.5 rounded-full mr-2 ${isDark ? 'bg-accent/20' : 'bg-[#1a3a6e]/20'}`} />}
-              {item}
-            </span>
-          ))}
-        </motion.div>
-      </section>
-
-      <Divider isDark={isDark} />
-
-      {/* ══════════════════════════════════════════════════════ */}
-      {/*  SECTION 3 — KPIs DE IMPACTO                          */}
-      {/* ══════════════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32">
-        <motion.div {...fadeUp} className="mb-20">
-          <span className="section-label mb-10 inline-block">Medición</span>
-          <h2 className={`heading-display text-display-lg max-w-3xl ${textMain}`}>
-            KPIs de impacto
-          </h2>
-          <p className={`text-xl font-light leading-relaxed max-w-2xl mt-6 ${textMuted}`}>
-            Indicadores clave para medir el éxito del proyecto y demostrar resultados tangibles.
-          </p>
-        </motion.div>
-
-        {/* KPI grid */}
-        <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-px ${isDark ? 'bg-white/[0.03]' : 'bg-black/[0.03]'}`}>
-          {kpis.map((kpi, i) => (
-            <motion.div
-              key={kpi.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.06, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              viewport={{ once: true }}
-              className={`${cardBg} backdrop-blur-sm p-8 lg:p-10 group`}
-            >
-              {/* KPI number */}
-              <span className={`stat-value text-4xl lg:text-5xl tracking-tight block mb-5`}>
-                {kpi.id}
-              </span>
-
-              {/* KPI name */}
-              <h4 className={`font-display text-lg mb-3 ${textMain}`}>
-                {kpi.name}
-              </h4>
-
-              {/* KPI description */}
-              <p className={`text-[15px] font-light leading-relaxed ${textMuted}`}>
-                {kpi.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      <Divider isDark={isDark} />
-
-      {/* ══════════════════════════════════════════════════════ */}
-      {/*  SECTION 4 — PROPUESTA DE INVERSIÓN                   */}
-      {/* ══════════════════════════════════════════════════════ */}
-      <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-32">
-        <motion.div {...fadeUp} className="mb-20">
-          <span className="section-label mb-10 inline-block">Inversión</span>
-          <h2 className={`heading-display text-display-lg max-w-4xl ${textMain}`}>
-            Una inversión diseñada para escalar junto a {clientName}
-          </h2>
-          <p className={`text-xl font-light leading-relaxed max-w-3xl mt-6 ${textMuted}`}>
-            Una propuesta económica pensada para acompañar el volumen, facilitar la adopción y consolidar una relación de largo plazo.
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-          {/* Left — Pricing table */}
+        <div className="grid lg:grid-cols-12 gap-6 mb-20">
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+            {...fadeUp}
+            transition={{ delay: 0.05 }}
+            className="lg:col-span-8 rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,26,46,0.92),rgba(10,21,36,0.82))] p-7 lg:p-8"
           >
-            <div className="mb-8">
-              <span className={`text-xs uppercase tracking-[0.2em] block mb-2 ${textMuted}`}>Para individuales</span>
-              <h3 className={`font-display text-2xl lg:text-3xl ${textMain}`}>Tabla de precios</h3>
-              <span className={`text-sm font-light mt-2 block ${textMuted}`}>(EUR* usuario/año)</span>
-            </div>
+            <SectionTitle
+              eyebrow="01"
+              title="Roadmap de ejecución"
+              subtitle="Cuatro fases para mantener la tracción y convertir cada acción en adopción y negocio."
+            />
 
-            <div className={`border ${borderColor} overflow-hidden`}>
-              {/* Table header */}
-              <div className={`grid grid-cols-2 gap-0 ${isDark ? 'bg-[#0d1a2e]' : 'bg-[#f5f5f5]'}`}>
-                <div className="p-5 lg:p-6">
-                  <span className={`text-xs uppercase tracking-[0.15em] font-medium ${textAccent}`}>N.º de asegurados</span>
-                </div>
-                <div className={`p-5 lg:p-6 border-l ${borderColor}`}>
-                  <span className={`text-xs uppercase tracking-[0.15em] font-medium ${textAccent}`}>Coste</span>
-                </div>
-              </div>
-
-              {/* Table rows */}
-              {pricingTiers.map((tier, i) => (
+            <div className="grid lg:grid-cols-2 gap-4">
+              {phases.map((phase, index) => (
                 <motion.div
-                  key={tier.users}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.05 * i }}
-                  viewport={{ once: true }}
-                  className={`grid grid-cols-2 gap-0 border-t ${borderColor} ${
-                    tier.highlighted
-                      ? isDark ? 'bg-accent/[0.06] border-l-2 border-l-accent' : 'bg-[#1a3a6e]/[0.06] border-l-2 border-l-[#1a3a6e]'
-                      : isDark ? 'hover:bg-white/[0.02]' : 'hover:bg-black/[0.02]'
-                  } transition-colors`}
+                  key={phase.num}
+                  {...fadeUp}
+                  transition={{ delay: index * 0.08 }}
+                  className={`rounded-[1.4rem] border p-5 ${
+                    phase.accent ? 'border-[#9cc2ff]/20 bg-[#9cc2ff]/8' : 'border-white/8 bg-white/[0.03]'
+                  }`}
                 >
-                  <div className="p-5 lg:p-6 flex items-center gap-3">
-                    <span className={`text-base font-light ${tier.highlighted ? textMain : (isDark ? 'text-cream/85' : 'text-[#0a1628]/75')}`}>
-                      {tier.users}
-                    </span>
-                    {tier.highlighted && (
-                      <span className={`text-[10px] uppercase tracking-[0.15em] px-2 py-1 font-medium ${
-                        isDark ? 'bg-accent/15 text-accent' : 'bg-[#1a3a6e]/15 text-[#1a3a6e]'
-                      }`}>
-                        {clientName}
-                      </span>
-                    )}
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-[11px] uppercase tracking-[0.24em] text-[#9cc2ff] font-medium">{phase.num}</span>
+                        <span className="text-[11px] uppercase tracking-[0.18em] text-cream/45">{phase.months}</span>
+                      </div>
+                      <h4 className="text-xl text-cream font-medium">{phase.title}</h4>
+                    </div>
+                    <span className="text-[11px] uppercase tracking-[0.18em] text-cream/40 text-right">{phase.period}</span>
                   </div>
-                  <div className={`p-5 lg:p-6 border-l ${borderColor}`}>
-                    <span className={`text-base ${tier.highlighted ? `font-medium ${textAccent}` : `font-light ${isDark ? 'text-cream/85' : 'text-[#0a1628]/75'}`}`}>
-                      {tier.cost}
-                    </span>
+
+                  <p className="text-sm text-cream/60 font-light leading-relaxed mb-4">{phase.summary}</p>
+                  <div className="space-y-2">
+                    {phase.actions.map((action) => (
+                      <div key={action} className="flex items-start gap-3 rounded-2xl border border-white/8 bg-[#09162a]/60 px-4 py-3">
+                        <div className="mt-1 w-2 h-2 rounded-full bg-[#9cc2ff] flex-shrink-0" />
+                        <span className="text-sm text-cream/72 font-light leading-relaxed">{action}</span>
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Right — Pricing cards + CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            viewport={{ once: true }}
+            {...fadeUp}
+            transition={{ delay: 0.08 }}
+            className="lg:col-span-4 rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,26,46,0.92),rgba(10,21,36,0.82))] p-7 lg:p-8"
           >
-            {/* Pricing cards */}
-            <div className="space-y-4 mb-12">
-              {/* Reference price */}
-              <div className={`${cardBg} backdrop-blur-sm border ${borderColor} p-10 lg:p-12`}>
-                <span className={`text-xs uppercase tracking-[0.2em] block mb-6 ${textMuted}`}>
-                  Coste licencia (200.000 asegurados)
-                </span>
-                <div className="flex items-baseline gap-1 mb-3">
-                  <span className={`stat-value text-5xl lg:text-6xl tracking-tight`}>1,36</span>
-                  <span className={`text-xl font-light ${textMuted}`}>€</span>
-                </div>
-                <span className={`text-base font-light ${textMuted}`}>por licencia / año</span>
-              </div>
+            <SectionTitle
+              eyebrow="02"
+              title="Recursos"
+              subtitle="El plan necesita un equipo claro y roles definidos para ejecutarse bien."
+            />
 
-              {/* Client price */}
-              <div className={`relative border overflow-hidden ${
-                isDark ? 'border-accent/20 bg-accent/[0.04]' : 'border-[#1a3a6e]/20 bg-[#1a3a6e]/[0.04]'
-              } p-10 lg:p-12`}>
-                {/* Accent bar */}
-                <div className={`absolute top-0 left-0 right-0 h-px ${isDark ? 'bg-accent' : 'bg-[#1a3a6e]'}`} />
-
-                <span className={`text-xs uppercase tracking-[0.2em] block mb-6 ${textAccent}`}>
-                  Pricing {clientName}
-                </span>
-                <div className="flex items-baseline gap-1 mb-3">
-                  <span className={`stat-value text-5xl lg:text-6xl tracking-tight`}>1,10</span>
-                  <span className={`text-xl font-light ${textMuted}`}>€</span>
-                </div>
-                <span className={`text-base font-light ${isDark ? 'text-cream/85' : 'text-[#0a1628]/75'}`}>por licencia / año</span>
-
-                {/* Savings badge */}
-                <div className={`mt-6 inline-flex items-center gap-2 px-4 py-2 ${
-                  isDark ? 'bg-accent/10' : 'bg-[#1a3a6e]/10'
-                }`}>
-                  <span className={`text-sm tracking-[0.03em] font-medium ${textAccent}`}>
-                    −19% sobre precio estándar
-                  </span>
-                </div>
-              </div>
+            <div className="grid gap-4">
+              {resources.map((resource) => (
+                <IconCard
+                  key={resource.title}
+                  title={resource.title}
+                  body={resource.body}
+                  icon={resource.icon}
+                />
+              ))}
             </div>
 
-            {/* Contract terms */}
-            <div className={`space-y-4 mt-2`}>
-              <div className={`flex items-center gap-4 py-4 border-t ${borderColor}`}>
-                <span className={`text-xs uppercase tracking-[0.2em] w-40 flex-shrink-0 ${textAccent}`}>Duración</span>
-                <span className={`text-base font-light ${isDark ? 'text-cream/90' : 'text-[#0a1628]/85'}`}>Dos años</span>
-              </div>
-              <div className={`flex items-center gap-4 py-4 border-t ${borderColor}`}>
-                <span className={`text-xs uppercase tracking-[0.2em] w-40 flex-shrink-0 ${textAccent}`}>Facturación</span>
-                <span className={`text-base font-light ${isDark ? 'text-cream/90' : 'text-[#0a1628]/85'}`}>Mensual</span>
-              </div>
-              <div className={`py-4 border-t ${borderColor}`}>
-                <p className={`text-base font-light ${textMuted}`}>
-                  Propuesta válida hasta el 31 de marzo
-                </p>
-              </div>
+            <div className="mt-5 rounded-[1.35rem] border border-[#9cc2ff]/15 bg-[#9cc2ff]/8 p-5">
+              <div className="text-[11px] uppercase tracking-[0.24em] text-[#9cc2ff] font-medium mb-2">Criterio de éxito</div>
+              <p className="text-sm text-cream/65 font-light leading-relaxed">
+                Cadencia, calidad de contenido y seguimiento constante para conectar visibilidad comercial con uso real.
+              </p>
             </div>
           </motion.div>
         </div>
 
-        {/* ── Piloto Kinesiología Híbrida ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <div className={`relative border overflow-hidden ${
-            isDark ? 'border-accent/20 bg-accent/[0.04]' : 'border-[#1a3a6e]/20 bg-[#1a3a6e]/[0.04]'
-          } p-10 lg:p-12`}>
-            {/* Accent bar */}
-            <div className={`absolute top-0 left-0 right-0 h-px ${isDark ? 'bg-accent' : 'bg-[#1a3a6e]'}`} />
+        <div className="grid lg:grid-cols-12 gap-6">
+          <motion.div
+            {...fadeUp}
+            transition={{ delay: 0.05 }}
+            className="lg:col-span-4 rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,26,46,0.92),rgba(10,21,36,0.82))] p-7 lg:p-8"
+          >
+            <SectionTitle
+              eyebrow="03"
+              title="Seguimiento"
+              subtitle="Seguimiento mensual con reportes dinámicos para analizar datos en tiempo real y tomar decisiones basadas en evidencia."
+            />
 
-            <span className={`text-xs uppercase tracking-[0.2em] block mb-2 ${textAccent}`}>
-              Piloto Kinesiología Híbrida — FisifyPro
-            </span>
-            <h3 className={`font-display text-2xl lg:text-3xl mb-10 ${textMain}`}>
-              Propuesta económica para el piloto
-            </h3>
-
-            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-              {/* Duración */}
-              <div>
-                <span className={`text-xs uppercase tracking-[0.2em] block mb-4 ${textMuted}`}>Duración</span>
-                <span className={`stat-value text-4xl lg:text-5xl tracking-tight block`}>12</span>
-                <span className={`text-base font-light ${textMuted}`}>meses</span>
-              </div>
-
-              {/* Volumen */}
-              <div>
-                <span className={`text-xs uppercase tracking-[0.2em] block mb-4 ${textMuted}`}>Volumen</span>
-                <span className={`stat-value text-4xl lg:text-5xl tracking-tight block`}>∞</span>
-                <span className={`text-base font-light ${textMuted}`}>Ilimitado</span>
-              </div>
-
-              {/* Coste */}
-              <div>
-                <span className={`text-xs uppercase tracking-[0.2em] block mb-4 ${textMuted}`}>Coste</span>
-                <div className="flex items-baseline gap-1">
-                  <span className={`stat-value text-4xl lg:text-5xl tracking-tight`}>2.500</span>
-                  <span className={`text-xl font-light ${textMuted}`}>€</span>
+            <div className="space-y-3">
+              {followUp.map((item) => (
+                <div key={item.label} className="rounded-[1.25rem] border border-white/8 bg-white/[0.03] p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-2xl bg-[#9cc2ff]/10 border border-[#9cc2ff]/15 flex items-center justify-center text-[#9cc2ff] flex-shrink-0">
+                      <Repeat2 size={18} />
+                    </div>
+                    <div>
+                      <div className="text-[11px] uppercase tracking-[0.22em] text-[#9cc2ff] font-medium mb-1">{item.label}</div>
+                      <p className="text-sm text-cream/65 font-light leading-relaxed">{item.value}</p>
+                    </div>
+                  </div>
                 </div>
-                <span className={`text-base font-light ${textMuted}`}>por mes</span>
+              ))}
+            </div>
+
+            <div className="mt-5 rounded-[1.35rem] border border-white/8 bg-[#09162a]/60 p-5">
+              <div className="flex items-center gap-3 mb-2 text-[#9cc2ff]">
+                <CalendarRange size={18} />
+                <span className="text-[11px] uppercase tracking-[0.24em] font-medium">Cadencia</span>
+              </div>
+              <p className="text-sm text-cream/65 font-light leading-relaxed">
+                Revisión mensual con reportes dinámicos en tiempo real para analizar resultados y definir los próximos pasos en base a datos.
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            {...fadeUp}
+            transition={{ delay: 0.08 }}
+            className="lg:col-span-8 rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,26,46,0.92),rgba(10,21,36,0.82))] p-7 lg:p-8"
+          >
+            <SectionTitle
+              eyebrow="04"
+              title="Palancas estratégicas"
+              subtitle="Cuatro reglas para que el plan tenga impacto comercial real."
+            />
+
+            <div className="grid md:grid-cols-2 gap-4">
+              {strategicKeys.map((item, index) => (
+                <motion.div
+                  key={item}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.06 }}
+                  className="rounded-[1.25rem] border border-white/8 bg-white/[0.03] p-4"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-2xl bg-[#9cc2ff]/10 border border-[#9cc2ff]/15 flex items-center justify-center text-[#9cc2ff] flex-shrink-0">
+                      <Sparkles size={16} />
+                    </div>
+                    <p className="text-sm text-cream/65 font-light leading-relaxed">{item}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-[1.35rem] border border-[#9cc2ff]/15 bg-gradient-to-r from-[#0d1a2e] via-[#0d1a2e] to-[#10264b] p-6 lg:p-7">
+              <div className="flex items-start gap-4">
+                <div className="w-11 h-11 rounded-2xl bg-[#9cc2ff]/12 border border-[#9cc2ff]/15 flex items-center justify-center text-[#9cc2ff] flex-shrink-0">
+                  <MonitorPlay size={18} />
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-[0.22em] text-[#9cc2ff] font-medium mb-2">Resultado esperado</div>
+                  <p className="text-sm text-cream/65 font-light leading-relaxed">
+                    Un plan vivo, coordinado y medible que convierta visibilidad en demanda, demanda en uso y uso en crecimiento.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-
+          </motion.div>
+        </div>
       </section>
     </div>
   )

@@ -133,7 +133,7 @@ export default function ObjetivoTab({ isDark: _isDark, clientName = 'Medicus' }:
           className="text-lg text-cream/70 font-light leading-[1.8] max-w-3xl mb-20"
         >
           Fisify permite que {clientName} evolucione de un modelo donde el afiliado &lsquo;aparece&rsquo; cuando hay
-          dolor, a uno donde la prepaga acompaña y previene de forma continua. El plan deja de ser una
+          dolor, a uno donde la aseguradora acompaña y previene de forma continua. El plan deja de ser una
           promesa y pasa a ser un valor tangible en el día a día.
         </motion.p>
 
@@ -238,7 +238,7 @@ export default function ObjetivoTab({ isDark: _isDark, clientName = 'Medicus' }:
             Situación actual
           </h3>
           <p className="text-lg text-cream/60 font-light">
-            Medicina prepagada en Argentina
+            Medicina de seguros de salud en Argentina
           </p>
         </motion.div>
 
@@ -294,7 +294,7 @@ export default function ObjetivoTab({ isDark: _isDark, clientName = 'Medicus' }:
         >
           <div className="relative pl-8 border-l border-accent/30">
             <p className="text-lg lg:text-xl text-cream/70 font-light leading-[1.7] max-w-4xl">
-              En un mercado con más competencia y más transparencia de precios, la prepaga necesita dejar
+            En un mercado con más competencia y más transparencia de precios, la aseguradora necesita dejar
               de ser{' '}
               <span className="text-cream/60 italic">&lsquo;gestor de prestaciones&rsquo;</span> y convertirse en{' '}
               <span className="text-accent font-normal">&lsquo;plataforma de salud cotidiana&rsquo;</span>:{' '}

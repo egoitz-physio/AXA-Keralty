@@ -30,7 +30,7 @@ export default function HeroSection({ clientName = 'Medicus' }: HeroSectionProps
             className="text-3xl md:text-5xl lg:text-6xl text-white leading-tight max-w-2xl"
             style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 300, letterSpacing: '-0.01em' }}
           >
-            Innovación con propósito para los afiliados de <span className="font-semibold">{clientName}</span>
+            Innovación con propósito para los asegurados de <span className="font-semibold">{clientName}</span>
           </motion.h1>
         </div>
       </div>

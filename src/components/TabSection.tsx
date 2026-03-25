@@ -9,23 +9,25 @@ interface TabSectionProps {
   clientLogo?: string
   clientName?: string
   visibleTabs?: TabId[]
+  brand?: 'standard' | 'zurich'
 }
 
 const allTabs = [
-  { id: 'objetivo' as TabId, label: 'Objetivo', num: '01' },
-  { id: 'results' as TabId, label: 'Resultados', num: '02' },
-  { id: 'product' as TabId, label: 'Producto', num: '03' },
-  { id: 'kinesiologia' as TabId, label: 'Kinesiología', num: '04' },
-  { id: 'value' as TabId, label: 'Valor', num: '05' },
-  { id: 'implement' as TabId, label: 'Implementación', num: '06' },
+  { id: 'objetivo' as TabId, label: 'Objetivo' },
+  { id: 'results' as TabId, label: 'Datos' },
+  { id: 'product' as TabId, label: 'Producto' },
+  { id: 'value' as TabId, label: 'Valor' },
+  { id: 'implement' as TabId, label: 'Plan de trabajo' },
 ]
 
-export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo = '/images/medicus-logo-white.png', clientName = 'Medicus', visibleTabs }: TabSectionProps) {
+export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo = '/images/medicus-logo-white.png', clientName = 'Medicus', visibleTabs, brand = 'standard' }: TabSectionProps) {
   const [isSticky, setIsSticky] = useState(false)
   const showClientLogo = Boolean(clientLogo)
-  const useBrandFilter = !clientLogo.includes('logo-aig')
-  const stickyClientSize = clientLogo.includes('logo-aig') ? 'h-5 opacity-80' : 'h-4 opacity-80'
-  const miniClientSize = clientLogo.includes('logo-aig') ? 'h-4 opacity-40' : 'h-3 opacity-40'
+  const isZurichLogo = clientLogo.includes('logo-zurich')
+  const useBrandFilter = !clientLogo.includes('logo-aig') && !isZurichLogo
+  const stickyClientSize = clientLogo.includes('logo-aig') ? 'h-5 opacity-80' : isZurichLogo ? 'h-7 opacity-90' : 'h-4 opacity-80'
+  const miniClientSize = clientLogo.includes('logo-aig') ? 'h-4 opacity-40' : isZurichLogo ? 'h-6 opacity-50' : 'h-3 opacity-40'
+  const isZurich = brand === 'zurich'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +50,7 @@ export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo
       id="tab-section"
       className={`sticky top-0 z-50 backdrop-blur-xl border-b transition-all duration-300 ${
         isDark
-          ? 'bg-[#0a1628]/95 border-white/5'
+          ? (isZurich ? 'bg-[#081b38]/92 border-white/10' : 'bg-[#0a1628]/95 border-white/5')
           : 'bg-white/95 border-black/5'
       }`}
     >
@@ -86,7 +88,7 @@ export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo
 
           {/* Tabs */}
           <div className="flex items-center gap-0">
-            {tabs.map((tab) => (
+            {tabs.map((tab, index) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
@@ -98,10 +100,10 @@ export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo
               >
                 <span className={`text-xs font-light tracking-widest transition-colors ${
                   activeTab === tab.id
-                    ? isDark ? 'text-accent' : 'text-[#1a3a6e]'
+                    ? isDark ? (isZurich ? 'text-[#9cc2ff]' : 'text-accent') : 'text-[#1a3a6e]'
                     : isDark ? 'text-cream/40' : 'text-[#0a1628]/35'
                 }`}>
-                  {tab.num}
+                  {String(index + 1).padStart(2, '0')}
                 </span>
                 <span className="font-body font-light text-xs uppercase tracking-[0.15em] whitespace-nowrap">
                   {tab.label}
@@ -113,7 +115,7 @@ export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo
                     layoutId="activeTabIndicator"
                     className={`absolute bottom-0 left-0 right-0 h-px ${
                       isDark 
-                        ? 'bg-gradient-to-r from-transparent via-accent to-transparent' 
+                        ? (isZurich ? 'bg-gradient-to-r from-transparent via-[#9cc2ff] to-transparent' : 'bg-gradient-to-r from-transparent via-accent to-transparent')
                         : 'bg-gradient-to-r from-transparent via-[#1a3a6e] to-transparent'
                     }`}
                     transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}

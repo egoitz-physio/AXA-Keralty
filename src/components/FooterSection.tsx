@@ -2,18 +2,21 @@ interface FooterSectionProps {
   isDark: boolean
   clientName?: string
   clientLogo?: string
+  brand?: 'standard' | 'zurich'
 }
 
-export default function FooterSection({ isDark, clientName = 'Medicus', clientLogo = '/images/medicus-logo-white.png' }: FooterSectionProps) {
+export default function FooterSection({ isDark, clientName = 'Medicus', clientLogo = '/images/medicus-logo-white.png', brand = 'standard' }: FooterSectionProps) {
   const showClientLogo = Boolean(clientLogo)
-  const useBrandFilter = !clientLogo.includes('logo-aig')
-  const clientLogoSize = clientLogo.includes('logo-aig') ? 'h-6 transition-all' : 'h-5 transition-all'
+  const isZurichLogo = clientLogo.includes('logo-zurich')
+  const useBrandFilter = !clientLogo.includes('logo-aig') && !isZurichLogo
+  const clientLogoSize = clientLogo.includes('logo-aig') ? 'h-6 transition-all' : isZurichLogo ? 'h-8 transition-all' : 'h-5 transition-all'
   const textMuted = isDark ? 'text-cream/70' : 'text-[#0a1628]/70'
   const textAccent = isDark ? 'text-accent' : 'text-[#1a3a6e]'
   const borderColor = isDark ? 'border-white/10' : 'border-black/10'
+  const isZurich = brand === 'zurich'
 
   return (
-    <footer className={`relative mt-32 border-t ${borderColor} ${isDark ? 'bg-[#060f1d]' : 'bg-[#f0eeeb]'}`}>
+    <footer className={`relative mt-32 border-t ${borderColor} ${isDark ? (isZurich ? 'bg-[#050b18]' : 'bg-[#060f1d]') : 'bg-[#f0eeeb]'}`}>
       {/* Top section */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20">
         <div className="grid lg:grid-cols-12 gap-16">
