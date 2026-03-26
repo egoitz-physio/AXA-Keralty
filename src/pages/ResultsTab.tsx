@@ -21,7 +21,7 @@ const essentialPlan = [
 
 const advancedPlan = [
   'Plan esencial + seguimiento proactivo',
-  'Atención multicanal',
+  'Atención multicanal: videollamadas y chat con fisioterapeutas',
   'Acciones de dinamización',
   'Modelo de gestión dedicada + inteligencia de datos',
 ]
