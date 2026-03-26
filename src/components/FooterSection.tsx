@@ -3,9 +3,18 @@ interface FooterSectionProps {
   clientName?: string
   clientLogo?: string
   brand?: 'standard' | 'zurich'
+  description?: string
+  bottomText?: string
 }
 
-export default function FooterSection({ isDark, clientName = 'Medicus', clientLogo = '/images/medicus-logo-white.png', brand = 'standard' }: FooterSectionProps) {
+export default function FooterSection({
+  isDark,
+  clientName = 'Medicus',
+  clientLogo = '/images/medicus-logo-white.png',
+  brand = 'standard',
+  description,
+  bottomText,
+}: FooterSectionProps) {
   const showClientLogo = Boolean(clientLogo)
   const isZurichLogo = clientLogo.includes('logo-zurich')
   const isPrudentialLogo = clientLogo.includes('logo-prudential')
@@ -43,7 +52,7 @@ export default function FooterSection({ isDark, clientName = 'Medicus', clientLo
               )}
             </div>
             <p className={`text-sm leading-relaxed mb-8 max-w-sm font-light ${textMuted}`}>
-              Transformando la experiencia de salud de los asegurados de {clientName} a través de fisioterapia digital de excelencia.
+              {description || `Transformando la experiencia de salud de los asegurados de ${clientName} a través de fisioterapia digital de excelencia.`}
             </p>
           </div>
 
@@ -85,7 +94,7 @@ export default function FooterSection({ isDark, clientName = 'Medicus', clientLo
       <div className={`border-t ${borderColor}`}>
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className={`text-xs font-light tracking-wide ${isDark ? 'text-cream/40' : 'text-[#0a1628]/40'}`}>
-            © 2026 Fisify. Propuesta exclusiva para {clientName}.
+            {bottomText || `© 2026 Fisify. Propuesta exclusiva para ${clientName}.`}
           </p>
           <div className="flex gap-8">
             <a href="#" className={`text-xs transition-colors font-light ${isDark ? 'text-cream/40 hover:text-cream/70' : 'text-[#0a1628]/40 hover:text-[#0a1628]/70'}`}>Privacidad</a>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import type { ReactNode } from 'react'
 import Navigation from './Navigation'
 import HeroSection from './HeroSection'
 import TabSection from './TabSection'
@@ -20,6 +21,17 @@ interface ClientPresentationAppProps {
   brand?: ClientBrand
   visibleTabs?: TabId[]
   initialTab?: TabId
+  hero?: {
+    eyebrow?: string
+    title?: ReactNode
+    description?: string
+    image?: string
+    imageAlt?: string
+  }
+  footer?: {
+    description?: string
+    bottomText?: string
+  }
 }
 
 export default function ClientPresentationApp({
@@ -29,6 +41,8 @@ export default function ClientPresentationApp({
   brand = 'standard',
   visibleTabs = ['objetivo', 'product', 'value', 'implement'],
   initialTab = 'objetivo',
+  hero,
+  footer,
 }: ClientPresentationAppProps) {
   const [activeTab, setActiveTab] = useState<TabId>(initialTab)
   const [scrolled, setScrolled] = useState(false)
@@ -71,7 +85,14 @@ export default function ClientPresentationApp({
       </div>
 
       <Navigation scrolled={scrolled} clientName={clientName} clientLogo={clientLogo} homePath={homePath} brand={brand} />
-      <HeroSection clientName={clientName} />
+      <HeroSection
+        clientName={clientName}
+        eyebrow={hero?.eyebrow}
+        title={hero?.title}
+        description={hero?.description}
+        image={hero?.image}
+        imageAlt={hero?.imageAlt}
+      />
 
       <TabSection
         activeTab={activeTab}
@@ -101,7 +122,14 @@ export default function ClientPresentationApp({
         </AnimatePresence>
       </main>
 
-      <FooterSection isDark={true} clientName={clientName} clientLogo={clientLogo} brand={brand} />
+      <FooterSection
+        isDark={true}
+        clientName={clientName}
+        clientLogo={clientLogo}
+        brand={brand}
+        description={footer?.description}
+        bottomText={footer?.bottomText}
+      />
     </div>
   )
 }

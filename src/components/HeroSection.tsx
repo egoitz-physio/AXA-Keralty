@@ -1,18 +1,31 @@
 import { motion } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 interface HeroSectionProps {
   clientName?: string
+  eyebrow?: string
+  title?: ReactNode
+  description?: string
+  image?: string
+  imageAlt?: string
 }
 
-export default function HeroSection({ clientName = 'Medicus' }: HeroSectionProps) {
+export default function HeroSection({
+  clientName = 'Medicus',
+  eyebrow = 'Propuesta de colaboración',
+  title,
+  description,
+  image = '/images/new-hero-2.png',
+  imageAlt,
+}: HeroSectionProps) {
   return (
     <section className="relative min-h-screen flex flex-col">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="/images/new-hero-2.png"
-          alt={`${clientName} Fisioterapia Digital`}
+          src={image}
+          alt={imageAlt || `${clientName} Fisioterapia Digital`}
           className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-tr from-[#060f1d] via-[#060f1d]/40 to-transparent" />
@@ -21,6 +34,9 @@ export default function HeroSection({ clientName = 'Medicus' }: HeroSectionProps
       {/* Content - Bottom Left */}
       <div className="relative flex-1 flex items-end">
         <div className="px-8 md:px-16 lg:px-24 pb-20 md:pb-28">
+          <div className="mb-5 text-[11px] uppercase tracking-[0.28em] text-white/55 font-medium">
+            {eyebrow}
+          </div>
           
           {/* Title */}
           <motion.h1
@@ -30,8 +46,22 @@ export default function HeroSection({ clientName = 'Medicus' }: HeroSectionProps
             className="text-3xl md:text-5xl lg:text-6xl text-white leading-tight max-w-2xl"
             style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 300, letterSpacing: '-0.01em' }}
           >
-            Innovación con propósito para los asegurados de <span className="font-semibold">{clientName}</span>
+            {title || (
+              <>
+                Innovación con propósito para los asegurados de <span className="font-semibold">{clientName}</span>
+              </>
+            )}
           </motion.h1>
+          {description && (
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.65 }}
+              className="mt-6 max-w-xl text-white/70 text-base md:text-lg font-light leading-relaxed"
+            >
+              {description}
+            </motion.p>
+          )}
         </div>
       </div>
 
