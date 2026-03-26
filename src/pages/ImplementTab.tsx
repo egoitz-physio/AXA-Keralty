@@ -25,10 +25,51 @@ const leaders = [
   },
 ]
 
-const stats = [
-  { value: '6', label: 'países' },
-  { value: '1.5M+', label: 'usuarios' },
-  { value: 'ES / EN / EU', label: 'idiomas' },
+const roadmap = [
+  {
+    quarter: 'Q1',
+    months: 'Ene - Mar',
+    title: 'Diseño y activación',
+    summary: 'Aterrizar el relato, alinear a los equipos y lanzar la primera ola de visibilidad.',
+    actions: [
+      'Definir mensajes de prevención, bienestar y valor cotidiano.',
+      'Alinear a Prudential y Mercado Libre en el plan de activación.',
+      'Preparar piezas de lanzamiento, argumentario comercial y calendario de contenidos.',
+    ],
+  },
+  {
+    quarter: 'Q2',
+    months: 'Abr - Jun',
+    title: 'Educación y adopción',
+    summary: 'Convertir la propuesta en uso real con formación, webinars y acompañamiento.',
+    actions: [
+      'Webinars para equipos comerciales y clientes.',
+      'Campañas de onboarding y materiales de uso diario.',
+      'Seguimiento con reportes mensuales y primeros aprendizajes.',
+    ],
+  },
+  {
+    quarter: 'Q3',
+    months: 'Jul - Sep',
+    title: 'Escalado y dinamización',
+    summary: 'Impulsar más interacción con acciones recurrentes y foco en la recurrencia.',
+    actions: [
+      'Nudges, newsletters y recordatorios segmentados.',
+      'Acciones de dinamización para reforzar adherencia y hábito.',
+      'Optimización de contenidos en función del uso y del feedback.',
+    ],
+  },
+  {
+    quarter: 'Q4',
+    months: 'Oct - Dic',
+    title: 'Consolidación y valor',
+    summary: 'Cerrar el año con resultados, aprendizajes y un business case sólido para el siguiente ciclo.',
+    actions: [
+      'Informe anual de KPIs, impacto y recomendaciones.',
+      'Plan de continuidad y priorización de mejoras.',
+      'Refuerzo del relato de valor para renovación y crecimiento.',
+    ],
+  },
 ]
 
 export default function ImplementTab({ isDark: _isDark, clientName = 'Prudential' }: ImplementTabProps) {
@@ -47,14 +88,51 @@ export default function ImplementTab({ isDark: _isDark, clientName = 'Prudential
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-3 gap-4 mb-16">
-        {stats.map((item) => (
-          <div key={item.label} className="rounded-[1.4rem] border border-white/8 bg-white/[0.03] p-5">
-            <div className="text-4xl font-light text-cream mb-1">{item.value}</div>
-            <div className="text-[11px] uppercase tracking-[0.24em] text-[#9cc2ff] font-medium">{item.label}</div>
-          </div>
-        ))}
-      </div>
+      <section className="mb-20">
+        <div className="flex items-center gap-5 mb-10">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-cream/50 font-medium">01</span>
+          <div className="flex-1 h-px bg-cream/[0.08]" />
+        </div>
+
+        <h3 className="text-3xl md:text-4xl lg:text-[2.8rem] font-light text-cream tracking-tight mb-4" style={{ fontFamily: 'Outfit, sans-serif' }}>
+          Plan de implementación de 12 meses
+        </h3>
+        <p className="text-lg text-cream/60 font-light max-w-4xl mb-10">
+          Un recorrido anual para activar la propuesta, generar uso diario y consolidar el valor de Fisify dentro del producto de Prudential.
+        </p>
+
+        <div className="grid lg:grid-cols-2 gap-5">
+          {roadmap.map((phase, index) => (
+            <motion.div
+              key={phase.quarter}
+              {...fadeUp}
+              transition={{ delay: index * 0.08 }}
+              className="rounded-[1.75rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,26,46,0.92),rgba(10,21,36,0.82))] p-6 lg:p-7"
+            >
+              <div className="flex items-start justify-between gap-4 mb-5">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-[11px] uppercase tracking-[0.24em] text-[#9cc2ff] font-medium">{phase.quarter}</span>
+                    <span className="text-[11px] uppercase tracking-[0.18em] text-cream/45">{phase.months}</span>
+                  </div>
+                  <h4 className="text-2xl font-medium text-cream">{phase.title}</h4>
+                </div>
+              </div>
+
+              <p className="text-sm text-cream/60 font-light leading-relaxed mb-4">{phase.summary}</p>
+
+              <div className="space-y-3">
+                {phase.actions.map((action) => (
+                  <div key={action} className="flex items-start gap-3 rounded-2xl border border-white/8 bg-[#09162a]/60 px-4 py-3">
+                    <div className="mt-1 w-2 h-2 rounded-full bg-[#9cc2ff] flex-shrink-0" />
+                    <span className="text-sm text-cream/72 font-light leading-relaxed">{action}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
       <section className="grid lg:grid-cols-2 gap-6 mb-20">
         <motion.div {...fadeUp} transition={{ delay: 0.05 }} className="rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,26,46,0.92),rgba(10,21,36,0.82))] p-7 lg:p-8">
@@ -108,7 +186,7 @@ export default function ImplementTab({ isDark: _isDark, clientName = 'Prudential
 
       <section className="mb-20">
         <div className="flex items-center gap-5 mb-10">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-cream/50 font-medium">01</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-cream/50 font-medium">02</span>
           <div className="flex-1 h-px bg-cream/[0.08]" />
         </div>
 
