@@ -26,8 +26,8 @@ export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo
   const isZurichLogo = clientLogo.includes('logo-zurich')
   const isPrudentialLogo = clientLogo.includes('logo-prudential')
   const useBrandFilter = !clientLogo.includes('logo-aig') && !isZurichLogo && !isPrudentialLogo
-  const stickyClientSize = clientLogo.includes('logo-aig') ? 'h-5 opacity-80' : isZurichLogo ? 'h-7 opacity-90' : isPrudentialLogo ? 'h-7 opacity-90' : 'h-4 opacity-80'
-  const miniClientSize = clientLogo.includes('logo-aig') ? 'h-4 opacity-40' : isZurichLogo ? 'h-6 opacity-50' : isPrudentialLogo ? 'h-5 opacity-55' : 'h-3 opacity-40'
+  const stickyClientSize = clientLogo.includes('logo-aig') ? 'h-5 opacity-80' : isZurichLogo ? 'h-7 opacity-90' : isPrudentialLogo ? 'h-8 opacity-90' : 'h-4 opacity-80'
+  const miniClientSize = clientLogo.includes('logo-aig') ? 'h-4 opacity-40' : isZurichLogo ? 'h-6 opacity-50' : isPrudentialLogo ? 'h-6 opacity-55' : 'h-3 opacity-40'
   const isZurich = brand === 'zurich'
 
   useEffect(() => {
