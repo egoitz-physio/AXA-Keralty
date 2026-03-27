@@ -2,7 +2,7 @@ import ClientPresentationAxa from '../components/ClientPresentationAxa'
 import type { TabId } from '../components/ClientPresentationApp'
 
 const CLIENT_NAME = 'AXA Keralty'
-const CLIENT_LOGO = '/images/axa-keralty-logo.svg'
+const CLIENT_LOGO = '/images/axa-keralty-logo-v2.svg'
 
 export default function AxaKeraltyApp() {
   const visibleTabs: TabId[] = ['objetivo', 'results', 'product', 'value', 'implement']

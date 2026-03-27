@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import ClientPresentationApp from './components/ClientPresentationApp'
 import AxaKeraltyApp from './pages/AxaKeraltyApp'
 import PrudentialApp from './pages/PrudentialApp'
@@ -9,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AxaKeraltyApp />} />
+        <Route path="/" element={<Navigate to="/axa-keralty" replace />} />
         <Route path="/axa-keralty" element={<AxaKeraltyApp />} />
         <Route path="/axa" element={<AxaKeraltyApp />} />
         <Route path="/medicus" element={<ClientPresentationApp clientName="Medicus" clientLogo="/images/medicus-logo-white.png" homePath="/medicus" />} />
