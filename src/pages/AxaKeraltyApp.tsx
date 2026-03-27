@@ -18,11 +18,11 @@ export default function AxaKeraltyApp() {
         eyebrow: 'Propuesta de colaboración',
         title: (
           <>
-            Prevención, bienestar, tratamiento y rehabilitación para <span className="font-semibold">AXA Keralty</span>
+            Prevención, bienestar y tratamiento para <span className="font-semibold">AXA Keralty</span>
           </>
         ),
         description:
-          'Fisify convierte la fisioterapia digital en una experiencia de prevención, tratamiento, rehabilitación y bienestar que el asegurado usa en su día a día, con especial foco en la recuperación funcional y el valor del seguro.',
+          'Fisify convierte la fisioterapia digital en una experiencia de prevención, tratamiento y bienestar que el asegurado usa en su día a día, con especial foco en el valor del seguro.',
         image: '/images/new-hero-2.png',
         imageAlt: 'AXA Keralty Fisioterapia Digital',
       }}
