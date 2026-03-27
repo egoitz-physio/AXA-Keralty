@@ -23,11 +23,12 @@ const allTabs = [
 export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo = '/images/medicus-logo-white.png', clientName = 'Medicus', visibleTabs, brand = 'standard' }: TabSectionProps) {
   const [isSticky, setIsSticky] = useState(false)
   const showClientLogo = Boolean(clientLogo)
+  const isAxaKeraltyLogo = clientLogo.includes('axa-keralty-logo')
   const isZurichLogo = clientLogo.includes('logo-zurich')
   const isPrudentialLogo = clientLogo.includes('logo-prudential')
-  const useBrandFilter = !clientLogo.includes('logo-aig') && !isZurichLogo && !isPrudentialLogo
-  const stickyClientSize = clientLogo.includes('logo-aig') ? 'h-5 opacity-80' : isZurichLogo ? 'h-7 opacity-90' : isPrudentialLogo ? 'h-8 opacity-90' : 'h-4 opacity-80'
-  const miniClientSize = clientLogo.includes('logo-aig') ? 'h-4 opacity-40' : isZurichLogo ? 'h-6 opacity-50' : isPrudentialLogo ? 'h-6 opacity-55' : 'h-3 opacity-40'
+  const useBrandFilter = !clientLogo.includes('logo-aig') && !isZurichLogo && !isPrudentialLogo && !isAxaKeraltyLogo
+  const stickyClientSize = clientLogo.includes('logo-aig') ? 'h-5 opacity-80' : isZurichLogo ? 'h-7 opacity-90' : isPrudentialLogo ? 'h-8 opacity-90' : isAxaKeraltyLogo ? 'h-5 opacity-85' : 'h-4 opacity-80'
+  const miniClientSize = clientLogo.includes('logo-aig') ? 'h-4 opacity-40' : isZurichLogo ? 'h-6 opacity-50' : isPrudentialLogo ? 'h-6 opacity-55' : isAxaKeraltyLogo ? 'h-4 opacity-45' : 'h-3 opacity-40'
   const isZurich = brand === 'zurich'
 
   useEffect(() => {
@@ -73,7 +74,9 @@ export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo
               alt="Fisify"
               className={`h-5 opacity-80 ${isDark ? 'brightness-0 invert' : 'brightness-0'}`}
             />
-            <span className={`text-xs ${isDark ? 'text-cream/30' : 'text-[#0a1628]/30'}`}>×</span>
+            {!isAxaKeraltyLogo && (
+              <span className={`text-xs ${isDark ? 'text-cream/30' : 'text-[#0a1628]/30'}`}>×</span>
+            )}
             {showClientLogo ? (
               <img
                 src={clientLogo}
@@ -142,7 +145,9 @@ export default function TabSection({ activeTab, setActiveTab, isDark, clientLogo
               alt="Fisify"
               className={`h-4 opacity-40 ${isDark ? 'brightness-0 invert' : 'brightness-0'}`}
             />
-            <span className={`text-xs font-light ${isDark ? 'text-cream/20' : 'text-[#0a1628]/20'}`}>×</span>
+            {!isAxaKeraltyLogo && (
+              <span className={`text-xs font-light ${isDark ? 'text-cream/20' : 'text-[#0a1628]/20'}`}>×</span>
+            )}
             {showClientLogo ? (
               <img
                 src={clientLogo}

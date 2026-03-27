@@ -10,15 +10,18 @@ interface NavigationProps {
 
 export default function Navigation({ scrolled, clientName = 'Medicus', clientLogo = '/images/medicus-logo-white.png', homePath = '/', brand = 'standard' }: NavigationProps) {
   const showClientLogo = Boolean(clientLogo)
+  const isAxaKeraltyLogo = clientLogo.includes('axa-keralty-logo')
   const isZurichLogo = clientLogo.includes('logo-zurich')
   const isPrudentialLogo = clientLogo.includes('logo-prudential')
-  const useBrandFilter = !clientLogo.includes('logo-aig') && !isZurichLogo && !isPrudentialLogo
+  const useBrandFilter = !clientLogo.includes('logo-aig') && !isZurichLogo && !isPrudentialLogo && !isAxaKeraltyLogo
   const clientLogoSize = clientLogo.includes('logo-aig')
     ? (scrolled ? 'h-5 opacity-90' : 'h-6 opacity-100')
       : isZurichLogo
         ? (scrolled ? 'h-7 opacity-95' : 'h-8 opacity-100')
       : isPrudentialLogo
         ? (scrolled ? 'h-9 opacity-95' : 'h-10 opacity-100')
+      : isAxaKeraltyLogo
+        ? (scrolled ? 'h-6 opacity-95' : 'h-7 opacity-100')
       : (scrolled ? 'h-[14px] opacity-90' : 'h-[18px] opacity-100')
   const isZurich = brand === 'zurich'
 
@@ -38,7 +41,7 @@ export default function Navigation({ scrolled, clientName = 'Medicus', clientLog
           scrolled ? 'h-16' : 'h-20'
         }`}>
           {/* Logos - Centered with scale animation */}
-          <a href={homePath} className="flex items-center gap-4 group">
+          <a href={homePath} className={`flex items-center group ${isAxaKeraltyLogo ? 'gap-3' : 'gap-4'}`}>
               <img 
                 src="/images/fisify-logo-white.png" 
                 alt="Fisify" 
@@ -46,9 +49,11 @@ export default function Navigation({ scrolled, clientName = 'Medicus', clientLog
                   scrolled ? 'h-5 opacity-90' : 'h-6 opacity-100'
                 }`}
               />
-            <span className={`font-light ${isZurich ? 'text-[#8fb7ff]/30' : 'text-white/30'} transition-all duration-500 ${
-              scrolled ? 'text-[8px]' : 'text-[10px]'
-            }`}>×</span>
+            {!isAxaKeraltyLogo && (
+              <span className={`font-light ${isZurich ? 'text-[#8fb7ff]/30' : 'text-white/30'} transition-all duration-500 ${
+                scrolled ? 'text-[8px]' : 'text-[10px]'
+              }`}>×</span>
+            )}
             {showClientLogo ? (
               <img
                 src={clientLogo}
