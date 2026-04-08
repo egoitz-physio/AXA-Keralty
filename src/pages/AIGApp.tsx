@@ -10,8 +10,8 @@ import {
   Workflow,
 } from 'lucide-react'
 
-const accent = '#d72638'
-const accentSoft = 'rgba(215, 38, 56, 0.14)'
+const accent = '#00a0e6'
+const accentSoft = 'rgba(0, 160, 230, 0.14)'
 
 const sectionFade = {
   initial: { opacity: 0, y: 24 },
@@ -42,6 +42,29 @@ const heroStats = [
   {
     value: '100%',
     label: 'Digital y remoto. Sin desplazamiento, sin lista de espera, en cualquier país.',
+  },
+]
+
+const referenceVisuals = [
+  {
+    src: '/images/aig-reference/aig-cover.png',
+    title: 'Portada AIG',
+    body: 'El azul institucional y la fotografía humana marcan el tono visual de la propuesta.',
+  },
+  {
+    src: '/images/aig-reference/aig-accidents-health.png',
+    title: 'Accidentes y salud',
+    body: 'La arquitectura de cobertura y la lectura médica ayudan a estructurar el relato comercial.',
+  },
+  {
+    src: '/images/aig-reference/aig-graves.png',
+    title: 'Coberturas complejas',
+    body: 'Un layout muy claro para explicar diagnósticos, beneficios y acompañamiento clínico.',
+  },
+  {
+    src: '/images/aig-reference/aig-alliances.png',
+    title: 'Alianzas estratégicas',
+    body: 'La lógica de socios, retail y verticales encaja con una propuesta distribuida por canales.',
   },
 ]
 
@@ -326,7 +349,7 @@ export default function AIGApp() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#070b14] text-white">
+    <div className="relative min-h-screen overflow-hidden bg-[#09131f] text-white">
       <div className="noise" />
 
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
@@ -338,7 +361,7 @@ export default function AIGApp() {
         />
       </div>
 
-      <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#070b14]/80 backdrop-blur-2xl border-b border-white/8' : 'bg-gradient-to-b from-black/40 to-transparent'}`}>
+      <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#09131f]/82 backdrop-blur-2xl border-b border-white/8' : 'bg-gradient-to-b from-black/32 to-transparent'}`}>
         <div className="mx-auto max-w-[1440px] px-5 lg:px-10">
           <div className="flex h-18 lg:h-20 items-center justify-between gap-6">
             <button onClick={() => scrollTo('hero')} className="flex items-center gap-4 group">
@@ -404,7 +427,7 @@ export default function AIGApp() {
             </motion.div>
 
             <motion.div {...sectionFade} transition={{ delay: 0.08 }} className="lg:col-span-5">
-              <div className="rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(14,18,28,0.95),rgba(8,11,20,0.92))] p-6 lg:p-8">
+              <div className="rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,20,34,0.96),rgba(10,16,27,0.94))] p-6 lg:p-8">
                 <div className="flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-white/55">
                   <QuoteMark />
                   Cita destacada
@@ -440,6 +463,67 @@ export default function AIGApp() {
           </div>
         </section>
 
+        <section className="mx-auto max-w-[1440px] px-5 lg:px-10 py-14 lg:py-16">
+          <SectionHeader
+            eyebrow="Referencias visuales"
+            title="Material AIG que inspira la propuesta"
+            subtitle="Tomamos como base el lenguaje visual del PDF para reforzar coherencia: azul institucional, fotografía clínica y bloques muy claros."
+          />
+
+          <div className="grid lg:grid-cols-12 gap-5">
+            <motion.article
+              {...sectionFade}
+              className="lg:col-span-7 overflow-hidden rounded-[2rem] border border-white/10 bg-white"
+            >
+              <div className="relative aspect-[16/10]">
+                <img
+                  src={referenceVisuals[0].src}
+                  alt={referenceVisuals[0].title}
+                  className="h-full w-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#09131f]/70 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6">
+                  <div className="inline-flex rounded-full bg-white/90 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-[#09131f]">
+                    {referenceVisuals[0].title}
+                  </div>
+                  <p className="mt-3 max-w-xl text-sm lg:text-[15px] font-light leading-relaxed text-white/85">
+                    {referenceVisuals[0].body}
+                  </p>
+                </div>
+              </div>
+            </motion.article>
+
+            <div className="lg:col-span-5 grid gap-5">
+              {referenceVisuals.slice(1).map((visual, index) => (
+                <motion.article
+                  key={visual.title}
+                  {...sectionFade}
+                  transition={{ delay: index * 0.06 }}
+                  className="overflow-hidden rounded-[1.7rem] border border-white/10 bg-[#eef4ff]"
+                >
+                  <div className="grid grid-cols-12">
+                    <div className="col-span-5 relative min-h-[170px]">
+                      <img
+                        src={visual.src}
+                        alt={visual.title}
+                        className="h-full w-full object-cover object-center"
+                      />
+                    </div>
+                    <div className="col-span-7 flex flex-col justify-center p-5 lg:p-6">
+                      <div className="text-[11px] uppercase tracking-[0.24em]" style={{ color: accent }}>
+                        {visual.title}
+                      </div>
+                      <p className="mt-3 text-sm lg:text-[15px] font-light leading-relaxed text-[#0d1b2a]/80">
+                        {visual.body}
+                      </p>
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="coberturas" className="mx-auto max-w-[1440px] px-5 lg:px-10 py-16 lg:py-20">
           <SectionHeader
             eyebrow="Cobertura por cobertura"
@@ -449,7 +533,7 @@ export default function AIGApp() {
 
           <div className="grid lg:grid-cols-12 gap-8">
             <motion.div {...sectionFade} className="lg:col-span-4">
-              <div className="sticky top-28 rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(215,38,56,0.12),rgba(255,255,255,0.03))] p-6 lg:p-8">
+              <div className="sticky top-28 rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(0,160,230,0.14),rgba(255,255,255,0.03))] p-6 lg:p-8">
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-white/70">
                   <Globe2 size={12} style={{ color: accent }} />
                   Fisify siempre disponible - 24 / 7 / 365
@@ -501,10 +585,14 @@ export default function AIGApp() {
           <motion.div
             {...sectionFade}
             transition={{ delay: 0.05 }}
-            className="mt-8 rounded-[2rem] border border-[#d72638]/20 bg-[linear-gradient(135deg,rgba(215,38,56,0.12),rgba(255,255,255,0.04))] p-6 lg:p-8"
+            className="mt-8 rounded-[2rem] border p-6 lg:p-8"
+            style={{
+              borderColor: 'rgba(0, 160, 230, 0.22)',
+              background: 'linear-gradient(135deg, rgba(0, 160, 230, 0.12), rgba(255, 255, 255, 0.04))',
+            }}
           >
             <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d72638]/20" style={{ background: accentSoft, color: accent }}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border" style={{ borderColor: 'rgba(0, 160, 230, 0.22)', background: accentSoft, color: accent }}>
                 <ShieldCheck size={20} />
               </div>
               <div>
@@ -647,7 +735,11 @@ export default function AIGApp() {
               <motion.article
                 key={metric.value}
                 {...sectionFade}
-                className="rounded-[1.6rem] border border-[#d72638]/18 bg-[linear-gradient(180deg,rgba(215,38,56,0.12),rgba(255,255,255,0.03))] p-6"
+                className="rounded-[1.6rem] border p-6"
+                style={{
+                  borderColor: 'rgba(0, 160, 230, 0.18)',
+                  background: 'linear-gradient(180deg, rgba(0, 160, 230, 0.12), rgba(255, 255, 255, 0.03))',
+                }}
               >
                 <div className="text-4xl font-medium tracking-tight text-white" style={{ color: accent }}>
                   {metric.value}
@@ -683,10 +775,14 @@ export default function AIGApp() {
         <section id="cta" className="mx-auto max-w-[1440px] px-5 lg:px-10 py-16 lg:py-24">
           <motion.div
             {...sectionFade}
-            className="rounded-[2.25rem] border border-[#d72638]/20 bg-[linear-gradient(135deg,rgba(215,38,56,0.18),rgba(255,255,255,0.04))] p-7 lg:p-10"
+            className="rounded-[2.25rem] border p-7 lg:p-10"
+            style={{
+              borderColor: 'rgba(0, 160, 230, 0.22)',
+              background: 'linear-gradient(135deg, rgba(0, 160, 230, 0.18), rgba(255, 255, 255, 0.04))',
+            }}
           >
             <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d72638]/25" style={{ background: accentSoft, color: accent }}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border" style={{ borderColor: 'rgba(0, 160, 230, 0.25)', background: accentSoft, color: accent }}>
                 <Workflow size={20} />
               </div>
               <div className="max-w-5xl">
