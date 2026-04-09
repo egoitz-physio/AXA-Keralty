@@ -502,21 +502,27 @@ export default function AIGApp() {
             subtitle="Para cada situación que AIG cubre, Fisify añade una capa de atención fisioterapéutica que acelera la recuperación, reduce la reclamación media y fideliza al asegurado."
           />
 
-          <div className="grid lg:grid-cols-12 gap-8">
-            <motion.div {...sectionFade} className="lg:col-span-4">
-              <div className="sticky top-28 rounded-[2rem] border border-white/8 p-6 lg:p-8" style={{ background: 'linear-gradient(180deg, rgba(19,153,255,0.20), rgba(255,255,255,0.03))' }}>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-white/70">
+          <div className="grid lg:grid-cols-[1.05fr_1.95fr] gap-8 xl:gap-10 items-start">
+            <motion.div {...sectionFade} className="lg:sticky lg:top-28">
+              <div className="rounded-[2.25rem] border border-white/8 p-6 lg:p-8" style={{ background: 'linear-gradient(180deg, rgba(19,153,255,0.18), rgba(255,255,255,0.03))', boxShadow: '0 22px 70px rgba(0,0,0,0.18)' }}>
+                <div className="flex items-center justify-between gap-4">
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-white/42">Coberturas globales</div>
+                  <div className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-white/72">
+                    24 / 7 / 365
+                  </div>
+                </div>
+                <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-white/70">
                   <Globe2 size={12} style={{ color: accent }} />
                   Fisify siempre disponible - 24 / 7 / 365
                 </div>
-                <p className="mt-5 text-base lg:text-lg font-light leading-relaxed text-white/70">
+                <p className="mt-5 max-w-md text-base lg:text-lg font-light leading-relaxed text-white/72">
                   Tanto si el accidente ocurre en México, en un viaje de negocios por Europa o en un viaje de aventura en Asia, el asegurado accede al mismo nivel de atención desde su móvil, sin coste de desplazamiento y sin burocracia.
                 </p>
-                <p className="mt-4 text-base lg:text-lg font-light leading-relaxed text-white/70">
+                <p className="mt-4 max-w-md text-base lg:text-lg font-light leading-relaxed text-white/72">
                   Eso convierte a Fisify en el único beneficio del seguro que es tan global como la cobertura de AIG.
                 </p>
                 <div className="mt-6 grid gap-3">
-                  <div className="rounded-2xl border border-white/8 bg-white/[0.05] px-4 py-3 text-sm text-white/75">
+                  <div className="rounded-[1.4rem] border border-white/8 bg-white/[0.05] px-4 py-4 text-sm text-white/76">
                     <div className="text-[11px] uppercase tracking-[0.18em] text-white/45 mb-1">Texto clave</div>
                     El único beneficio del seguro disponible donde ocurra el siniestro.
                   </div>
@@ -524,7 +530,7 @@ export default function AIGApp() {
 
                 <div className="mt-6 overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#eef4ff]">
                   <div className="grid grid-cols-12">
-                    <div className="col-span-5 relative min-h-[150px]">
+                    <div className="col-span-5 relative min-h-[160px]">
                       <img
                         src={referenceVisuals[1].src}
                         alt={referenceVisuals[1].title}
@@ -541,22 +547,29 @@ export default function AIGApp() {
                     </div>
                   </div>
                 </div>
+
+                <div className="mt-6 rounded-[1.4rem] border border-white/8 bg-white/[0.04] px-4 py-4">
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-white/42">Cobertura global</div>
+                  <p className="mt-2 text-sm font-light leading-relaxed text-white/72">
+                    Un mismo estándar de fisioterapia, sin importar el país, el canal o el momento del siniestro.
+                  </p>
+                </div>
               </div>
             </motion.div>
 
-            <div className="lg:col-span-8 grid md:grid-cols-2 gap-4 lg:gap-5 items-stretch">
+            <div className="grid md:grid-cols-2 gap-4 lg:gap-5 items-stretch">
               {coverageCards.map((card, index) => (
                 <motion.article
                   key={card.title}
                   {...sectionFade}
                   transition={{ delay: index * 0.05 }}
-                  className="flex h-full min-h-[26rem] flex-col rounded-[2rem] border border-white/10 p-6 lg:p-7"
+                  className="flex h-full min-h-[27rem] flex-col rounded-[2rem] border border-white/10 p-6 lg:p-7"
                   style={{
                     background: 'linear-gradient(180deg, rgba(13,20,34,0.985), rgba(8,13,24,0.965))',
                     boxShadow: '0 24px 80px rgba(0, 0, 0, 0.24)',
                   }}
                 >
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="grid grid-cols-[1fr_auto] items-start gap-4">
                     <div className="min-w-0">
                       <div className="text-[11px] uppercase tracking-[0.26em] text-white/42">Cobertura AIG</div>
                       <h3 className="mt-2 max-w-[8ch] text-3xl font-medium leading-[0.98] tracking-tight text-white lg:text-[2.1rem] text-balance">
@@ -564,7 +577,7 @@ export default function AIGApp() {
                       </h3>
                     </div>
                     <span
-                      className="max-w-[11rem] rounded-full border border-white/10 px-4 py-2 text-left text-[11px] uppercase tracking-[0.18em] leading-[1.25]"
+                      className="max-w-[11rem] justify-self-end rounded-full border border-white/10 px-4 py-2 text-left text-[11px] uppercase tracking-[0.18em] leading-[1.25]"
                       style={{
                         color: accent,
                         background: 'linear-gradient(180deg, rgba(19,153,255,0.24), rgba(19,153,255,0.12))',
