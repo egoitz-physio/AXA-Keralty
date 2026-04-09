@@ -586,21 +586,21 @@ export default function AIGApp() {
                     key={card.title}
                     {...sectionFade}
                     transition={{ delay: index * 0.05 }}
-                    className="flex h-full min-h-[27rem] flex-col rounded-[2rem] border border-white/10 p-6 lg:p-7"
+                    className="flex h-full min-h-[28rem] flex-col rounded-[2rem] border border-white/10 p-6 lg:p-7"
                     style={{
                       background: 'linear-gradient(180deg, rgba(13,20,34,0.985), rgba(8,13,24,0.965))',
                       boxShadow: '0 24px 80px rgba(0, 0, 0, 0.24)',
                     }}
                   >
-                    <div className="grid grid-cols-[1fr_auto] items-start gap-4">
+                    <div className="grid grid-cols-[minmax(0,1fr)_10.5rem] items-start gap-4 lg:gap-5">
                       <div className="min-w-0">
                         <div className="text-[11px] uppercase tracking-[0.26em] text-white/42">Cobertura AIG</div>
-                        <h3 className="mt-2 max-w-[8ch] text-3xl font-medium leading-[0.98] tracking-tight text-white lg:text-[2.1rem]">
+                        <h3 className="mt-2 max-w-[7ch] text-3xl font-medium leading-[0.96] tracking-tight text-white lg:text-[2.1rem] text-balance">
                           {card.title}
                         </h3>
                       </div>
                       <span
-                        className="max-w-[11rem] justify-self-end rounded-full border border-white/10 px-4 py-2 text-left text-[11px] uppercase tracking-[0.18em] leading-[1.25]"
+                        className="justify-self-end rounded-full border border-white/10 px-4 py-2 text-center text-[11px] uppercase tracking-[0.16em] leading-[1.25]"
                         style={{
                           color: accent,
                           background: 'linear-gradient(180deg, rgba(19,153,255,0.24), rgba(19,153,255,0.12))',
