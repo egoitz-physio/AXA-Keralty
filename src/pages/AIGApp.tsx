@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
-  ArrowRight,
   BadgeCheck,
   CircleCheck,
+  DollarSign,
   Globe2,
   ShieldCheck,
   Sparkles,
-  Workflow,
+  Users,
 } from 'lucide-react'
 
 const accent = '#1399ff'
@@ -19,13 +19,13 @@ const sectionFade = {
   viewport: { once: true, margin: '-40px' },
 }
 
-type ActiveSection = 'coberturas' | 'nichos' | 'modulos' | 'roadmap'
+type ActiveSection = 'coberturas' | 'nichos' | 'modulos' | 'planes'
 
 const sectionTabs: Array<{ id: ActiveSection; label: string }> = [
   { id: 'coberturas', label: 'Coberturas' },
   { id: 'nichos', label: 'Nichos' },
   { id: 'modulos', label: 'Módulos' },
-  { id: 'roadmap', label: 'Hoja de ruta' },
+  { id: 'planes', label: 'Planes' },
 ]
 
 const heroStats = [
@@ -51,17 +51,17 @@ const referenceVisuals = [
   {
     src: '/images/aig-reference/aig-cover.png',
     title: 'Portada AIG',
-    body: 'El azul institucional y la fotografía humana marcan el tono visual de la propuesta.',
+    body: '',
   },
   {
     src: '/images/aig-reference/aig-accidents-health.png',
     title: 'Accidentes y salud',
-    body: 'La arquitectura de cobertura y la lectura médica ayudan a estructurar el relato comercial.',
+    body: '',
   },
   {
     src: '/images/aig-reference/aig-graves.png',
     title: 'Coberturas complejas',
-    body: 'Un layout muy claro para explicar diagnósticos, beneficios y acompañamiento clínico.',
+    body: '',
   },
   {
     src: '/images/aig-reference/aig-alliances.png',
@@ -134,30 +134,30 @@ const niches = [
     label: 'Nicho 01',
     title: 'Deportistas activos',
     description:
-      'Runners, ciclistas, jugadores de pádel, crossfit y deportes de equipo. Perfil 25-50 años, alta propensión digital y lesiones recurrentes y predecibles.',
+      'Runners, ciclistas, jugadores de pádel, crossfit y deportes de equipo. Perfil digital, con alta recurrencia de lesiones y un uso muy natural del servicio.',
     profiles: ['Runner', 'Ciclista', 'Pádel', 'CrossFit', 'Fútbol', 'Natación'],
     insight:
-      'Mayor adopción digital, gasto más alto en salud y ROI medible. El piloto enseña resultados visibles en 6 meses.',
+      'Servicio diseñado para acompañar la práctica deportiva, prevenir molestias y recuperar mejor cada vez que el asegurado lo necesite.',
     points: [
       'Prevención específica por deporte: rodilla del runner, hombro del nadador, zona lumbar del ciclista y codo del tenista.',
+      'Calentamiento y enfriamiento personalizado antes y después de la práctica deportiva.',
       'Rehabilitación activada automáticamente cuando el asegurado entra en cobertura.',
-      'Teleconsulta de urgencia en menos de 24h para cortar la lesión antes de que escale.',
       'Biblioteca FisifyLabs con más de 500 ejercicios validados clínicamente.',
-      'Valoración funcional de ingreso para estratificar riesgo y afinar pricing.',
+      'Valoración funcional inicial mediante tests de visión artificial para identificar potenciales riesgos de accidente.',
     ],
   },
   {
     label: 'Nicho 02',
     title: 'Mujeres y amas de casa',
     description:
-      'Perfil 30-55 años con alta exposición a lesiones domésticas y dolencias musculoesqueléticas crónicas, especialmente en etapas como post-parto y menopausia.',
-    profiles: ['30-55 años', 'Post-parto', 'Menopausia', 'Cuidadoras', 'Trabajadoras'],
+      'Perfil con alta exposición a lesiones domésticas y dolencias musculoesqueléticas crónicas, con necesidades que cambian según la etapa vital y la actividad diaria.',
+    profiles: ['Prevención', 'Bienestar', 'Cuidadoras', 'Trabajadoras', 'Hogar'],
     insight:
-      'La fisioterapia de suelo pélvico y el módulo post-parto son un diferenciador real que hoy casi ningún seguro masivo ofrece.',
+      'Fisioterapia personalizada a las necesidades de cada mujer, entendiendo sus etapas, sus rutinas y sus actividades de la vida diaria.',
     points: [
       'Fisioterapia de suelo pélvico 100% online, privada y sin lista de espera.',
-      'Programa digital de recuperación post-parto integrado en la póliza.',
-      'Espalda, cervical y hombro como zonas prioritarias por carga doméstica.',
+      'Programa digital con tips de recuperación post-parto integrado en la póliza.',
+      'Espalda, cervical y hombro como zonas prioritarias por carga doméstica y cuidado familiar.',
       'Prevención de accidentes domésticos con ergonomía y hábitos posturales.',
       'Sin desplazamiento, sin tiempo de espera y desde casa.',
     ],
@@ -187,7 +187,7 @@ const modules = [
     num: '04',
     title: 'Valoración de ingreso',
     tag: 'Suscripción',
-    body: 'Assessment funcional digital al contratar el seguro para personalizar coberturas y mejorar el pricing por perfil.',
+    body: 'Valoración funcional inicial mediante tests de visión artificial para identificar potenciales riesgos y ajustar la propuesta al perfil.',
   },
   {
     num: '05',
@@ -211,28 +211,18 @@ const valueActors = [
       'Menor siniestralidad por prevención activa.',
       'Menor coste medio por siniestro con rehabilitación precoz.',
       'Mayor retención en renovación anual.',
-      'Datos clínicos para mejorar modelos de riesgo.',
+      'Recopilación de datos para mejorar la predicción de siniestralidad y el cálculo de primas.',
       'Diferenciación frente a competidores en canal retail.',
     ],
   },
   {
-    title: 'Para Fisify',
-    subtitle: 'Canal de distribución masivo',
-    items: [
-      'Acceso a la base de clientes AIG y retail partners.',
-      'Ingresos recurrentes B2B por asegurado activo.',
-      'Validación del modelo en aseguradoras.',
-      'Posicionamiento como referente insurtech salud en México.',
-    ],
-  },
-  {
     title: 'Para el retailer',
-    subtitle: 'Producto con beneficio tangible',
+    subtitle: 'Mayor captación y retención de asegurados',
     items: [
-      'Seguro con valor percibido muy alto frente al precio de venta.',
-      'Diferenciación en la oferta de servicios financieros.',
-      'Mayor fidelización del cliente final.',
-      'NPS superior frente a seguros estándar.',
+      'Un beneficio diferencial que mejora la propuesta comercial en el punto de venta.',
+      'Más captación de clientes gracias a un valor percibido claro y fácil de explicar.',
+      'Mayor fidelización y retención de asegurados a lo largo del tiempo.',
+      'Una experiencia de uso que ayuda a que el seguro se recuerde y se renueve mejor.',
     ],
   },
   {
@@ -247,39 +237,38 @@ const valueActors = [
   },
 ]
 
-const pilotMetrics = [
-  { value: '≥40%', label: 'Tasa de activación de Fisify por asegurado en los primeros 30 días.' },
-  { value: '↓15%', label: 'Reducción de reclamaciones menores vs grupo control sin Fisify.' },
-  { value: '+20pt', label: 'Mejora en NPS del seguro vs producto estándar AIG sin beneficio Fisify.' },
-  { value: '+18%', label: 'Tasa de renovación esperada vs cartera base en el mismo segmento.' },
+const essentialPlan = [
+  'Evaluación y personalización',
+  'Tecnología de asistente virtual',
+  'Soluciones especializadas',
+  'Educación continua',
 ]
 
-const roadmap = [
-  {
-    step: '01',
-    title: 'One-pager ejecutivo',
-    body: 'Documento de 1 página para circulación interna en AIG, con foco en reducción de siniestralidad y NPS.',
-  },
-  {
-    step: '02',
-    title: 'Definir nicho piloto',
-    body: 'Recomendado: deportistas. Mayor adopción digital y ROI más visible en el primer año.',
-  },
-  {
-    step: '03',
-    title: 'Modelo comercial',
-    body: 'Definir si encaja como proveedor de servicios, co-branding AIG + Fisify o revenue share por asegurado activo.',
-  },
-  {
-    step: '04',
-    title: 'Retailer ancla',
-    body: 'Coppel o Liverpool como primer canal. El volumen de su base justifica el piloto con estadística significativa.',
-  },
-  {
-    step: '05',
-    title: 'Métricas acordadas',
-    body: 'Tasa de uso, NPS del seguro, reducción de reclamaciones y coste de rehabilitación vs grupo control.',
-  },
+const advancedPlan = [
+  'Plan esencial + seguimiento proactivo',
+  'Atención multicanal: videollamadas y chat con fisioterapeutas',
+  'Acciones de dinamización',
+  'Modelo de gestión dedicada + inteligencia de datos',
+]
+
+const pricing = [
+  { insured: '50.000', essential: '1,17 €', advanced: '4,48 €' },
+  { insured: '100.000', essential: '1,07 €', advanced: '4,09 €' },
+  { insured: '200.000', essential: '0,99 €', advanced: '3,80 €' },
+  { insured: '300.000', essential: '0,93 €', advanced: '3,59 €' },
+  { insured: '400.000', essential: '0,88 €', advanced: '3,39 €' },
+  { insured: '500.000', essential: '0,85 €', advanced: '3,27 €' },
+  { insured: '600.000', essential: '0,82 €', advanced: '3,15 €' },
+  { insured: '700.000', essential: '0,79 €', advanced: '3,05 €' },
+  { insured: '800.000', essential: '0,77 €', advanced: '2,95 €' },
+  { insured: '900.000', essential: '0,75 €', advanced: '2,85 €' },
+  { insured: '1.000.000', essential: '0,73 €', advanced: '2,75 €' },
+  { insured: '1.250.000', essential: '0,68 €', advanced: '2,60 €' },
+  { insured: '1.500.000', essential: '0,63 €', advanced: '2,45 €' },
+  { insured: '1.750.000', essential: '0,58 €', advanced: '2,30 €' },
+  { insured: '2.000.000', essential: '0,52 €', advanced: '2,15 €' },
+  { insured: '2.250.000', essential: '0,47 €', advanced: '2,00 €' },
+  { insured: '2.500.000', essential: '0,41 €', advanced: '1,85 €' },
 ]
 
 function SectionHeader({
@@ -394,13 +383,6 @@ export default function AIGApp() {
               ))}
             </nav>
 
-            <button
-              onClick={() => setActiveSection('roadmap')}
-              className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-[#08101a] transition-transform hover:-translate-y-0.5"
-            >
-              Agendar reunión
-              <ArrowRight size={14} />
-            </button>
           </div>
         </div>
       </header>
@@ -411,7 +393,7 @@ export default function AIGApp() {
             <motion.div {...sectionFade} className="lg:col-span-7">
               <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-white/70">
                 <Sparkles size={12} style={{ color: accent }} />
-                Propuesta estratégica · Confidencial · 2025
+                Propuesta estratégica
               </div>
 
               <h1
@@ -636,21 +618,24 @@ export default function AIGApp() {
                   <ShieldCheck size={20} />
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-[0.24em] text-white/45">Tarjeta destacada global</div>
-                  <h3 className="mt-2 text-2xl lg:text-3xl font-light text-white">Fisify es tan global como la cobertura de AIG</h3>
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-white/45">Tarjeta destacada</div>
+                  <h3 className="mt-2 text-2xl lg:text-3xl font-light text-white">
+                    Fisify acompaña al asegurado en su día a día
+                  </h3>
                   <p className="mt-3 max-w-4xl text-white/68 font-light leading-relaxed">
-                    AIG cubre al asegurado en cualquier país. Ningún beneficio de salud del seguro podía acompañarle con la misma cobertura
-                    geográfica. Fisify es el primero: 100% digital, en español, sin importar dónde esté el asegurado cuando necesite atención.
+                    Un servicio pensado para estar presente en cada etapa del asegurado: prevención cuando lo necesita, apoyo cuando surge una
+                    molestia y rehabilitación cuando hay un siniestro. La propuesta se adapta a cada perfil y a las necesidades reales de cada
+                    persona, manteniendo siempre una atención digital, flexible y fácil de usar.
                   </p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {[
-                      'App móvil',
-                      'Web',
-                      'En cualquier país',
-                      '24 horas',
+                      'Acompañamiento diario',
+                      'Prevención personalizada',
+                      'Atención bajo demanda',
+                      'Rehabilitación guiada',
                       'En español',
                       'Fisioterapeuta real',
-                      'Plan personalizado',
+                      'Plan adaptado al perfil',
                       'Sin lista de espera',
                     ].map((pill) => (
                       <span
@@ -782,7 +767,7 @@ export default function AIGApp() {
               ))}
             </div>
 
-            <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-5 mt-6">
+            <div className="grid lg:grid-cols-3 gap-5 mt-6">
               {valueActors.map((actor, index) => (
                 <motion.article
                   key={actor.title}
@@ -806,102 +791,100 @@ export default function AIGApp() {
           </section>
         )}
 
-        {activeSection === 'roadmap' && (
+        {activeSection === 'planes' && (
           <section className="mx-auto max-w-[1440px] px-5 lg:px-10 py-10 lg:py-16">
             <SectionHeader
-              eyebrow="Métricas del piloto"
-              title="Antes del lanzamiento hay que acordar cómo se mide el éxito"
-              subtitle="Estas son las métricas que recomendamos acordar con AIG para el primer piloto."
+              eyebrow="Planes"
+              title="Dos niveles de servicio para acompañar a cada asegurado"
+              subtitle="Tomando como referencia la estructura de AIG, la propuesta se organiza en dos planes claros, con una lectura sencilla para la aseguradora y para el canal."
             />
 
-            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-              {pilotMetrics.map((metric) => (
-                <motion.article
-                  key={metric.value}
-                  {...sectionFade}
-                  className="rounded-[1.6rem] border p-6"
-                  style={{
-                    borderColor: 'rgba(19, 153, 255, 0.20)',
-                    background: 'linear-gradient(180deg, rgba(19, 153, 255, 0.14), rgba(255, 255, 255, 0.03))',
-                  }}
-                >
-                  <div className="text-4xl font-medium tracking-tight text-white" style={{ color: accent }}>
-                    {metric.value}
+            <div className="grid lg:grid-cols-2 gap-6 mb-20">
+              <motion.div {...sectionFade} transition={{ delay: 0.05 }} className="rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,26,46,0.92),rgba(10,21,36,0.82))] p-7 lg:p-8">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-2xl bg-[#9cc2ff]/10 border border-[#9cc2ff]/15 flex items-center justify-center text-[#9cc2ff]">
+                    <BadgeCheck size={18} />
                   </div>
-                  <p className="mt-4 text-sm lg:text-[15px] font-light leading-relaxed text-white/68">{metric.label}</p>
-                </motion.article>
-              ))}
-            </div>
-
-            <div className="mt-14">
-              <SectionHeader
-                eyebrow="Hoja de ruta"
-                title="De la conversación al piloto"
-                subtitle="5 pasos para pasar de la reunión inicial a un primer piloto midiendo resultados reales en mercado."
-              />
-            </div>
-
-            <div className="grid lg:grid-cols-5 gap-4">
-              {roadmap.map((step) => (
-                <motion.article
-                  key={step.step}
-                  {...sectionFade}
-                  className="rounded-[1.5rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5"
-                >
-                  <div className="text-[11px] uppercase tracking-[0.28em] text-white/45">{step.step}</div>
-                  <h3 className="mt-3 text-xl font-medium text-white">{step.title}</h3>
-                  <p className="mt-3 text-sm font-light leading-relaxed text-white/68">{step.body}</p>
-                </motion.article>
-              ))}
-            </div>
-
-            <div
-              className="mt-14 rounded-[2.25rem] border p-7 lg:p-10"
-              style={{
-                borderColor: 'rgba(19, 153, 255, 0.24)',
-                background: 'linear-gradient(135deg, rgba(19, 153, 255, 0.22), rgba(255, 255, 255, 0.04))',
-              }}
-            >
-              <div className="flex items-start gap-4">
-                <div
-                  className="flex h-12 w-12 items-center justify-center rounded-2xl border"
-                  style={{ borderColor: 'rgba(19, 153, 255, 0.25)', background: accentSoft, color: accent }}
-                >
-                  <Workflow size={20} />
+                  <div>
+                    <div className="text-[11px] uppercase tracking-[0.24em] text-[#9cc2ff] font-medium">Plan esencial</div>
+                    <div className="text-sm text-cream/45 font-light">Modelo de gestión + inteligencia de datos</div>
+                  </div>
                 </div>
-                <div className="max-w-5xl">
-                  <div className="text-[11px] uppercase tracking-[0.24em] text-white/45">Siguiente paso</div>
-                  <h2
-                    className="mt-3 text-3xl md:text-4xl lg:text-[3.3rem] font-light leading-[1.05] text-white"
-                    style={{ fontFamily: 'Outfit, sans-serif' }}
-                  >
-                    ¿Construimos el seguro que el mercado no tiene todavía?
-                  </h2>
-                  <p className="mt-5 max-w-4xl text-base md:text-lg lg:text-xl font-light leading-relaxed text-white/68">
-                    AIG tiene la distribución y la póliza. Fisify tiene la plataforma clínica y el equipo de fisioterapeutas. Juntos, podemos
-                    crear el primer seguro de accidentes y salud con fisioterapia activa integrada, accesible 24/7 desde cualquier país del
-                    mundo.
-                  </p>
 
-                  <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                    <a
-                      href="mailto:info@fisify.com?subject=Reuni%C3%B3n%20AIG%20x%20Fisify"
-                      className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
-                      style={{ background: accent }}
-                    >
-                      Agendar reunión con AIG
-                      <ArrowRight size={16} />
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => setActiveSection('coberturas')}
-                      className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-6 py-3 text-sm font-medium text-white/85 transition-colors hover:bg-white/[0.07]"
-                    >
-                      Ver propuesta completa
-                    </button>
+                <div className="grid gap-3 mb-6">
+                  {essentialPlan.map((item) => (
+                    <div key={item} className="rounded-2xl border border-white/8 bg-[#09162a]/60 px-4 py-3 text-cream/75 font-light text-sm">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="rounded-2xl border border-[#9cc2ff]/15 bg-[#9cc2ff]/8 p-4 mb-5">
+                  <div className="text-xs uppercase tracking-[0.18em] text-[#9cc2ff] mb-2">Coste / licencia / año</div>
+                  <div className="text-3xl font-light text-cream">0,41 € - 1,17 €</div>
+                  <p className="text-xs text-cream/50 mt-2">*IVA incluido, según número de asegurados</p>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {pricing.map((tier) => (
+                    <div key={tier.insured} className="rounded-2xl border border-white/8 bg-white/[0.03] p-3">
+                      <div className="text-[10px] uppercase tracking-[0.18em] text-cream/40 mb-2">{tier.insured}</div>
+                      <div className="text-sm text-[#9cc2ff] font-medium">{tier.essential}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div {...sectionFade} transition={{ delay: 0.1 }} className="rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(13,26,46,0.92),rgba(10,21,36,0.82))] p-7 lg:p-8">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-2xl bg-[#9cc2ff]/10 border border-[#9cc2ff]/15 flex items-center justify-center text-[#9cc2ff]">
+                    <DollarSign size={18} />
                   </div>
+                  <div>
+                    <div className="text-[11px] uppercase tracking-[0.24em] text-[#9cc2ff] font-medium">Plan avanzado</div>
+                    <div className="text-sm text-cream/45 font-light">Plan esencial + seguimiento proactivo</div>
+                  </div>
+                </div>
+
+                <div className="grid gap-3 mb-6">
+                  {advancedPlan.map((item) => (
+                    <div key={item} className="rounded-2xl border border-white/8 bg-[#09162a]/60 px-4 py-3 text-cream/75 font-light text-sm">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="rounded-2xl border border-[#9cc2ff]/15 bg-[#9cc2ff]/8 p-4 mb-5">
+                  <div className="text-xs uppercase tracking-[0.18em] text-[#9cc2ff] mb-2">Coste / licencia / año</div>
+                  <div className="text-3xl font-light text-cream">1,85 € - 4,48 €</div>
+                  <p className="text-xs text-cream/50 mt-2">*IVA incluido, según número de asegurados</p>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {pricing.map((tier) => (
+                    <div key={tier.insured} className="rounded-2xl border border-white/8 bg-white/[0.03] p-3">
+                      <div className="text-[10px] uppercase tracking-[0.18em] text-cream/40 mb-2">{tier.insured}</div>
+                      <div className="text-sm text-[#9cc2ff] font-medium">{tier.advanced}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="rounded-[2rem] border border-white/8 bg-white/[0.03] p-7 lg:p-8">
+              <div className="flex items-center gap-4 mb-5">
+                <div className="w-10 h-10 rounded-2xl bg-[#9cc2ff]/10 border border-[#9cc2ff]/15 flex items-center justify-center text-[#9cc2ff]">
+                  <Users size={18} />
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-[#9cc2ff] font-medium">Lectura ejecutiva</div>
+                  <div className="text-sm text-cream/45 font-light">Más valor en producto, más claridad en negocio</div>
                 </div>
               </div>
+              <p className="text-cream/70 font-light leading-relaxed max-w-5xl">
+                El objetivo no es sumar una funcionalidad aislada, sino convertir la fisioterapia digital en un servicio que mejore la propuesta de
+                valor, refuerce la percepción del nuevo seguro y ayude a que el asegurado lo use y lo valore cada día.
+              </p>
             </div>
           </section>
         )}
@@ -913,9 +896,6 @@ export default function AIGApp() {
             <img src="/images/fisify-logo-white.png" alt="Fisify" className="h-5 brightness-0 invert" />
             <span className="text-white/20">×</span>
             <img src="/images/logo-aig.svg" alt="AIG" className="h-6 brightness-0 invert" />
-          </div>
-          <div className="text-xs uppercase tracking-[0.2em] text-white/45">
-            Propuesta confidencial · Digital & Direct Marketing · 2025
           </div>
         </div>
       </footer>
