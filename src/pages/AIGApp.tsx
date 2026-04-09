@@ -520,13 +520,13 @@ export default function AIGApp() {
 
             <motion.div {...sectionFade} className="mb-8 overflow-hidden rounded-[2.25rem] border border-white/8">
               <div
-                className="grid lg:grid-cols-[1.35fr_0.95fr] gap-0"
+                className="grid lg:grid-cols-[1.45fr_0.85fr] gap-0"
                 style={{
                   background: 'linear-gradient(180deg, rgba(19,153,255,0.18), rgba(255,255,255,0.03))',
                   boxShadow: '0 22px 70px rgba(0,0,0,0.18)',
                 }}
               >
-                <div className="p-6 lg:p-8">
+                <div className="p-6 lg:p-8 xl:p-9">
                   <div className="flex items-center justify-between gap-4">
                     <div className="text-[11px] uppercase tracking-[0.24em] text-white/42">Coberturas globales</div>
                     <div className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-white/72">
@@ -537,20 +537,20 @@ export default function AIGApp() {
                     <Globe2 size={12} style={{ color: accent }} />
                     Fisify siempre disponible - 24 / 7 / 365
                   </div>
-                  <p className="mt-5 max-w-xl text-base lg:text-lg font-light leading-relaxed text-white/72">
+                  <p className="mt-5 max-w-2xl text-base lg:text-lg font-light leading-relaxed text-white/72">
                     Tanto si el accidente ocurre en México, en un viaje de negocios por Europa o en un viaje de aventura en Asia, el asegurado
                     accede al mismo nivel de atención desde su móvil, sin coste de desplazamiento y sin burocracia.
                   </p>
-                  <p className="mt-4 max-w-xl text-base lg:text-lg font-light leading-relaxed text-white/72">
+                  <p className="mt-4 max-w-2xl text-base lg:text-lg font-light leading-relaxed text-white/72">
                     Eso convierte a Fisify en el único beneficio del seguro que es tan global como la cobertura de AIG.
                   </p>
-                  <div className="mt-6 grid gap-3 max-w-xl">
+                  <div className="mt-6 grid gap-3 max-w-2xl">
                     <div className="rounded-[1.4rem] border border-white/8 bg-white/[0.05] px-4 py-4 text-sm text-white/76">
                       <div className="text-[11px] uppercase tracking-[0.18em] text-white/45 mb-1">Texto clave</div>
                       El único beneficio del seguro disponible donde ocurra el siniestro.
                     </div>
                   </div>
-                  <div className="mt-6 rounded-[1.4rem] border border-white/8 bg-white/[0.04] px-4 py-4 max-w-xl">
+                  <div className="mt-6 rounded-[1.4rem] border border-white/8 bg-white/[0.04] px-4 py-4 max-w-2xl">
                     <div className="text-[11px] uppercase tracking-[0.24em] text-white/42">Cobertura global</div>
                     <p className="mt-2 text-sm font-light leading-relaxed text-white/72">
                       Un mismo estándar de fisioterapia, sin importar el país, el canal o el momento del siniestro.
@@ -565,7 +565,7 @@ export default function AIGApp() {
                     className="h-full w-full object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-[#09131f]/20 via-transparent to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-5 lg:p-6">
+                  <div className="absolute inset-x-0 bottom-0 p-5 lg:p-6 xl:p-7">
                     <div className="text-[11px] uppercase tracking-[0.24em]" style={{ color: accent }}>
                       {referenceVisuals[1].title}
                     </div>
@@ -577,7 +577,7 @@ export default function AIGApp() {
               </div>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-4 lg:gap-5 items-stretch">
+            <div className="grid md:grid-cols-2 gap-4 lg:gap-5 items-stretch mt-2">
                 {coverageCards.map((card, index) => (
                   <motion.article
                     key={card.title}
