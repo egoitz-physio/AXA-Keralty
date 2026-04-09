@@ -544,25 +544,31 @@ export default function AIGApp() {
               </div>
             </motion.div>
 
-            <div className="lg:col-span-8 grid md:grid-cols-2 gap-4 lg:gap-5">
+            <div className="lg:col-span-8 grid md:grid-cols-2 gap-4 lg:gap-5 items-stretch">
               {coverageCards.map((card, index) => (
                 <motion.article
                   key={card.title}
                   {...sectionFade}
                   transition={{ delay: index * 0.05 }}
-                  className="rounded-[2rem] border border-white/10 p-6 lg:p-7"
-                  style={{ background: 'linear-gradient(180deg, rgba(13,20,34,0.98), rgba(9,15,27,0.96))' }}
+                  className="flex h-full min-h-[26rem] flex-col rounded-[2rem] border border-white/10 p-6 lg:p-7"
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(13,20,34,0.985), rgba(8,13,24,0.965))',
+                    boxShadow: '0 24px 80px rgba(0, 0, 0, 0.24)',
+                  }}
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="text-[11px] uppercase tracking-[0.24em] text-white/42">Cobertura AIG</div>
-                      <h3 className="mt-2 max-w-[10ch] text-3xl font-medium leading-[1.02] text-white lg:text-[2.1rem]">
+                    <div className="min-w-0">
+                      <div className="text-[11px] uppercase tracking-[0.26em] text-white/42">Cobertura AIG</div>
+                      <h3 className="mt-2 max-w-[8ch] text-3xl font-medium leading-[0.98] tracking-tight text-white lg:text-[2.1rem] text-balance">
                         {card.title}
                       </h3>
                     </div>
                     <span
-                      className="whitespace-nowrap rounded-full border border-white/10 px-4 py-2 text-[11px] uppercase tracking-[0.2em]"
-                      style={{ color: accent, background: 'linear-gradient(180deg, rgba(19,153,255,0.28), rgba(19,153,255,0.14))' }}
+                      className="max-w-[11rem] rounded-full border border-white/10 px-4 py-2 text-left text-[11px] uppercase tracking-[0.18em] leading-[1.25]"
+                      style={{
+                        color: accent,
+                        background: 'linear-gradient(180deg, rgba(19,153,255,0.24), rgba(19,153,255,0.12))',
+                      }}
                     >
                       {card.value}
                     </span>
@@ -570,10 +576,12 @@ export default function AIGApp() {
 
                   <div className="mt-6 rounded-[1.5rem] border border-white/12 bg-white/[0.03] p-4 lg:p-5">
                     <div className="text-[11px] uppercase tracking-[0.18em] text-white/42 mb-2">Cobertura</div>
-                    <p className="text-sm lg:text-[15px] leading-relaxed text-white/76">{card.coverage}</p>
+                    <p className="text-sm lg:text-[15px] leading-relaxed text-white/78">{card.coverage}</p>
                   </div>
 
-                  <p className="mt-5 text-sm lg:text-[15px] font-light leading-relaxed text-white/70">{card.body}</p>
+                  <p className="mt-5 text-sm lg:text-[15px] font-light leading-relaxed text-white/72 flex-1">
+                    {card.body}
+                  </p>
                 </motion.article>
               ))}
             </div>
